@@ -42,7 +42,6 @@ class UserUnitTest extends TestCase
         $user = new User();
 
         $this->assertEmpty($user->getEmail());
-        $this->assertEmpty($user->getPassword());
         $this->assertEmpty($user->getPseudo());
         $this->assertEmpty($user->getReputation());
     }

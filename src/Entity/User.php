@@ -42,12 +42,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Pseudo;
+    private $pseudo;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $Reputation;
+    private $reputation;
 
     public function __construct()
     {
@@ -111,7 +111,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see PasswordAuthenticatedUserInterface
      */
-    public function getPassword(): ?string
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -145,24 +145,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getPseudo(): ?string
     {
-        return $this->Pseudo;
+        return $this->pseudo;
     }
 
-    public function setPseudo(string $Pseudo): self
+    public function setPseudo(string $pseudo): self
     {
-        $this->Pseudo = $Pseudo;
+        $this->pseudo = $pseudo;
 
         return $this;
     }
 
     public function getReputation(): ?int
     {
-        return $this->Reputation;
+        return $this->reputation;
     }
 
-    public function setReputation(?int $Reputation): self
+    public function setReputation(?int $reputation): self
     {
-        $this->Reputation = $Reputation;
+        $this->reputation = $reputation;
 
         return $this;
     }
