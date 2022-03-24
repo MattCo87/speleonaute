@@ -27,7 +27,7 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
         $admin->setPseudo('Mr X')
             ->setEmail('87700p@gmail.com')
             ->setRoles(['ROLE_ADMIN'])
-            ->setExperience(1000);
+            ->setReputation(1000);
         $password = $this->hasher->hashPassword($admin, 'pass_1234');
         $admin->setPassword($password);
 
@@ -59,18 +59,20 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
         );
 
 
-        foreach ($users as $user) {
-            $$user = new User();
-            $$user->setPseudo($user['pseudo'])
+        foreach ($users as $name => $user) {
+            // Client user accounts
+            $$name = new User();
+            $$name->setPseudo($user['pseudo'])
                 ->setEmail($user['mail'])
-                ->setPassword($this->encoder->encodePassword($$user, $user['pseudo']))
-                ->setRoles($user['role'])
-                ->setExperience($user['xp']);
-
-            $this->addReference('users', $$user);
-            $manager->persist($$user);
+                ->setRoles([$user['role']])
+                ->setReputation($user['xp']);
+            $password = $this->hasher->hashPassword($$name, 'pass_1234');
+            $$name->setPassword($password);
+            $manager->persist($$name);
+            $manager->flush();
+            $this->addReference($name, $$name);
+            //dd("Jusqu'ici tout va bien");
         }
-        $manager->flush();
     }
 
     public function getOrder()
