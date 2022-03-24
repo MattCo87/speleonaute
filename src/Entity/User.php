@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -49,9 +51,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $reputation;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Combat::class, mappedBy="lienUser")
+     */
+    private $combats;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Creature::class, mappedBy="lienUser")
+     */
+    private $creatures;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Formation::class, mappedBy="lienUser")
+     */
+    private $formations;
+
     public function __construct()
     {
         $this->roles = [self::ROLE_USER];
+        $this->combats = new ArrayCollection();
+        $this->creatures = new ArrayCollection();
+        $this->formations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -163,6 +183,96 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setReputation(?int $reputation): self
     {
         $this->reputation = $reputation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Combat>
+     */
+    public function getCombats(): Collection
+    {
+        return $this->combats;
+    }
+
+    public function addCombat(Combat $combat): self
+    {
+        if (!$this->combats->contains($combat)) {
+            $this->combats[] = $combat;
+            $combat->setLienUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCombat(Combat $combat): self
+    {
+        if ($this->combats->removeElement($combat)) {
+            // set the owning side to null (unless already changed)
+            if ($combat->getLienUser() === $this) {
+                $combat->setLienUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Creature>
+     */
+    public function getCreatures(): Collection
+    {
+        return $this->creatures;
+    }
+
+    public function addCreature(Creature $creature): self
+    {
+        if (!$this->creatures->contains($creature)) {
+            $this->creatures[] = $creature;
+            $creature->setLienUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCreature(Creature $creature): self
+    {
+        if ($this->creatures->removeElement($creature)) {
+            // set the owning side to null (unless already changed)
+            if ($creature->getLienUser() === $this) {
+                $creature->setLienUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Formation>
+     */
+    public function getFormations(): Collection
+    {
+        return $this->formations;
+    }
+
+    public function addFormation(Formation $formation): self
+    {
+        if (!$this->formations->contains($formation)) {
+            $this->formations[] = $formation;
+            $formation->setLienUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFormation(Formation $formation): self
+    {
+        if ($this->formations->removeElement($formation)) {
+            // set the owning side to null (unless already changed)
+            if ($formation->getLienUser() === $this) {
+                $formation->setLienUser(null);
+            }
+        }
 
         return $this;
     }

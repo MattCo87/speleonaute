@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CreatureRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,32 @@ class Creature
      * @ORM\Column(type="integer", nullable=true)
      */
     private $exp;
+
+    /**
+     * @ORM\OneToMany(targetEntity=StatistiqueCreature::class, mappedBy="lienCreature")
+     */
+    private $statistiqueCreatures;
+
+    /**
+     * @ORM\OneToMany(targetEntity=CreatureFormation::class, mappedBy="lienCreature")
+     */
+    private $creatureFormations;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Modele::class, inversedBy="creatures")
+     */
+    private $lienModele;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="creatures")
+     */
+    private $lienUser;
+
+    public function __construct()
+    {
+        $this->statistiqueCreatures = new ArrayCollection();
+        $this->creatureFormations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +97,90 @@ class Creature
     public function setExp(?int $exp): self
     {
         $this->exp = $exp;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, StatistiqueCreature>
+     */
+    public function getStatistiqueCreatures(): Collection
+    {
+        return $this->statistiqueCreatures;
+    }
+
+    public function addStatistiqueCreature(StatistiqueCreature $statistiqueCreature): self
+    {
+        if (!$this->statistiqueCreatures->contains($statistiqueCreature)) {
+            $this->statistiqueCreatures[] = $statistiqueCreature;
+            $statistiqueCreature->setLienCreature($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatistiqueCreature(StatistiqueCreature $statistiqueCreature): self
+    {
+        if ($this->statistiqueCreatures->removeElement($statistiqueCreature)) {
+            // set the owning side to null (unless already changed)
+            if ($statistiqueCreature->getLienCreature() === $this) {
+                $statistiqueCreature->setLienCreature(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CreatureFormation>
+     */
+    public function getCreatureFormations(): Collection
+    {
+        return $this->creatureFormations;
+    }
+
+    public function addCreatureFormation(CreatureFormation $creatureFormation): self
+    {
+        if (!$this->creatureFormations->contains($creatureFormation)) {
+            $this->creatureFormations[] = $creatureFormation;
+            $creatureFormation->setLienCreature($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCreatureFormation(CreatureFormation $creatureFormation): self
+    {
+        if ($this->creatureFormations->removeElement($creatureFormation)) {
+            // set the owning side to null (unless already changed)
+            if ($creatureFormation->getLienCreature() === $this) {
+                $creatureFormation->setLienCreature(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getLienModele(): ?Modele
+    {
+        return $this->lienModele;
+    }
+
+    public function setLienModele(?Modele $lienModele): self
+    {
+        $this->lienModele = $lienModele;
+
+        return $this;
+    }
+
+    public function getLienUser(): ?User
+    {
+        return $this->lienUser;
+    }
+
+    public function setLienUser(?User $lienUser): self
+    {
+        $this->lienUser = $lienUser;
 
         return $this;
     }

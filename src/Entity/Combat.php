@@ -27,6 +27,16 @@ class Combat
      */
     private $fichierLog;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="combats")
+     */
+    private $lienUser;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Scenario::class, inversedBy="combats")
+     */
+    private $lienScenario;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +62,30 @@ class Combat
     public function setFichierLog(string $fichierLog): self
     {
         $this->fichierLog = $fichierLog;
+
+        return $this;
+    }
+
+    public function getLienUser(): ?User
+    {
+        return $this->lienUser;
+    }
+
+    public function setLienUser(?User $lienUser): self
+    {
+        $this->lienUser = $lienUser;
+
+        return $this;
+    }
+
+    public function getLienScenario(): ?Scenario
+    {
+        return $this->lienScenario;
+    }
+
+    public function setLienScenario(?Scenario $lienScenario): self
+    {
+        $this->lienScenario = $lienScenario;
 
         return $this;
     }

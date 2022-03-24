@@ -27,6 +27,16 @@ class CreatureFormation
      */
     private $strategie;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Creature::class, inversedBy="creatureFormations")
+     */
+    private $lienCreature;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Formation::class, inversedBy="creatureFormations")
+     */
+    private $lienFormation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +62,30 @@ class CreatureFormation
     public function setStrategie(?int $strategie): self
     {
         $this->strategie = $strategie;
+
+        return $this;
+    }
+
+    public function getLienCreature(): ?Creature
+    {
+        return $this->lienCreature;
+    }
+
+    public function setLienCreature(?Creature $lienCreature): self
+    {
+        $this->lienCreature = $lienCreature;
+
+        return $this;
+    }
+
+    public function getLienFormation(): ?Formation
+    {
+        return $this->lienFormation;
+    }
+
+    public function setLienFormation(?Formation $lienFormation): self
+    {
+        $this->lienFormation = $lienFormation;
 
         return $this;
     }

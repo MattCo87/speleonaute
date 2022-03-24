@@ -32,6 +32,16 @@ class StatistiqueModele
      */
     private $valeurNiv;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Modele::class, inversedBy="statistiqueModeles")
+     */
+    private $lienModele;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Statistique::class, inversedBy="statistiqueModeles")
+     */
+    private $lienStatistique;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +79,30 @@ class StatistiqueModele
     public function setValeurNiv(int $valeurNiv): self
     {
         $this->valeurNiv = $valeurNiv;
+
+        return $this;
+    }
+
+    public function getLienModele(): ?Modele
+    {
+        return $this->lienModele;
+    }
+
+    public function setLienModele(?Modele $lienModele): self
+    {
+        $this->lienModele = $lienModele;
+
+        return $this;
+    }
+
+    public function getLienStatistique(): ?Statistique
+    {
+        return $this->lienStatistique;
+    }
+
+    public function setLienStatistique(?Statistique $lienStatistique): self
+    {
+        $this->lienStatistique = $lienStatistique;
 
         return $this;
     }

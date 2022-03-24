@@ -22,6 +22,16 @@ class StrategieModele
      */
     private $positionStrategie;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Strategie::class, inversedBy="strategieModeles")
+     */
+    private $lienStrategie;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Modele::class, inversedBy="strategieModeles")
+     */
+    private $lienModele;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +45,30 @@ class StrategieModele
     public function setPositionStrategie(int $positionStrategie): self
     {
         $this->positionStrategie = $positionStrategie;
+
+        return $this;
+    }
+
+    public function getLienStrategie(): ?Strategie
+    {
+        return $this->lienStrategie;
+    }
+
+    public function setLienStrategie(?Strategie $lienStrategie): self
+    {
+        $this->lienStrategie = $lienStrategie;
+
+        return $this;
+    }
+
+    public function getLienModele(): ?Modele
+    {
+        return $this->lienModele;
+    }
+
+    public function setLienModele(?Modele $lienModele): self
+    {
+        $this->lienModele = $lienModele;
 
         return $this;
     }

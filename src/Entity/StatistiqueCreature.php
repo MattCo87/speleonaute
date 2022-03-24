@@ -22,6 +22,16 @@ class StatistiqueCreature
      */
     private $valeur;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Creature::class, inversedBy="statistiqueCreatures")
+     */
+    private $lienCreature;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Statistique::class, inversedBy="statistiqueCreatures")
+     */
+    private $lienStatistique;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +45,30 @@ class StatistiqueCreature
     public function setValeur(int $valeur): self
     {
         $this->valeur = $valeur;
+
+        return $this;
+    }
+
+    public function getLienCreature(): ?Creature
+    {
+        return $this->lienCreature;
+    }
+
+    public function setLienCreature(?Creature $lienCreature): self
+    {
+        $this->lienCreature = $lienCreature;
+
+        return $this;
+    }
+
+    public function getLienStatistique(): ?Statistique
+    {
+        return $this->lienStatistique;
+    }
+
+    public function setLienStatistique(?Statistique $lienStatistique): self
+    {
+        $this->lienStatistique = $lienStatistique;
 
         return $this;
     }
