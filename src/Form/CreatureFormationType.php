@@ -19,56 +19,19 @@ class CreatureFormationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-
+            // On affiche la liste des Formations
             ->add('lienFormation', EntityType::class, array(
-                // query choices from this entity
                 'class' => Formation::class,
-
-                // use the User.username property as the visible option string
                 'choice_label' => 'nom',
-
-                // used to render a select box, check boxes or radios
-                // 'multiple' => true,
-                // 'expanded' => true,
             ))
 
+            // On affiche la liste des Créatures
             ->add('lienCreature', EntityType::class, array(
-                // query choices from this entity
                 'class' => Creature::class,
-
-                // use the User.username property as the visible option string
                 'choice_label' => 'nom',
-
-                // used to render a select box, check boxes or radios
-                // 'multiple' => true,
-                // 'expanded' => true,
             ))
 
-            /*
-            ->add('lienFormation', EntityType::class, [
-                // looks for choices from this entity
-                'class' => Formation::class,
-            
-                // uses the User.username property as the visible option string
-                'choice_label' => 'Formation',
-            
-                // used to render a select box, check boxes or radios
-                // 'multiple' => true,
-                // 'expanded' => true,
-            ])
-
-            ->add('lienCreature', EntityType::class, [
-                // looks for choices from this entity
-                'class' => Creature::class,
-            
-                // uses the User.username property as the visible option string
-                'choice_label' => 'Creature',
-            
-                // used to render a select box, check boxes or radios
-                // 'multiple' => true,
-                // 'expanded' => true,
-            ])
-*/
+            // On choisit sa localisation
             ->add('localisation', ChoiceType::class, array(
                 'choices'  => [
                     'Devant' => 0,
@@ -77,6 +40,7 @@ class CreatureFormationType extends AbstractType
                 ],
             ))
 
+            // On choisit la stratégie
             ->add('strategie', ChoiceType::class, [
                 'choices'  => [
                     '1' => 1,
@@ -86,6 +50,7 @@ class CreatureFormationType extends AbstractType
                 ],
             ])
 
+            // Bouton pour valider la création de la CreationFormation
             ->add(
                 'submit',
                 SubmitType::class,
