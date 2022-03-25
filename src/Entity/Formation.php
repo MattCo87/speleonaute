@@ -45,6 +45,14 @@ class Formation
         $this->scenarios = new ArrayCollection();
     }
 
+        /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->getNom();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -50,6 +50,14 @@ class Action
         $this->actionStrategies = new ArrayCollection();
     }
 
+        /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->getNom();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
