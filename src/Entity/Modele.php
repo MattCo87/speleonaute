@@ -61,6 +61,14 @@ class Modele
         $this->creatures = new ArrayCollection();
     }
 
+        /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->getNomModele();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
