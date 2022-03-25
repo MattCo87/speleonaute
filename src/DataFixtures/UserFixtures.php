@@ -7,10 +7,9 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class UserFixtures extends Fixture implements OrderedFixtureInterface
+class UserFixtures extends Fixture
 {
     private UserPasswordHasherInterface $hasher;
 
@@ -19,13 +18,12 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
         $this->hasher = $hasher;
     }
 
-
     public function load(ObjectManager $manager): void
     {
         // Client administrator account
         $admin = new User();
         $admin->setPseudo('Mr X')
-            ->setEmail('87700p@gmail.com')
+            ->setEmail('8gfhf7700p@gmail.com')
             ->setRoles(['ROLE_ADMIN'])
             ->setReputation(1000);
         $password = $this->hasher->hashPassword($admin, 'pass_1234');
@@ -73,10 +71,5 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
             $this->addReference($name, $$name);
             //dd("Jusqu'ici tout va bien");
         }
-    }
-
-    public function getOrder()
-    {
-        return 1;
     }
 }
