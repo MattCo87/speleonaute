@@ -36,8 +36,8 @@ class StrategieFixtures extends Fixture implements DependentFixtureInterface
             $manager->persist($$name);
             $manager->flush();
             $this->addReference($name, $$name);
-            //dump($name);
-            //dump($$name);
+            dump($name);
+            dump($$name);
         }
     }
 }
