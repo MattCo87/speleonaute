@@ -73,7 +73,6 @@ class ActionStrategieFixtures extends Fixture implements DependentFixtureInterfa
                             ->setLienAction($this->getReference($actionName))
                             ->setLienStrategie($this->getReference($strategyName));
                         $manager->persist($actStrat);
-                        $manager->flush();
                         // Ajoute l'objet pour les autres fichiers de fixtures
                         $this->addReference("ACTSTRAT_" . $actionName . "_" . $strategyName . ($tier[1] + $tier[2] + $tier[3]), $actStrat);
                         dump($tier);
@@ -81,5 +80,6 @@ class ActionStrategieFixtures extends Fixture implements DependentFixtureInterfa
                 }
             }
         }
+        $manager->flush();
     }
 }

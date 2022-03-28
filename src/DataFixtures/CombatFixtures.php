@@ -7,21 +7,27 @@ use DateTime;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 
 class CombatFixtures
 extends Fixture
-implements OrderedFixtureInterface
+implements DependentFixtureInterface
 {
+    // Remplacer "UserFixtures" avec la classe dont celle-ci est dépendante
+    public function getDependencies()
+    {
+        return [ScenarioFixtures::class];
+    }
+
     public function load(ObjectManager $manager): void
     {
         $tabCombat = [
-            ['Fichier log du combat 1','scenario5', 'USER_Matt'],
-            ['Fichier log du combat 2','scenario4', 'USER_Joel'],
-            ['Fichier log du combat 3','scenario3', 'admin'],
-            ['Fichier log du combat 4','scenario2', 'USER_Yanis'],
-            ['Fichier log du combat 5','scenario1', 'USER_Jacqueline'],
+            ['Fichier log du combat 1', 'scenario5', 'USER_Matt'],
+            ['Fichier log du combat 2', 'scenario4', 'USER_Joel'],
+            ['Fichier log du combat 3', 'scenario3', 'admin'],
+            ['Fichier log du combat 4', 'scenario2', 'USER_Yanis'],
+            ['Fichier log du combat 5', 'scenario1', 'USER_Jacqueline'],
 
         ];
 
@@ -41,7 +47,6 @@ implements OrderedFixtureInterface
 
         $manager->flush();
         unset($z, $a, $b, $c);
-
     }
 
     public function getOrder()

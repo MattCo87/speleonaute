@@ -6,14 +6,23 @@ use App\Entity\Formation;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class FormationFixtures
 extends Fixture
-implements OrderedFixtureInterface
+implements DependentFixtureInterface
 {
+    public function getDependencies()
+    {
+        return [UserFixtures::class];
+    }
+
     public function load(ObjectManager $manager): void
     {
+
+        // Remplacer "UserFixtures" avec la classe dont celle-ci est dépendante
+
+
         $tabFormation = [
             ['Explorers', 'admin'],
             ['Bersekers', 'admin'],
@@ -44,12 +53,5 @@ implements OrderedFixtureInterface
 
         $manager->flush();
         unset($z, $a);
-
-
-    }
-
-    public function getOrder()
-    {
-        return 2;
     }
 }
