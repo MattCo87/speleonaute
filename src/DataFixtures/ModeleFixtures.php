@@ -15,7 +15,7 @@ class ModeleFixtures extends Fixture implements DependentFixtureInterface
     // Remplacer "UserFixtures" avec la classe dont celle-ci est dépendante
     public function getDependencies()
     {
-        return [UserFixtures::class];
+        return [ActionStrategieFixtures::class];
     }
 
     // Chargement de l'objet provenant de l'Entity

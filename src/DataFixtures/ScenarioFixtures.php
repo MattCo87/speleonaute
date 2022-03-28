@@ -6,7 +6,6 @@ use App\Entity\Scenario;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\Dep;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class ScenarioFixtures

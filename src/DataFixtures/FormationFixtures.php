@@ -14,7 +14,7 @@ implements DependentFixtureInterface
 {
     public function getDependencies()
     {
-        return [UserFixtures::class];
+        return [StatistiqueCreature::class];
     }
 
     public function load(ObjectManager $manager): void
