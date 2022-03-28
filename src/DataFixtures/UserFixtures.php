@@ -36,22 +36,22 @@ class UserFixtures extends Fixture
 
 
         $users = array(
-            "Matt" => array(
+            "USER_Matt" => array(
                 "pseudo" => "Lord Aixois", "mail" => "87000@gmail.com", "role" => "ROLE_USER", "xp" => 1
             ),
-            "Joel" => array(
+            "USER_Joel" => array(
                 "pseudo" => "silentfabrik", "mail" => "joel@gmail.com", "role" => "ROLE_USER", "xp" => 1
             ),
-            "Yanis" => array(
+            "USER_Yanis" => array(
                 "pseudo" => "callipo", "mail" => "callipo@gmail.com", "role" => "ROLE_USER", "xp" => 1
             ),
-            "Pierrette" => array(
+            "USER_Pierrette" => array(
                 "pseudo" => "piepie", "mail" => "piepie@gmail.com", "role" => "ROLE_USER", "xp" => 1
             ),
-            "Paulette" => array(
+            "USER_Paulette" => array(
                 "pseudo" => "paully", "mail" => "paully@gmail.com", "role" => "ROLE_USER", "xp" => 1
             ),
-            "Jacqueline" => array(
+            "USER_Jacqueline" => array(
                 "pseudo" => "jaki", "mail" => "jaki@gmail.com", "role" => "ROLE_USER", "xp" => 1
             ),
         );

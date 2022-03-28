@@ -22,12 +22,19 @@ class StrategieFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $strategies = array();
-        for ($i = 1; $i < 4; $i++) {
+        for ($i = 1; $i <= 3; $i++) {
             // Create the entries
-            $strategies["Tank" . $i] = ["nom" => "Un joueur Tank version $i"];
-            $strategies["Snipe" . $i] = ["nom" => "Sniper de l'arrière version $i"];
-            $strategies["Speed" . $i] = ["nom" => "Prendre de vitesse version $i"];
-            $strategies["Defense" . $i] = ["nom" => "Pure défense version $i"];
+            $strategies["STRAT_PurEternuement" . $i] = ["nom" => "Combo d'éternuements de force $i"];
+            $strategies["STRAT_PurRoulement" . $i] = ["nom" => "Attaque roulade de force $i"];
+            $strategies["STRAT_PureFrappe" . $i] = ["nom" => "Combo de frappes de force $i"];
+            $strategies["STRAT_PurPoison" . $i] = ["nom" => "Combo poison de force $i"];
+            $strategies["STRAT_PureMagie" . $i] = ["nom" => "Pure attaque magique de force $i"];
+            $strategies["STRAT_PurEffondrement" . $i] = ["nom" => "Effondrement voûte de force $i"];
+            $strategies["STRAT_EternuementRoule" . $i] = ["nom" => "Combo Éternuements avec des Roulades de force $i"];
+            $strategies["STRAT_EternuementFrappe" . $i] = ["nom" => "Combo Éternuement et Frappe de force $i"];
+            $strategies["STRAT_PoisonMagie" . $i] = ["nom" => "Combo Poison et Magie de force $i"];
+            $strategies["STRAT_FrappeEffondrement" . $i] = ["nom" => "Combo Frappe et Effondrement de force $i"];
+            $strategies["STRAT_MagieEffondrement" . $i] = ["nom" => "Combo magie et effondrement de force $i"];
         }
         foreach ($strategies as $name => $strategy) {
             // Populate the objects
@@ -36,8 +43,8 @@ class StrategieFixtures extends Fixture implements DependentFixtureInterface
             $manager->persist($$name);
             $manager->flush();
             $this->addReference($name, $$name);
-            dump($name);
-            dump($$name);
+            //dump($name);
+            //dump($$name);
         }
     }
 }

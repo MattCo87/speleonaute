@@ -29,30 +29,30 @@ class StatistiqueFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($statToucher);
         $manager->flush();
         // Ajoute l'objet pour les autres fichiers de fixtures
-        $this->addReference("StatToucher", $statToucher);
+        $this->addReference("STAT_Toucher", $statToucher);
 
         $statDegat = new Statistique();
         $statDegat->setNom("Degat");
         $manager->persist($statDegat);
         $manager->flush();
-        $this->addReference("StatDegat", $statDegat);
+        $this->addReference("STAT_Degat", $statDegat);
 
         $statResistance = new Statistique();
         $statResistance->setNom("Resistance");
         $manager->persist($statResistance);
         $manager->flush();
-        $this->addReference("StatResistance", $statResistance);
+        $this->addReference("STAT_Resistance", $statResistance);
 
         $statVitesse = new Statistique();
         $statVitesse->setNom("Vitesse");
         $manager->persist($statVitesse);
         $manager->flush();
-        $this->addReference("StatVitesse", $statVitesse);
+        $this->addReference("STAT_Vitesse", $statVitesse);
 
         $statEndurance = new Statistique();
         $statEndurance->setNom("Endurance");
         $manager->persist($statEndurance);
         $manager->flush();
-        $this->addReference("StatEndurance", $statEndurance);
+        $this->addReference("STAT_Endurance", $statEndurance);
     }
 }

@@ -31,6 +31,6 @@ class Fixtures_Model extends Fixture implements DependentFixtureInterface
         $manager->flush();
         // Ajoute l'objet pour les autres fichiers de fixtures
         $this->addReference("Test_de_fixture", $test);
-        //dd($this->referenceRepository);
+        //dd($this->referenceRepository->getIdentities());
     }
 }
