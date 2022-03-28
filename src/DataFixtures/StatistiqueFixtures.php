@@ -16,7 +16,7 @@ class StatistiqueFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies()
     {
-        return [UserFixtures::class];
+        return [ModeleFixtures::class];
     }
 
     // Chargement de l'objet provenant de l'Entity
