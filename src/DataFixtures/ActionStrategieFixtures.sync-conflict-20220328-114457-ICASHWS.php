@@ -36,47 +36,33 @@ class ActionStrategieFixtures extends Fixture implements DependentFixtureInterfa
 
         foreach ($strategies as $strategyName => $strategy) {
             //dd($strategy);
-            dump("++++++++STRATEGY++$strategyName+++++++++");
-            $tier = [1 => 0, 2 => 0, 3 => 0];
+            dump("+++++++++++++++++");
+            $tier = [1 => 1, 2 => 0, 3 => 0];
             foreach ($actions as $actionName => $action) {
+                dump($tier);
                 $strategiePure = str_contains($strategyName, "Pur");
                 $actionNameRedux = str_replace(["ACT_", "1", "2", "3"], "", $actionName);
                 $actionTier = $actionName[-1];
-                dump("-------Action--$actionName--------");
+                dump("-------TIER-------");
                 dump("TIER : " . $actionTier);
+                dump($strategyName);
                 dump($actionNameRedux);
-                if ($tier[1] + $tier[2] + $tier[3] <= 4 && $tier[1] <= 2 & $tier[2] <= 2 && $tier[3] <= 1) {
+                if (($tier[1] + $tier[2] + $tier[3]) <= 5) {
                     if (str_contains($strategyName, $actionNameRedux)) {
-                        switch ($actionTier) {
-                            case 1:
-                                $tier[1] = $tier[1] + 1;
-                                dump("CASE 1");
-                                break;
-
-                            case 2:
-                                $tier[2] = $tier[2] + 1;
-                                dump("CASE 2");
-                                break;
-
-                            case 3:
-                                $tier[3] = $tier[3] + 1;
-                                dump("CASE 3");
-                                break;
-
-                            default:
-                                dump("!!!!!!! NO CASE !!!!!!");
-                                break;
+                        if ($strategiePure) {
+                            for ($tier[1] <= 2; $tier[1] = $tier[1] + 1;) {
+                                $actStrat = new ActionStrategie();
+                                $actStrat->setPositionAction(($tier[1] + $tier[2] + $tier[3]))
+                                    ->setLienAction($this->getReference($actionName))
+                                    ->setLienStrategie($this->getReference($strategyName));
+                                $manager->persist($actStrat);
+                                $manager->flush();
+                                // Ajoute l'objet pour les autres fichiers de fixtures
+                                $this->addReference("ACTSTRAT_" . $actionName . "_" . $strategyName . ($tier[1] + $tier[2] + $tier[3]), $actStrat);
+                                dump("ACTSTRAT_" . $actionName . "_" . $strategyName);
+                                dump("_______________________________________________");
+                            }
                         }
-
-                        $actStrat = new ActionStrategie();
-                        $actStrat->setPositionAction(($tier[1] + $tier[2] + $tier[3]))
-                            ->setLienAction($this->getReference($actionName))
-                            ->setLienStrategie($this->getReference($strategyName));
-                        $manager->persist($actStrat);
-                        $manager->flush();
-                        // Ajoute l'objet pour les autres fichiers de fixtures
-                        $this->addReference("ACTSTRAT_" . $actionName . "_" . $strategyName . ($tier[1] + $tier[2] + $tier[3]), $actStrat);
-                        dump($tier);
                     }
                 }
             }
