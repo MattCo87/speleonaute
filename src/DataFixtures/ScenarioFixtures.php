@@ -7,16 +7,17 @@ use App\Entity\Scenario;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 class ScenarioFixtures
 extends Fixture
-implements DependentFixtureInterface
+implements OrderedFixtureInterface
 {
 
     // Remplacer "UserFixtures" avec la classe dont celle-ci est dépendante
-    public function getDependencies()
+    public function getOrder()
     {
-        return [FormationFixtures::class];
+        return 13;
     }
 
     public function load(ObjectManager $manager): void

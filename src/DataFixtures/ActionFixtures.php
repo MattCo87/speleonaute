@@ -4,14 +4,14 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use App\Entity\Action;
 
-class ActionFixtures extends Fixture implements DependentFixtureInterface
+class ActionFixtures extends Fixture implements OrderedFixtureInterface
 {
-    public function getDependencies()
+    public function getOrder()
     {
-        return [UserFixtures::class];
+        return 2;
     }
 
     public function load(ObjectManager $manager): void

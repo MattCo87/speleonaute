@@ -9,13 +9,14 @@ use Doctrine\Persistence\ObjectManager;
 // Et qu'il faut lancer avant elle
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use App\Entity\Strategie;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
-class StrategieFixtures extends Fixture implements DependentFixtureInterface
+class StrategieFixtures extends Fixture implements OrderedFixtureInterface
 {
     // Remplacer "UserFixtures" avec la classe dont celle-ci est dépendante
-    public function getDependencies()
+    public function getOrder()
     {
-        return [ActionFixtures::class];
+        return 3;
     }
 
     // Chargement de l'objet provenant de l'Entity

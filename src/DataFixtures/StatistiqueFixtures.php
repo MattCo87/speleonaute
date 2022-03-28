@@ -9,14 +9,14 @@ use Doctrine\Persistence\ObjectManager;
 // Et qu'il faut lancer avant elle
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use App\Entity\Statistique;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
-
-class StatistiqueFixtures extends Fixture implements DependentFixtureInterface
+class StatistiqueFixtures extends Fixture implements OrderedFixtureInterface
 {
 
-    public function getDependencies()
+    public function getOrder()
     {
-        return [StrategieModeleFixtures::class];
+        return 7;
     }
 
     // Chargement de l'objet provenant de l'Entity

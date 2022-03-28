@@ -7,14 +7,15 @@ use App\Entity\Formation;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 class FormationFixtures
 extends Fixture
-implements DependentFixtureInterface
+implements OrderedFixtureInterface
 {
-    public function getDependencies()
+    public function getOrder()
     {
-        return [StatistiqueCreature::class];
+        return 11;
     }
 
     public function load(ObjectManager $manager): void

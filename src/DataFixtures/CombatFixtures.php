@@ -7,17 +7,16 @@ use DateTime;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 class CombatFixtures
 extends Fixture
-implements DependentFixtureInterface
+implements OrderedFixtureInterface
 {
     // Remplacer "UserFixtures" avec la classe dont celle-ci est dépendante
-    public function getDependencies()
+    public function getOrder()
     {
-        return [ScenarioFixtures::class];
+        return 14;
     }
 
     public function load(ObjectManager $manager): void
@@ -47,10 +46,5 @@ implements DependentFixtureInterface
 
         $manager->flush();
         unset($z, $a, $b, $c);
-    }
-
-    public function getOrder()
-    {
-        return 4;
     }
 }
