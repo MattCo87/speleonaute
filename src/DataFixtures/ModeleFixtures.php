@@ -25,13 +25,13 @@ class ModeleFixtures extends Fixture implements OrderedFixtureInterface
         $modeles = array();
         for ($i = 1; $i <= 2; $i++) {
             // Create the entries
-            $modèles["MODEL_Araignedes"] = ["nom_modele" => "Araignée des cavernes", "rarete" => 2, "point_niv" => 5, "ouvrable" => TRUE];
-            $modèles["MODEL_VerPsychiq"] = ["nom_modele" => "Ver Psychique", "rarete" => 3, "point_niv" => 5, "ouvrable" => TRUE];
-            $modèles["MODEL_Rejetonde"] = ["nom_modele" => "Rejeton de la fosse", "rarete" => 2, "point_niv" => 5, "ouvrable" => TRUE];
-            $modèles["MODEL_Cubegelati"] = ["nom_modele" => "Cube gélatineux", "rarete" => 4, "point_niv" => 5, "ouvrable" => TRUE];
-            $modèles["MODEL_Basilicgea"] = ["nom_modele" => "Basilic géant", "rarete" => 5, "point_niv" => 6, "ouvrable" => TRUE];
-            $modèles["MODEL_Ratsanguin"] = ["nom_modele" => "Rat sanguinaire", "rarete" => 1, "point_niv" => 5, "ouvrable" => FALSE];
-            $modèles["MODEL_Vertoxique"] = ["nom_modele" => "Ver toxique", "rarete" => 2, "point_niv" => 5, "ouvrable" => FALSE];
+            $modeles["MODEL_Araignedes"] = ["nom_modele" => "Araignée des cavernes", "rarete" => 2, "point_niv" => 5, "ouvrable" => TRUE];
+            $modeles["MODEL_VerPsychiq"] = ["nom_modele" => "Ver Psychique", "rarete" => 3, "point_niv" => 5, "ouvrable" => TRUE];
+            $modeles["MODEL_Rejetonde"] = ["nom_modele" => "Rejeton de la fosse", "rarete" => 2, "point_niv" => 5, "ouvrable" => TRUE];
+            $modeles["MODEL_Cubegelati"] = ["nom_modele" => "Cube gélatineux", "rarete" => 4, "point_niv" => 5, "ouvrable" => TRUE];
+            $modeles["MODEL_Basilicgea"] = ["nom_modele" => "Basilic géant", "rarete" => 5, "point_niv" => 6, "ouvrable" => TRUE];
+            $modeles["MODEL_Ratsanguin"] = ["nom_modele" => "Rat sanguinaire", "rarete" => 1, "point_niv" => 5, "ouvrable" => FALSE];
+            $modeles["MODEL_Vertoxique"] = ["nom_modele" => "Ver toxique", "rarete" => 2, "point_niv" => 5, "ouvrable" => FALSE];
         }
 
         foreach ($modeles as $name => $modele) {
@@ -42,11 +42,11 @@ class ModeleFixtures extends Fixture implements OrderedFixtureInterface
                 ->setPointNiv($modele["point_niv"])
                 ->setOuvrable($modele["ouvrable"]);
             $manager->persist($$name);
-            $manager->flush();
             $this->addReference($name, $$name);
             //dump($name);
             //dump($$name);
         }
+        $manager->flush();
     }
 }
 

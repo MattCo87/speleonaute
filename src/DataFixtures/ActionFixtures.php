@@ -51,11 +51,11 @@ class ActionFixtures extends Fixture implements OrderedFixtureInterface
                 ->setToucher($action["toucher"])
                 ->setDegat($action["degat"]);
             $manager->persist($$name);
-            $manager->flush();
             $this->addReference($name, $$name);
             //dump($name);
             //dump($$name);
         }
+        $manager->flush();
     }
 }
 

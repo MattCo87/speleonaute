@@ -37,7 +37,6 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
         $admin->setPassword($password);
 
         $manager->persist($admin);
-        $manager->flush();
 
         $this->addReference('admin', $admin);
 
@@ -74,9 +73,9 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
             $password = $this->hasher->hashPassword($$name, 'pass_1234');
             $$name->setPassword($password);
             $manager->persist($$name);
-            $manager->flush();
             $this->addReference($name, $$name);
             //dd("Jusqu'ici tout va bien");
         }
+        $manager->flush();
     }
 }
