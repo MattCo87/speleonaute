@@ -24,13 +24,16 @@ class CreatureFixtures extends Fixture implements OrderedFixtureInterface
         $creatures = array();
 
         // Create the entries
-        $creatures["Milly21"] = ["niveau" => 1, "experience" => 0, "nom" => "Milly", "idUser" => "USER_Matt", "idModele" => "MODEL_Araignedes"];
-        $creatures["Eccles22"] = ["niveau" => 1, "experience" => 0, "nom" => "Eccles", "idUser" => "USER_Matt", "idModele" => "MODEL_VerPsychiq"];
-        $creatures["Zabek23"] = ["niveau" => 1, "experience" => 0, "nom" => "Zabek", "idUser" => "USER_Matt", "idModele" => "MODEL_Rejetonde"];
-        $creatures["Cradou24"] = ["niveau" => 1, "experience" => 0, "nom" => "Cradou", "idUser" => "USER_Matt", "idModele" => "MODEL_Cubegelati"];
-        $creatures["Torti25"] = ["niveau" => 1, "experience" => 0, "nom" => "Torti", "idUser" => "USER_Matt", "idModele" => "MODEL_Basilicgea"];
-        $creatures["Rat sanguinaire16"] = ["niveau" => 1, "experience" => 0, "nom" => "Rat sanguinaire", "idUser" => "admin", "idModele" => "MODEL_Ratsanguin"];
-        $creatures["Ver toxique17"] = ["niveau" => 1, "experience" => 0, "nom" => "Ver toxique    ", "idUser" => "admin", "idModele" => "MODEL_Vertoxique"];
+        $creatures["Milly"] = ["niveau" => 1, "experience" => 0, "nom" => "Milly", "idUser" => "USER_Matt", "idModele" => "MODEL_Araignedes"];
+        $creatures["Eccles"] = ["niveau" => 1, "experience" => 0, "nom" => "Eccles", "idUser" => "USER_Matt", "idModele" => "MODEL_VerPsychiq"];
+        $creatures["Zabek"] = ["niveau" => 1, "experience" => 0, "nom" => "Zabek", "idUser" => "USER_Matt", "idModele" => "MODEL_Rejetonde"];
+        $creatures["Cradou"] = ["niveau" => 1, "experience" => 0, "nom" => "Cradou", "idUser" => "USER_Matt", "idModele" => "MODEL_Cubegelati"];
+        $creatures["Torti"] = ["niveau" => 1, "experience" => 0, "nom" => "Torti", "idUser" => "USER_Matt", "idModele" => "MODEL_Basilicgea"];
+        $creatures["Rat sanguinaire 1"] = ["niveau" => 1, "experience" => 0, "nom" => "Rat sanguinaire 1", "idUser" => "admin", "idModele" => "MODEL_Ratsanguin"];
+        $creatures["Rat sanguinaire 2"] = ["niveau" => 1, "experience" => 0, "nom" => "Rat sanguinaire 2", "idUser" => "admin", "idModele" => "MODEL_Ratsanguin"];
+        $creatures["Rat sanguinaire 3"] = ["niveau" => 1, "experience" => 0, "nom" => "Rat sanguinaire 3", "idUser" => "admin", "idModele" => "MODEL_Ratsanguin"];
+        $creatures["Ver toxique 1"] = ["niveau" => 1, "experience" => 0, "nom" => "Ver toxique 1", "idUser" => "admin", "idModele" => "MODEL_Ratsanguin"];
+        $creatures["Ver toxique 2"] = ["niveau" => 1, "experience" => 0, "nom" => "Ver toxique 2", "idUser" => "admin", "idModele" => "MODEL_Ratsanguin"];
 
 
         foreach ($creatures as $name => $creature) {

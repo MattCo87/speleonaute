@@ -24,16 +24,16 @@ class CreatureFormationFixtures extends Fixture implements OrderedFixtureInterfa
 
         $formationCreatures = array();
         // Create the entries
-        $formationCreatures["FORMCREAT_1"]  = ["lienFormation" => "FORM_DreamTeam2", "lienCreature" => "Milly21", "localisation" => "", "strategie" => ""];
-        $formationCreatures["FORMCREAT_2"]  = ["lienFormation" => "FORM_DreamTeam2", "lienCreature" => "Eccles22", "localisation" => "", "strategie" => ""];
-        $formationCreatures["FORMCREAT_3"]  = ["lienFormation" => "FORM_DreamTeam2", "lienCreature" => "Zabek23", "localisation" => "", "strategie" => ""];
-        $formationCreatures["FORMCREAT_4"]  = ["lienFormation" => "FORM_DreamTeam2", "lienCreature" => "Cradou24", "localisation" => "", "strategie" => ""];
-        $formationCreatures["FORMCREAT_5"]  = ["lienFormation" => "FORM_DreamTeam2", "lienCreature" => "Torti25", "localisation" => "", "strategie" => ""];
-        $formationCreatures["FORMCREAT_6"]  = ["lienFormation" => "FORM_Nuisibles1", "lienCreature" => "Rat sanguinaire16", "localisation" => "", "strategie" => ""];
-        $formationCreatures["FORMCREAT_7"]  = ["lienFormation" => "FORM_Nuisibles1", "lienCreature" => "Rat sanguinaire16", "localisation" => "", "strategie" => ""];
-        $formationCreatures["FORMCREAT_8"]  = ["lienFormation" => "FORM_Nuisibles1", "lienCreature" => "Rat sanguinaire16", "localisation" => "", "strategie" => ""];
-        $formationCreatures["FORMCREAT_9"]  = ["lienFormation" => "FORM_Nuisibles1", "lienCreature" => "Ver toxique17", "localisation" => "", "strategie" => ""];
-        $formationCreatures["FORMCREAT_10"] = ["lienFormation" => "FORM_Nuisibles1", "lienCreature" => "Ver toxique17", "localisation" => "", "strategie" => ""];
+        $formationCreatures["FORMCREAT_1"]  = ["lienFormation" => "FORM_DreamTeam2", "lienCreature" => "Milly", "localisation" => "", "strategie" => ""];
+        $formationCreatures["FORMCREAT_2"]  = ["lienFormation" => "FORM_DreamTeam2", "lienCreature" => "Eccles", "localisation" => "", "strategie" => ""];
+        $formationCreatures["FORMCREAT_3"]  = ["lienFormation" => "FORM_DreamTeam2", "lienCreature" => "Zabek", "localisation" => "", "strategie" => ""];
+        $formationCreatures["FORMCREAT_4"]  = ["lienFormation" => "FORM_DreamTeam2", "lienCreature" => "Cradou", "localisation" => "", "strategie" => ""];
+        $formationCreatures["FORMCREAT_5"]  = ["lienFormation" => "FORM_DreamTeam2", "lienCreature" => "Torti", "localisation" => "", "strategie" => ""];
+        $formationCreatures["FORMCREAT_6"]  = ["lienFormation" => "FORM_Nuisibles1", "lienCreature" => "Rat sanguinaire 1", "localisation" => "", "strategie" => ""];
+        $formationCreatures["FORMCREAT_7"]  = ["lienFormation" => "FORM_Nuisibles1", "lienCreature" => "Rat sanguinaire 2", "localisation" => "", "strategie" => ""];
+        $formationCreatures["FORMCREAT_8"]  = ["lienFormation" => "FORM_Nuisibles1", "lienCreature" => "Rat sanguinaire 3", "localisation" => "", "strategie" => ""];
+        $formationCreatures["FORMCREAT_9"]  = ["lienFormation" => "FORM_Nuisibles1", "lienCreature" => "Ver toxique 1", "localisation" => "", "strategie" => ""];
+        $formationCreatures["FORMCREAT_10"] = ["lienFormation" => "FORM_Nuisibles1", "lienCreature" => "Ver toxique 2", "localisation" => "", "strategie" => ""];
 
         foreach ($formationCreatures as $name => $formationCreature) {
             // Populate the objects
