@@ -23,19 +23,19 @@ class StrategieModeleFixtures extends Fixture implements OrderedFixtureInterface
     {
         $strategieModele = array();
         // Create the entries
-        $strategieModele["STRATMOD_11"] = ["lienStrategie" => $this->getReference("STRAT_Ember"), "lienModele" => $this->getReference("MODEL_Araignedes"), "positionStrategie" => 1];
-        $strategieModele["STRATMOD_22"] = ["lienStrategie" => $this->getReference("STRAT_Assau"), "lienModele" => $this->getReference("MODEL_VerPsychiq"), "positionStrategie" => 1];
-        $strategieModele["STRATMOD_33"] = ["lienStrategie" => $this->getReference("STRAT_Depec"), "lienModele" => $this->getReference("MODEL_Rejetonde"), "positionStrategie" => 1];
-        $strategieModele["STRATMOD_44"] = ["lienStrategie" => $this->getReference("STRAT_Netto"), "lienModele" => $this->getReference("MODEL_Cubegelati"), "positionStrategie" => 1];
-        $strategieModele["STRATMOD_55"] = ["lienStrategie" => $this->getReference("STRAT_Figer"), "lienModele" => $this->getReference("MODEL_Basilicgea"), "positionStrategie" => 1];
-        $strategieModele["STRATMOD_66"] = ["lienStrategie" => $this->getReference("STRAT_Attaq"), "lienModele" => $this->getReference("MODEL_Ratsanguin"), "positionStrategie" => 1];
-        $strategieModele["STRATMOD_77"] = ["lienStrategie" => $this->getReference("STRAT_Poiso"), "lienModele" => $this->getReference("MODEL_Vertoxique"), "positionStrategie" => 1];
+        $strategieModele["STRATMOD_11"] = ["lienStrategie" => "STRAT_Ember", "lienModele" => "MODEL_Araignedes", "positionStrategie" => 1];
+        $strategieModele["STRATMOD_22"] = ["lienStrategie" => "STRAT_Assau", "lienModele" => "MODEL_VerPsychiq", "positionStrategie" => 1];
+        $strategieModele["STRATMOD_33"] = ["lienStrategie" => "STRAT_Depec", "lienModele" => "MODEL_Rejetonde", "positionStrategie" => 1];
+        $strategieModele["STRATMOD_44"] = ["lienStrategie" => "STRAT_Netto", "lienModele" => "MODEL_Cubegelati", "positionStrategie" => 1];
+        $strategieModele["STRATMOD_55"] = ["lienStrategie" => "STRAT_Figer", "lienModele" => "MODEL_Basilicgea", "positionStrategie" => 1];
+        $strategieModele["STRATMOD_66"] = ["lienStrategie" => "STRAT_Attaq", "lienModele" => "MODEL_Ratsanguin", "positionStrategie" => 1];
+        $strategieModele["STRATMOD_77"] = ["lienStrategie" => "STRAT_Poiso", "lienModele" => "MODEL_Vertoxique", "positionStrategie" => 1];
 
         foreach ($strategieModele as $name => $strategieMod) {
             // Populate the objects
             $$name = new StrategieModele();
-            $$name->setLienStrategie($strategieMod["lienStrategie"])
-                ->setLienModele($strategieMod["lienModele"])
+            $$name->setLienStrategie($this->getReference($strategieMod["lienStrategie"]))
+                ->setLienModele($this->getReference($strategieMod["lienModele"]))
                 ->setPositionStrategie($strategieMod["positionStrategie"]);
             $manager->persist($$name);
             $this->addReference($name, $$name);

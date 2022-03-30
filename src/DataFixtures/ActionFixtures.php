@@ -31,12 +31,12 @@ class ActionFixtures extends Fixture implements OrderedFixtureInterface
         $actions["ACT_dechiqueta"] = ["nom" => "Déchiquetage d’entrailles", "tier" => 3, "toucher" => 7, "degat" => 8];
         $actions["ACT_jetdacid"] = ["nom" => "jet d’acide ", "tier" => 1, "toucher" => 3, "degat" => 4];
         $actions["ACT_engloutiss"] = ["nom" => "engloutissement ", "tier" => 2, "toucher" => 5, "degat" => 8];
-        $actions["ACT_digestion "] = ["nom" => "digestion ", "tier" => 3, "toucher" => 7, "degat" => 12];
+        $actions["ACT_digestion"] = ["nom" => "digestion ", "tier" => 3, "toucher" => 7, "degat" => 12];
         $actions["ACT_charge vio"] = ["nom" => "Charge violente ", "tier" => 1, "toucher" => 1, "degat" => 6];
         $actions["ACT_javeline d"] = ["nom" => "Javeline dorsale ", "tier" => 2, "toucher" => 8, "degat" => 9];
         $actions["ACT_regard petr"] = ["nom" => "Regard pétrifiant ", "tier" => 3, "toucher" => 5, "degat" => 15];
         $actions["ACT_griffe"] = ["nom" => "griffe ", "tier" => 1, "toucher" => 1, "degat" => 2];
-        $actions["ACT_ecorchure "] = ["nom" => "ecorchure profonde ", "tier" => 2, "toucher" => 3, "degat" => 5];
+        $actions["ACT_ecorchure"] = ["nom" => "ecorchure profonde ", "tier" => 2, "toucher" => 3, "degat" => 5];
         $actions["ACT_morsuremu"] = ["nom" => "morsure multiple ", "tier" => 3, "toucher" => 5, "degat" => 8];
         $actions["ACT_bavetoxiq"] = ["nom" => "bave toxique ", "tier" => 1, "toucher" => 2, "degat" => 3];
         $actions["ACT_contactaf"] = ["nom" => "contact affaiblissant ", "tier" => 2, "toucher" => 4, "degat" => 4];

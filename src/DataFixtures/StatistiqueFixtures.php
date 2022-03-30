@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -21,7 +22,8 @@ class StatistiqueFixtures extends Fixture implements OrderedFixtureInterface
     // Chargement de l'objet provenant de l'Entity
     public function load(ObjectManager $manager): void
     {
-        $stratistiques = array();
+
+        $statistiques = array();
         // Create the entries
         $statistiques["STAT_touch"] = ["name" => "toucher"];
         $statistiques["STAT_degat"] = ["name" => "degat"];
@@ -29,14 +31,14 @@ class StatistiqueFixtures extends Fixture implements OrderedFixtureInterface
         $statistiques["STAT_vites"] = ["name" => "vitesse"];
         $statistiques["STAT_endur"] = ["name" => "endurance"];
 
-        foreach ($stratistiques as $name => $statistique) {
+        foreach ($statistiques as $name => $statistique) {
             // Populate the objects
             $$name = new Statistique();
-            $$name->setNom($statistique["nom"]);
+            $$name->setNom($statistique["name"]);
             $manager->persist($$name);
             $this->addReference($name, $$name);
-            //dump($name);
             //dump($$name);
         }
+        $manager->flush();
     }
 }

@@ -23,47 +23,47 @@ class ActionStrategieFixtures extends Fixture implements OrderedFixtureInterface
         $actionStrategies = array();
 
         // Create the entries
-        $actionStrategies["ACTIONSTRAT_1-1"] = ["lienStrategie" => $this->getReference("STRAT_Ember"), "lienAction" => $this->getReference("ACT_toiledar"), "positionAction" => 1];
-        $actionStrategies["ACTIONSTRAT_1-1"] = ["lienStrategie" => $this->getReference("STRAT_Ember"), "lienAction" => $this->getReference("ACT_toiledar"), "positionAction" => 4];
-        $actionStrategies["ACTIONSTRAT_1-2"] = ["lienStrategie" => $this->getReference("STRAT_Ember"), "lienAction" => $this->getReference("ACT_embrochage"), "positionAction" => 2];
-        $actionStrategies["ACTIONSTRAT_1-2"] = ["lienStrategie" => $this->getReference("STRAT_Ember"), "lienAction" => $this->getReference("ACT_embrochage"), "positionAction" => 3];
-        $actionStrategies["ACTIONSTRAT_1-3"] = ["lienStrategie" => $this->getReference("STRAT_Ember"), "lienAction" => $this->getReference("ACT_morsuremo"), "positionAction" => 5];
-        $actionStrategies["ACTIONSTRAT_2-4"] = ["lienStrategie" => $this->getReference("STRAT_Assau"), "lienAction" => $this->getReference("ACT_picpsychi"), "positionAction" => 2];
-        $actionStrategies["ACTIONSTRAT_2-4"] = ["lienStrategie" => $this->getReference("STRAT_Assau"), "lienAction" => $this->getReference("ACT_picpsychi"), "positionAction" => 4];
-        $actionStrategies["ACTIONSTRAT_2-5"] = ["lienStrategie" => $this->getReference("STRAT_Assau"), "lienAction" => $this->getReference("ACT_asservisse"), "positionAction" => 1];
-        $actionStrategies["ACTIONSTRAT_2-5"] = ["lienStrategie" => $this->getReference("STRAT_Assau"), "lienAction" => $this->getReference("ACT_asservisse"), "positionAction" => 5];
-        $actionStrategies["ACTIONSTRAT_2-6"] = ["lienStrategie" => $this->getReference("STRAT_Assau"), "lienAction" => $this->getReference("ACT_destructio"), "positionAction" => 3];
-        $actionStrategies["ACTIONSTRAT_3-7"] = ["lienStrategie" => $this->getReference("STRAT_Depec"), "lienAction" => $this->getReference("ACT_griffures"), "positionAction" => 1];
-        $actionStrategies["ACTIONSTRAT_3-7"] = ["lienStrategie" => $this->getReference("STRAT_Depec"), "lienAction" => $this->getReference("ACT_griffures"), "positionAction" => 5];
-        $actionStrategies["ACTIONSTRAT_3-8"] = ["lienStrategie" => $this->getReference("STRAT_Depec"), "lienAction" => $this->getReference("ACT_eventremen"), "positionAction" => 2];
-        $actionStrategies["ACTIONSTRAT_3-8"] = ["lienStrategie" => $this->getReference("STRAT_Depec"), "lienAction" => $this->getReference("ACT_eventremen"), "positionAction" => 4];
-        $actionStrategies["ACTIONSTRAT_3-9"] = ["lienStrategie" => $this->getReference("STRAT_Depec"), "lienAction" => $this->getReference("ACT_dechiqueta"), "positionAction" => 3];
-        $actionStrategies["ACTIONSTRAT_4-10"] = ["lienStrategie" => $this->getReference("STRAT_Netto"), "lienAction" => $this->getReference("ACT_jetdacid"), "positionAction" =>  3];
-        $actionStrategies["ACTIONSTRAT_4-10"] = ["lienStrategie" => $this->getReference("STRAT_Netto"), "lienAction" => $this->getReference("ACT_jetdacid"), "positionAction" =>  5];
-        $actionStrategies["ACTIONSTRAT_4-11"] = ["lienStrategie" => $this->getReference("STRAT_Netto"), "lienAction" => $this->getReference("ACT_engloutiss"), "positionAction" =>  1];
-        $actionStrategies["ACTIONSTRAT_4-11"] = ["lienStrategie" => $this->getReference("STRAT_Netto"), "lienAction" => $this->getReference("ACT_engloutiss"), "positionAction" =>  4];
-        $actionStrategies["ACTIONSTRAT_4-12"] = ["lienStrategie" => $this->getReference("STRAT_Netto"), "lienAction" => $this->getReference("ACT_digestion "), "positionAction" =>  2];
-        $actionStrategies["ACTIONSTRAT_5-13"] = ["lienStrategie" => $this->getReference("STRAT_Figer"), "lienAction" => $this->getReference("ACT_charge vio"), "positionAction" =>  2];
-        $actionStrategies["ACTIONSTRAT_5-13"] = ["lienStrategie" => $this->getReference("STRAT_Figer"), "lienAction" => $this->getReference("ACT_charge vio"), "positionAction" =>  4];
-        $actionStrategies["ACTIONSTRAT_5-14"] = ["lienStrategie" => $this->getReference("STRAT_Figer"), "lienAction" => $this->getReference("ACT_javeline d"), "positionAction" =>  3];
-        $actionStrategies["ACTIONSTRAT_5-14"] = ["lienStrategie" => $this->getReference("STRAT_Figer"), "lienAction" => $this->getReference("ACT_javeline d"), "positionAction" =>  5];
-        $actionStrategies["ACTIONSTRAT_5-15"] = ["lienStrategie" => $this->getReference("STRAT_Figer"), "lienAction" => $this->getReference("ACT_regard petr"), "positionAction" =>  1];
-        $actionStrategies["ACTIONSTRAT_6-16"] = ["lienStrategie" => $this->getReference("STRAT_Attaq"), "lienAction" => $this->getReference("ACT_griffe"), "positionAction" =>  1];
-        $actionStrategies["ACTIONSTRAT_6-16"] = ["lienStrategie" => $this->getReference("STRAT_Attaq"), "lienAction" => $this->getReference("ACT_griffe"), "positionAction" =>  5];
-        $actionStrategies["ACTIONSTRAT_6-17"] = ["lienStrategie" => $this->getReference("STRAT_Attaq"), "lienAction" => $this->getReference("ACT_ecorchure "), "positionAction" =>  3];
-        $actionStrategies["ACTIONSTRAT_6-17"] = ["lienStrategie" => $this->getReference("STRAT_Attaq"), "lienAction" => $this->getReference("ACT_ecorchure "), "positionAction" =>  4];
-        $actionStrategies["ACTIONSTRAT_6-18"] = ["lienStrategie" => $this->getReference("STRAT_Attaq"), "lienAction" => $this->getReference("ACT_morsuremu"), "positionAction" =>  2];
-        $actionStrategies["ACTIONSTRAT_7-19"] = ["lienStrategie" => $this->getReference("STRAT_Poiso"), "lienAction" => $this->getReference("ACT_bavetoxiq"), "positionAction" =>  3];
-        $actionStrategies["ACTIONSTRAT_7-19"] = ["lienStrategie" => $this->getReference("STRAT_Poiso"), "lienAction" => $this->getReference("ACT_bavetoxiq"), "positionAction" =>  5];
-        $actionStrategies["ACTIONSTRAT_7-20"] = ["lienStrategie" => $this->getReference("STRAT_Poiso"), "lienAction" => $this->getReference("ACT_contactaf"), "positionAction" =>  2];
-        $actionStrategies["ACTIONSTRAT_7-20"] = ["lienStrategie" => $this->getReference("STRAT_Poiso"), "lienAction" => $this->getReference("ACT_contactaf"), "positionAction" =>  4];
-        $actionStrategies["ACTIONSTRAT_7-21"] = ["lienStrategie" => $this->getReference("STRAT_Poiso"), "lienAction" => $this->getReference("ACT_jetdepois"), "positionAction" =>  1];
+        $actionStrategies["ACTIONSTRAT_1-1"] = ["lienStrategie" =>  "STRAT_Ember", "lienAction" => "ACT_toiledar", "positionAction" => 1];
+        $actionStrategies["ACTIONSTRAT_1-1"] = ["lienStrategie" =>  "STRAT_Ember", "lienAction" => "ACT_toiledar", "positionAction" => 4];
+        $actionStrategies["ACTIONSTRAT_1-2"] = ["lienStrategie" =>  "STRAT_Ember", "lienAction" => "ACT_embrochage", "positionAction" => 2];
+        $actionStrategies["ACTIONSTRAT_1-2"] = ["lienStrategie" =>  "STRAT_Ember", "lienAction" => "ACT_embrochage", "positionAction" => 3];
+        $actionStrategies["ACTIONSTRAT_1-3"] = ["lienStrategie" =>  "STRAT_Ember", "lienAction" => "ACT_morsuremo", "positionAction" => 5];
+        $actionStrategies["ACTIONSTRAT_2-4"] = ["lienStrategie" =>  "STRAT_Assau", "lienAction" => "ACT_picpsychi", "positionAction" => 2];
+        $actionStrategies["ACTIONSTRAT_2-4"] = ["lienStrategie" =>  "STRAT_Assau", "lienAction" => "ACT_picpsychi", "positionAction" => 4];
+        $actionStrategies["ACTIONSTRAT_2-5"] = ["lienStrategie" =>  "STRAT_Assau", "lienAction" => "ACT_asservisse", "positionAction" => 1];
+        $actionStrategies["ACTIONSTRAT_2-5"] = ["lienStrategie" =>  "STRAT_Assau", "lienAction" => "ACT_asservisse", "positionAction" => 5];
+        $actionStrategies["ACTIONSTRAT_2-6"] = ["lienStrategie" =>  "STRAT_Assau", "lienAction" => "ACT_destructio", "positionAction" => 3];
+        $actionStrategies["ACTIONSTRAT_3-7"] = ["lienStrategie" =>  "STRAT_Depec", "lienAction" => "ACT_griffures", "positionAction" => 1];
+        $actionStrategies["ACTIONSTRAT_3-7"] = ["lienStrategie" =>  "STRAT_Depec", "lienAction" => "ACT_griffures", "positionAction" => 5];
+        $actionStrategies["ACTIONSTRAT_3-8"] = ["lienStrategie" =>  "STRAT_Depec", "lienAction" => "ACT_eventremen", "positionAction" => 2];
+        $actionStrategies["ACTIONSTRAT_3-8"] = ["lienStrategie" =>  "STRAT_Depec", "lienAction" => "ACT_eventremen", "positionAction" => 4];
+        $actionStrategies["ACTIONSTRAT_3-9"] = ["lienStrategie" =>  "STRAT_Depec", "lienAction" => "ACT_dechiqueta", "positionAction" => 3];
+        $actionStrategies["ACTIONSTRAT_4-10"] = ["lienStrategie" => "STRAT_Netto", "lienAction" => "ACT_jetdacid", "positionAction" =>  3];
+        $actionStrategies["ACTIONSTRAT_4-10"] = ["lienStrategie" => "STRAT_Netto", "lienAction" => "ACT_jetdacid", "positionAction" =>  5];
+        $actionStrategies["ACTIONSTRAT_4-11"] = ["lienStrategie" => "STRAT_Netto", "lienAction" => "ACT_engloutiss", "positionAction" =>  1];
+        $actionStrategies["ACTIONSTRAT_4-11"] = ["lienStrategie" => "STRAT_Netto", "lienAction" => "ACT_engloutiss", "positionAction" =>  4];
+        $actionStrategies["ACTIONSTRAT_4-12"] = ["lienStrategie" => "STRAT_Netto", "lienAction" => "ACT_digestion", "positionAction" =>  2];
+        $actionStrategies["ACTIONSTRAT_5-13"] = ["lienStrategie" => "STRAT_Figer", "lienAction" => "ACT_charge vio", "positionAction" =>  2];
+        $actionStrategies["ACTIONSTRAT_5-13"] = ["lienStrategie" => "STRAT_Figer", "lienAction" => "ACT_charge vio", "positionAction" =>  4];
+        $actionStrategies["ACTIONSTRAT_5-14"] = ["lienStrategie" => "STRAT_Figer", "lienAction" => "ACT_javeline d", "positionAction" =>  3];
+        $actionStrategies["ACTIONSTRAT_5-14"] = ["lienStrategie" => "STRAT_Figer", "lienAction" => "ACT_javeline d", "positionAction" =>  5];
+        $actionStrategies["ACTIONSTRAT_5-15"] = ["lienStrategie" => "STRAT_Figer", "lienAction" => "ACT_regard petr", "positionAction" =>  1];
+        $actionStrategies["ACTIONSTRAT_6-16"] = ["lienStrategie" => "STRAT_Attaq", "lienAction" => "ACT_griffe", "positionAction" =>  1];
+        $actionStrategies["ACTIONSTRAT_6-16"] = ["lienStrategie" => "STRAT_Attaq", "lienAction" => "ACT_griffe", "positionAction" =>  5];
+        $actionStrategies["ACTIONSTRAT_6-17"] = ["lienStrategie" => "STRAT_Attaq", "lienAction" => "ACT_ecorchure", "positionAction" =>  3];
+        $actionStrategies["ACTIONSTRAT_6-17"] = ["lienStrategie" => "STRAT_Attaq", "lienAction" => "ACT_ecorchure", "positionAction" =>  4];
+        $actionStrategies["ACTIONSTRAT_6-18"] = ["lienStrategie" => "STRAT_Attaq", "lienAction" => "ACT_morsuremu", "positionAction" =>  2];
+        $actionStrategies["ACTIONSTRAT_7-19"] = ["lienStrategie" => "STRAT_Poiso", "lienAction" => "ACT_bavetoxiq", "positionAction" =>  3];
+        $actionStrategies["ACTIONSTRAT_7-19"] = ["lienStrategie" => "STRAT_Poiso", "lienAction" => "ACT_bavetoxiq", "positionAction" =>  5];
+        $actionStrategies["ACTIONSTRAT_7-20"] = ["lienStrategie" => "STRAT_Poiso", "lienAction" => "ACT_contactaf", "positionAction" =>  2];
+        $actionStrategies["ACTIONSTRAT_7-20"] = ["lienStrategie" => "STRAT_Poiso", "lienAction" => "ACT_contactaf", "positionAction" =>  4];
+        $actionStrategies["ACTIONSTRAT_7-21"] = ["lienStrategie" => "STRAT_Poiso", "lienAction" => "ACT_jetdepois", "positionAction" =>  1];
 
         foreach ($actionStrategies as $name => $actionStrategie) {
             // Populate the objects
             $$name = new ActionStrategie();
-            $$name->setLienStrategie($actionStrategie["lienStrategie"])
-                ->setLienAction($actionStrategie["lienAction"])
+            $$name->setLienStrategie($this->getReference($actionStrategie["lienStrategie"]))
+                ->setLienAction($this->getReference($actionStrategie["lienAction"]))
                 ->setPositionAction($actionStrategie["positionAction"]);
             $manager->persist($$name);
             $this->addReference($name, $$name);
