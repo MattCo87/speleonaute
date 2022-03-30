@@ -6,11 +6,18 @@ use App\Entity\User;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class UserFixtures extends Fixture
+class UserFixtures extends Fixture implements OrderedFixtureInterface
 {
+
+    public function getOrder()
+    {
+        return 1;
+    }
+
     private UserPasswordHasherInterface $hasher;
 
     public function __construct(UserPasswordHasherInterface $hasher)
@@ -30,28 +37,27 @@ class UserFixtures extends Fixture
         $admin->setPassword($password);
 
         $manager->persist($admin);
-        $manager->flush();
 
         $this->addReference('admin', $admin);
 
 
         $users = array(
-            "Matt" => array(
+            "USER_Matt" => array(
                 "pseudo" => "Lord Aixois", "mail" => "87000@gmail.com", "role" => "ROLE_USER", "xp" => 1
             ),
-            "Joel" => array(
+            "USER_Joel" => array(
                 "pseudo" => "silentfabrik", "mail" => "joel@gmail.com", "role" => "ROLE_USER", "xp" => 1
             ),
-            "Yanis" => array(
+            "USER_Yanis" => array(
                 "pseudo" => "callipo", "mail" => "callipo@gmail.com", "role" => "ROLE_USER", "xp" => 1
             ),
-            "Pierrette" => array(
+            "USER_Pierrette" => array(
                 "pseudo" => "piepie", "mail" => "piepie@gmail.com", "role" => "ROLE_USER", "xp" => 1
             ),
-            "Paulette" => array(
+            "USER_Paulette" => array(
                 "pseudo" => "paully", "mail" => "paully@gmail.com", "role" => "ROLE_USER", "xp" => 1
             ),
-            "Jacqueline" => array(
+            "USER_Jacqueline" => array(
                 "pseudo" => "jaki", "mail" => "jaki@gmail.com", "role" => "ROLE_USER", "xp" => 1
             ),
         );
@@ -67,9 +73,9 @@ class UserFixtures extends Fixture
             $password = $this->hasher->hashPassword($$name, 'pass_1234');
             $$name->setPassword($password);
             $manager->persist($$name);
-            $manager->flush();
             $this->addReference($name, $$name);
             //dd("Jusqu'ici tout va bien");
         }
+        $manager->flush();
     }
 }
