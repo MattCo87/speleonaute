@@ -13,6 +13,10 @@ class MoteurCombatController extends AbstractController
      */
     public function index(): Response
     {
+
+        $res = array();
+
+        dd($res);
         return $this->render('moteur_combat/index.html.twig', [
             'controller_name' => 'MoteurCombatController',
         ]);
