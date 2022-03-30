@@ -15,12 +15,13 @@ class CreatureFormationFixtures extends Fixture implements OrderedFixtureInterfa
     // Remplacer "UserFixtures" avec la classe dont celle-ci est dépendante
     public function getOrder()
     {
-        return 6;
+        return 12;
     }
 
     // Chargement de l'objet provenant de l'Entity
     public function load(ObjectManager $manager): void
     {
+
         $formationCreatures = array();
         // Create the entries
         $formationCreatures["FORMCREAT_1"]  = ["lienFormation" => "FORM_DreamTeam2", "lienCreature" => "Milly21", "localisation" => "", "strategie" => ""];
