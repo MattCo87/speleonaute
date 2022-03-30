@@ -15,7 +15,7 @@ class ScenarioFixtures extends Fixture implements OrderedFixtureInterface
     // Remplacer "UserFixtures" avec la classe dont celle-ci est dépendante
     public function getOrder()
     {
-        return 12;
+        return 13;
     }
 
     // Chargement de l'objet provenant de l'Entity
