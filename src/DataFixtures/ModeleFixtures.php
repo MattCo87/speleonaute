@@ -7,7 +7,6 @@ use Doctrine\Persistence\ObjectManager;
 
 // Implémentation d'une méthode pour déclarer les fixtures dont celle-ci dépend 
 // Et qu'il faut lancer avant elle
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use App\Entity\Modele;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
