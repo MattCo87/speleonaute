@@ -2,8 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Action;
+use App\Entity\ActionStrategie;
 use App\Entity\Creature;
 use App\Entity\CreatureFormation;
+use App\Entity\Modele;
+use App\Entity\StatistiqueCreature;
+use App\Entity\StrategieModele;
 use App\Service\Test;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,7 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\Query\QueryBuilder;
-use PhpParser\Node\Stmt\Foreach_;
 
 class MoteurCombatController extends AbstractController
 {
@@ -23,7 +27,7 @@ class MoteurCombatController extends AbstractController
         // thanks to the type-hint, the container will instantiate a
         // new MessageGenerator and pass it to you!
         // ...
-       // $id = 1;
+        $id = 2;
 
        //Tableau Hote
         $tableauHote = array();
@@ -41,7 +45,7 @@ class MoteurCombatController extends AbstractController
 
 
       //Tableau monstre
-       $id = 2;
+       $id = 1;
        $tableauMonstre = array();
        //$tiersCrea = $creatureFormation->getRepository(CreatureFormation::class)->findAll();
        //$tiersCrea = array();
@@ -62,41 +66,97 @@ class MoteurCombatController extends AbstractController
          $tableauCreature = array();
         foreach($tableauHote as $hote){
         
-        $creature = $doctrine->getRepository(Creature::class)->findBy(['id' => $hote]);
+            $creature = $doctrine->getRepository(Creature::class)->findBy(['id' => $hote]);
             foreach($creature as $crea){
-                $idCrea2 = $crea->getNom();
-               // dd($idCrea2);
-            // $tableauHote = $idCrea->getNom();
-            $Creature2['nom'] = $crea->getNom();
-            $Creature2['niveau'] = $crea->getNiveau();
-            $Creature2['exp'] = $crea->getExp();
-            dd($Creature2);
+                //   dd($creature);
+                //$idCrea2 = $crea->getNom();
+                // dd($idCrea2);
+                // $tableauHote = $idCrea->getNom();
+                $Creature2['id'] = $crea->getId();
+                $Creature2['nom'] = $crea->getNom();
+                $Creature2['niveau'] = $crea->getNiveau();
+                $Creature2['exp'] = $crea->getExp();
+                $Creature2['idModele'] = $crea->getlienModele()->getId();
+                }
+                //dd($Creature2);
+                $statCreature = $doctrine->getRepository(StatistiqueCreature::class)->findBy(['lienCreature' => $Creature2['id']]);
+                $Creature2['toucher']= $statCreature[0]->getValeur();
+                $Creature2['degat']= $statCreature[1]->getValeur();
+                $Creature2['resistance']= $statCreature[2]->getValeur();
+                $Creature2['vitesse']= $statCreature[3]->getValeur();
+                $Creature2['endurance']= $statCreature[4]->getValeur();
+                $Creature2['pvMax']=$Creature2['endurance']+$Creature2['niveau']*2+20;
+                $Creature2['pvActuel']=$Creature2['pvMax'];
+                $Creature2['cote']=0;
+                $Creature2['initiative']=0;
+            array_push($tableauCreature, $Creature2);
+        }       
+        foreach($tableauMonstre as $monstre){
+        
+            $creature = $doctrine->getRepository(Creature::class)->findBy(['id' => $monstre]);
+            foreach($creature as $crea){
+                //   dd($creature);
+                   // $idCrea2 = $crea->getNom();
+                // dd($idCrea2);
+                // $tableauHote = $idCrea->getNom();
+                $Creature2['id'] = $crea->getId();
+                $Creature2['nom'] = $crea->getNom();
+                $Creature2['niveau'] = $crea->getNiveau();
+                $Creature2['exp'] = $crea->getExp();
+                $Creature2['idModele'] = $crea->getlienModele()->getId();
+                }
+                //dd($Creature2);
+                $statCreature = $doctrine->getRepository(StatistiqueCreature::class)->findBy(['lienCreature' => $Creature2['id']]);
+                $Creature2['toucher']= $statCreature[0]->getValeur();
+                $Creature2['degat']= $statCreature[1]->getValeur();
+                $Creature2['resistance']= $statCreature[2]->getValeur();
+                $Creature2['vitesse']= $statCreature[3]->getValeur();
+                $Creature2['endurance']= $statCreature[4]->getValeur();
+                $Creature2['pvMax']=$Creature2['endurance']+$Creature2['niveau']*2+20;
+                $Creature2['pvActuel']=$Creature2['pvMax'];
+                $Creature2['cote']=0;
+                $Creature2['initiative']=0;
+            array_push($tableauCreature, $Creature2);
+    
+        }
+        //dd($tableauCreature,$tableauHote,$tableauMonstre);
+        $tableauAction = array();
+        foreach($tableauCreature as $creature){
+            $modele = $doctrine->getRepository(Modele::class)->findBy(['id' => $creature['idModele']]);
+            $idModele = $modele[0]->getId();
+            $strategie = $doctrine->getRepository(StrategieModele::class)->findBy(['lienModele' => $idModele]);
+            $idStrategie = $strategie[0]->getlienStrategie()->getId();
+            $actions = $doctrine->getRepository(ActionStrategie::class)->findBy(['lienStrategie' => $idStrategie]);
+           // dd($creature);
+            
+            foreach($actions as $action){
+                $Action2['idCreature'] = $creature['id'];
+                $Action2['positionAction'] = $action->getPositionAction();
+                $Action2['nom'] = $action->getLienAction()->getNom();
+                $Action2['toucher'] = $action->getLienAction()->getToucher();
+                $Action2['degat'] = $action->getLienAction()->getDegat();
+                $Action2['tier'] = $action->getLienAction()->getTier();
+               // dd($Action2);
+
+               // $attaque = $doctrine->getRepository(Action::class)->findBy(['lienAction' => $action->getlienAction()]);
+                //dd($attaque);
+                array_push($tableauAction, $Action2);
             }
-        dd($creature);
-       // $tableauCreature[0]['nom' => $creature->getNom()];
-        $nom = $creature->getNom();
+            
+
+    }dd($tableauCreature,$tableauHote,$tableauMonstre,$tableauAction);
 
 
 
 
 
-        $test = $tiersCrea->getlienCreature();
-        dd($test->getNom());
-
-
-        $message = $test->getHappyMessage();
-       // dd($message);
-        $this->addFlash('success', $message);
-        // ...
-        return $this->render('moteur_combat/index.html.twig', [
-            'controller_name' => 'MCController',
-        ]);
-    }
-
-    }
 
 
 
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      /*
     public function index(): Response
     {
@@ -106,4 +166,5 @@ class MoteurCombatController extends AbstractController
     }*/
 
 
+}
 }
