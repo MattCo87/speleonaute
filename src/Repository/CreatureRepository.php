@@ -7,6 +7,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\CreatureFormation;
+use App\Entity\Formation;
 
 /**
  * @method Creature|null find($id, $lockMode = null, $lockVersion = null)
@@ -45,6 +47,48 @@ class CreatureRepository extends ServiceEntityRepository
         }
     }
 
+    public function getFormationCreatures($formation)
+    {
+        return $this->createQueryBuilder('c')
+            ->select('c')
+            ->leftJoin(CreatureFormation::class, 'cf')
+            ->leftJoin(Formation::class, 'f')
+            ->where('cf.lienCreature = c.id')
+            ->andwhere('f.id = cf.lienFormation')
+            ->andwhere("f.nom = ?1")
+            ->setParameter(1, $formation)
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Creature[] Returns an array of Creature objects
+     */
+
+
+
+    // // Exemple d'Adeline
+    //public function findThresHoldReturn(Session $session, string $locale): array
+    //{
+    //$qb = $this->createQueryBuilder('cp')
+    //->select('AVG(cp.percentage) AS avg, sc.ulid, sct.name')
+    //->leftJoin('cp.skillChild', 'sc')
+    //->leftJoin('sc.translations', 'sct')
+    //->leftJoin('cp.participant', 'p')
+    //->andWhere('cp.session = :session')
+    //->andWhere('sct.locale = :locale')
+    //->andWhere('p.state = :state_done')
+    //->setParameter('session', $session)
+    //->setParameter('locale', $locale)
+    //->setParameter('state_done', ParticipantState::STATE_DONE)
+    //->groupBy('sc.ulid, sct.name')
+    //->orderBy('sc.sort', 'ASC')
+    //;
+    //
+    //return $qb->getQuery()->getResult();
+    //}
+    //
     // /**
     //  * @return Creature[] Returns an array of Creature objects
     //  */

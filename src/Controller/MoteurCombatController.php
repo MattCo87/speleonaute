@@ -10,20 +10,19 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManager;
 use App\Repository\CreatureRepository;
 use App\Entity\Creature;
+use App\Repository\FormationRepository;
 
 class MoteurCombatController extends AbstractController
 {
     /**
      * @Route("/moteur/combat", name="app_moteur_combat")
      */
-    public function MoteurTest(ManagerRegistry $doctrine): Response
+    public function MoteurTest(CreatureRepository $formationCreatures): Response
     {
-        $id = 1;
-        $query = $doctrine->getRepository(Creature::class)->findAll();
-        dd($query);
-        $res = "";
+        $formation = "Nuisibles";
+        $ennemies = $formationCreatures->getFormationCreatures($formation);
 
-        dd($res);
+        dd($ennemies);
         return $this->render('moteur_combat/index.html.twig', [
             'controller_name' => 'MoteurCombatController',
         ]);

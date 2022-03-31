@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Creature;
 use App\Entity\Formation;
+use App\Entity\CreatureFormation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -44,6 +46,8 @@ class FormationRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+
 
     // /**
     //  * @return Formation[] Returns an array of Formation objects
