@@ -144,7 +144,32 @@ class MoteurCombatController extends AbstractController
             }
             
 
-    }dd($tableauCreature,$tableauHote,$tableauMonstre,$tableauAction);
+    }
+    //dd(count($tableauCreature));
+    for( $i=0; ($i<count($tableauCreature)) ; $i++){
+        //dd($i);
+        $tableauCreature[$i]['initiative'] = $tableauCreature[$i]['vitesse'] + rand(1, 20);
+    }
+    //dd($tableauCreature);
+
+    $initiative = array();
+	foreach ($tableauCreature as $key => $row)
+	{
+		$initiative[$key] = $row['initiative'];
+		
+	}
+	array_multisort($initiative, SORT_DESC, $tableauCreature);
+
+    dd($tableauCreature);
+    
+    
+    
+    
+    
+    
+    
+    
+    dd($tableauCreature,$tableauHote,$tableauMonstre,$tableauAction);
 
 
 
