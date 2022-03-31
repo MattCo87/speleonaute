@@ -32,8 +32,8 @@ class CreatureFixtures extends Fixture implements OrderedFixtureInterface
         $creatures["Rat sanguinaire 1"] = ["niveau" => 1, "experience" => 0, "nom" => "Rat sanguinaire 1", "idUser" => "admin", "idModele" => "MODEL_Ratsanguin"];
         $creatures["Rat sanguinaire 2"] = ["niveau" => 1, "experience" => 0, "nom" => "Rat sanguinaire 2", "idUser" => "admin", "idModele" => "MODEL_Ratsanguin"];
         $creatures["Rat sanguinaire 3"] = ["niveau" => 1, "experience" => 0, "nom" => "Rat sanguinaire 3", "idUser" => "admin", "idModele" => "MODEL_Ratsanguin"];
-        $creatures["Ver toxique 1"] = ["niveau" => 1, "experience" => 0, "nom" => "Ver toxique 1", "idUser" => "admin", "idModele" => "MODEL_Ratsanguin"];
-        $creatures["Ver toxique 2"] = ["niveau" => 1, "experience" => 0, "nom" => "Ver toxique 2", "idUser" => "admin", "idModele" => "MODEL_Ratsanguin"];
+        $creatures["Ver toxique 1"] = ["niveau" => 1, "experience" => 0, "nom" => "Ver toxique 1", "idUser" => "admin", "idModele" => "MODEL_Vertoxique"];
+        $creatures["Ver toxique 2"] = ["niveau" => 1, "experience" => 0, "nom" => "Ver toxique 2", "idUser" => "admin", "idModele" => "MODEL_Vertoxique"];
 
 
         foreach ($creatures as $name => $creature) {
