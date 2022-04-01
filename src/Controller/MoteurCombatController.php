@@ -62,8 +62,6 @@ class MoteurCombatController extends AbstractController
       }
       //dd($tableauMonstre);
 
-    
-
 
       //TableauCreature
          $tableauCreature = array();
@@ -146,17 +144,19 @@ class MoteurCombatController extends AbstractController
             
 
     }
-    //dd($tableauAction);
+    //dd($tableauAction,$tableauCreature,$tableauHote,$tableauMonstre);
     ///////Ouverture de ficher
         // init file system
         $fsObject = new Filesystem();
-        $current_dir_path = getcwd(); 
+        $current_dir_path = getcwd();
+       // dd($fsObject,$current_dir_path);
     // create a new file and add contents
     try {
         $new_file_path = $current_dir_path . "/../var/combatLog/bar.txt";
         //dd($new_file_path);
         if (!$fsObject->exists($new_file_path))
         {
+           
             $fsObject->touch($new_file_path);
             $fsObject->chmod($new_file_path, 0777);
             $fsObject->dumpFile($new_file_path, "Adding dummy content to bar.txt file.\n");
@@ -164,8 +164,9 @@ class MoteurCombatController extends AbstractController
         }
     } catch (IOExceptionInterface $exception) {
         echo "Error creating file at". $exception->getPath();
+        dd(2);
     }
-
+    //dd(2);
 
     //////Moteur C PARTI
     $tour = 0;
@@ -177,6 +178,7 @@ class MoteurCombatController extends AbstractController
 
         $tour++;
         $tourAction++;
+
         $fsObject->appendToFile($new_file_path, "Tour".$tour."\n");
         $fsObject->appendToFile($new_file_path, "Phase d'initiative"."\n");
 
@@ -303,9 +305,9 @@ class MoteurCombatController extends AbstractController
                 else{
                     $fsObject->appendToFile($new_file_path,"Defense echoué"."\n");
                     $degat = floor($creature['degat']/2) + $tableauAction[$indexAction]['degat'];
-                    $fsObject->appendToFile($new_file_path,"degat de ".$creature['nom']." est egale à son degat diviser par deux (arrondie a l'inferieur) (".($creature['degat']/2).") plus le bonus de degat le l'action ".$tableauAction[$indexAction]['degat']." = ".$degat."\n");
+                    $fsObject->appendToFile($new_file_path,"degat de ".$creature['nom']." est egale à son degat diviser par deux (arrondie a l'inferieur) (".floor($creature['degat']/2).") plus le bonus de degat le l'action ".$tableauAction[$indexAction]['degat']." = ".$degat."\n");
                     $resistance = floor($tableauCreature[$cible]['resistance']/2);
-                    $fsObject->appendToFile($new_file_path,"resistance de ".$tableauCreature[$cible]['nom']." est egale à sa resistance diviser par deux (arrondie a l'inferieur) (".($tableauCreature[$cible]['resistance']/2).") = ".$resistance."\n");
+                    $fsObject->appendToFile($new_file_path,"resistance de ".$tableauCreature[$cible]['nom']." est egale à sa resistance diviser par deux (arrondie a l'inferieur) (".floor($tableauCreature[$cible]['resistance']/2).") = ".$resistance."\n");
                     if($degat <= $resistance){
                         $fsObject->appendToFile($new_file_path,"".$tableauCreature[$cible]['nom']." à resister a l'attaque"."\n");
                     }
@@ -315,7 +317,7 @@ class MoteurCombatController extends AbstractController
                         $tableauCreature[$cible]['pvActuel'] = $tableauCreature[$cible]['pvActuel']- $degatSubit;
                         if($tableauCreature[$cible]['pvActuel'] <= 0){
                             $fsObject->appendToFile($new_file_path,"".$tableauCreature[$cible]['nom']." est mort au combat"."\n");
-                            if($tableauCreature[$cible]['hote'] == 0){
+                            if($tableauCreature[$cible]['cote'] == 0){
                                 $alliéVivant++;
                             }else{
                                 $ennemiVivant++;
@@ -356,7 +358,7 @@ class MoteurCombatController extends AbstractController
     } //dd($tableauCreature);
 
 ///Fin du combat
-if($alliéVivant ==0){
+if($alliéVivant ==5){
     $fsObject->appendToFile($new_file_path,"Defaite "."\n");
 }else{
     $fsObject->appendToFile($new_file_path,"Vctoire "."\n");
@@ -405,13 +407,13 @@ if($alliéVivant ==0){
 
 }
 
-
+/*
   public function index(): Response
     {
         return $this->render('moteur_combat/index.html.twig', [
             'controller_name' => 'MoteurCombatController',
         ]);
-    }
+    }*/
 
 
 
