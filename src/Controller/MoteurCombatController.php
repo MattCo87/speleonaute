@@ -14,6 +14,9 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Path;
 use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\Query\QueryBuilder;
 
@@ -114,7 +117,7 @@ class MoteurCombatController extends AbstractController
                 $Creature2['endurance']= $statCreature[4]->getValeur();
                 $Creature2['pvMax']=$Creature2['endurance']+$Creature2['niveau']*2+20;
                 $Creature2['pvActuel']=$Creature2['pvMax'];
-                $Creature2['cote']=0;
+                $Creature2['cote']=1;
                 $Creature2['initiative']=0;
             array_push($tableauCreature, $Creature2);
     
@@ -122,9 +125,7 @@ class MoteurCombatController extends AbstractController
         //dd($tableauCreature,$tableauHote,$tableauMonstre);
         $tableauAction = array();
         foreach($tableauCreature as $creature){
-            $modele = $doctrine->getRepository(Modele::class)->findBy(['id' => $creature['idModele']]);
-            $idModele = $modele[0]->getId();
-            $strategie = $doctrine->getRepository(StrategieModele::class)->findBy(['lienModele' => $idModele]);
+            $strategie = $doctrine->getRepository(StrategieModele::class)->findBy(['lienModele' => $creature['idModele']]);
             $idStrategie = $strategie[0]->getlienStrategie()->getId();
             $actions = $doctrine->getRepository(ActionStrategie::class)->findBy(['lienStrategie' => $idStrategie]);
            // dd($creature);
@@ -145,13 +146,68 @@ class MoteurCombatController extends AbstractController
             
 
     }
+    dd($tableauAction);
+    ///////Ouverture de ficher
+        // init file system
+        $fsObject = new Filesystem();
+        $current_dir_path = getcwd(); 
+    // create a new file and add contents
+    try {
+        $new_file_path = $current_dir_path . "/../var/combatLog/bar.txt";
+        //dd($new_file_path);
+        if (!$fsObject->exists($new_file_path))
+        {
+            $fsObject->touch($new_file_path);
+            $fsObject->chmod($new_file_path, 0777);
+            $fsObject->dumpFile($new_file_path, "Adding dummy content to bar.txt file.\n");
+            $fsObject->appendToFile($new_file_path, "This should be added to the end of the file.\n");
+        }
+    } catch (IOExceptionInterface $exception) {
+        echo "Error creating file at". $exception->getPath();
+    }
+
+
+    //////Moteur C PARTI
+    $tour = 0;
+    $tourAction = 0;
+    $alliéVivant = 1;
+    $ennemiVivant = 1;
+
+    while( $tour < 50 || $alliéVivant == 0 || $ennemiVivant ==0 ){
+
+        $tour++;
+        $tourAction++;
+        $fsObject->appendToFile($new_file_path, "Tour".$tour."\n");
+        $fsObject->appendToFile($new_file_path, "Phase d'initiative"."\n");
+
+    ///////Initiative
     //dd(count($tableauCreature));
     for( $i=0; ($i<count($tableauCreature)) ; $i++){
         //dd($i);
-        $tableauCreature[$i]['initiative'] = $tableauCreature[$i]['vitesse'] + rand(1, 20);
+        if($tableauCreature[$i]['cote'] == 0){
+            $random = rand(1, 20);
+            $tableauCreature[$i]['initiative'] = $tableauCreature[$i]['vitesse'] + $random;
+            $fsObject->appendToFile($new_file_path, "initiative de ".$tableauCreature[$i]['nom']." est egale à sa vitesse ".$tableauCreature[$i]['vitesse']." + un jet d'initiative (".$random.") = =".$tableauCreature[$i]['initiative']."\n");
+        }
+
+
+        
+    }
+    for( $i=0; ($i<count($tableauCreature)) ; $i++){
+        //dd($i);
+        if($tableauCreature[$i]['cote'] == 1){
+            $random = rand(1, 20);
+            $tableauCreature[$i]['initiative'] = $tableauCreature[$i]['vitesse'] + $random;
+            $fsObject->appendToFile($new_file_path, "initiative de ".$tableauCreature[$i]['nom']." est egale à sa vitesse ".$tableauCreature[$i]['vitesse']." + un jet d'initiative (".$random.") = =".$tableauCreature[$i]['initiative']."\n");
+        }
+
+
+        
     }
     //dd($tableauCreature);
 
+
+    //////Tri par initiative
     $initiative = array();
 	foreach ($tableauCreature as $key => $row)
 	{
@@ -159,6 +215,105 @@ class MoteurCombatController extends AbstractController
 		
 	}
 	array_multisort($initiative, SORT_DESC, $tableauCreature);
+
+
+    //dd($tableauCreature);   
+    ////////Action des differente creature
+
+    foreach($tableauCreature as $creature){
+
+        if($creature['pvActuel'] > 0){
+
+            if($tourAction == 6){
+                $tourAction = 1;
+            }
+            $indexAction = 0;
+            foreach($tableauAction as $action){
+                if(($action['idCreature'] == $creature['id']) && ($action['positionAction'] == $tourAction)){
+                    break;
+                }
+                $indexAction;
+            }
+            if($creature['cote'] == 0){
+                $idCible = array_rand($tableauMonstre,1);
+                $cible = 0;
+                $tableauCreatureCopie = $tableauCreature;
+                foreach($tableauCreatureCopie as $creatureCopie){
+                    if($creatureCopie['id'] == $idCible){
+                        break;
+                    }
+                    $idCible++;
+                }
+                //dd($cible);
+            }
+            if($creature['cote'] == 1){
+                $cible = array_rand($tableauHote,1);
+                $cible = 0;
+                $tableauCreatureCopie = $tableauCreature;
+                foreach($tableauCreatureCopie as $creatureCopie){
+                    if($creatureCopie['id'] == $idCible){
+                        break;
+                    }
+                    $idCible++;
+                }
+            }
+            $d20 = rand(1,20);
+            $toucher = $creature['toucher'] + $action['toucher'] + $d20;
+            $fsObject->appendToFile($new_file_path,"".$creature['nom']." realise l'action ".$action['nom']."(Tier ".$action['tier'].") contre ".$tableauCreature[$cible]['nom']."\n");
+            $fsObject->appendToFile($new_file_path,"attaque de ".$creature['nom']." est egale à son toucher ".$creature['toucher']." plus un jet de toucher (".$d20.") auquel on ajoute aussi le bonus de toucher le l'action ".$action['toucher']." = ".$toucher."\n");
+
+
+
+
+
+
+
+
+
+        }
+
+
+
+    }
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     dd($tableauCreature);
     
