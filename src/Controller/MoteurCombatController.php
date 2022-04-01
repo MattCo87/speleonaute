@@ -188,10 +188,7 @@ class MoteurCombatController extends AbstractController
                 $random = rand(1, 20);
                 $tableauCreature[$i]['initiative'] = $tableauCreature[$i]['vitesse'] + $random;
                 $fsObject->appendToFile($new_file_path, "initiative de ".$tableauCreature[$i]['nom']." est egale à sa vitesse ".$tableauCreature[$i]['vitesse']." + un jet d'initiative (".$random.") = =".$tableauCreature[$i]['initiative']."\n");
-            }
-
-
-            
+            }          
         }
         for( $i=0; ($i<count($tableauCreature)) ; $i++){
             //dd($i);
@@ -232,7 +229,9 @@ class MoteurCombatController extends AbstractController
                     if(($action['idCreature'] == $creature['id']) && ($action['positionAction'] == $tourAction)){
                         break;
                     }
-                    $indexAction;
+                    else{
+                        $indexAction++;
+                    }
                 }
                 if($creature['cote'] == 0){
 
@@ -290,9 +289,9 @@ class MoteurCombatController extends AbstractController
                     }while($isOk == 0);
                 }
                 $d20 = rand(1,20);
-                $toucher = $creature['toucher'] + $action['toucher'] + $d20;
-                $fsObject->appendToFile($new_file_path,"".$creature['nom']." realise l'action ".$action['nom']."(Tier ".$action['tier'].") contre ".$tableauCreature[$cible]['nom']."\n");
-                $fsObject->appendToFile($new_file_path,"attaque de ".$creature['nom']." est egale à son toucher ".$creature['toucher']." plus un jet de toucher (".$d20.") auquel on ajoute aussi le bonus de toucher le l'action ".$action['toucher']." = ".$toucher."\n");
+                $toucher = $creature['toucher'] + $tableauAction[$indexAction]['toucher'] + $d20;
+                $fsObject->appendToFile($new_file_path,"".$creature['nom']." realise l'action ".$tableauAction[$indexAction]['nom']."(Tier ".$tableauAction[$indexAction]['tier'].") contre ".$tableauCreature[$cible]['nom']."\n");
+                $fsObject->appendToFile($new_file_path,"attaque de ".$creature['nom']." est egale à son toucher ".$creature['toucher']." plus un jet de toucher (".$d20.") auquel on ajoute aussi le bonus de toucher le l'action ".$tableauAction[$indexAction]['toucher']." = ".$toucher."\n");
                 $defense = $tableauCreature[$cible]['toucher'] + $d20;
                 $fsObject->appendToFile($new_file_path,"defense de ".$tableauCreature[$cible]['nom']." est egale à son toucher ".$tableauCreature[$cible]['toucher']." plus un jet de toucher (".$d20.") = ".$defense."\n");
                 if($toucher < $defense){
@@ -300,8 +299,8 @@ class MoteurCombatController extends AbstractController
                 }
                 else{
                     $fsObject->appendToFile($new_file_path,"Defense echoué"."\n");
-                    $degat = floor($creature['degat']/2) + $action['degat'];
-                    $fsObject->appendToFile($new_file_path,"degat de ".$creature['nom']." est egale à son degat diviser par deux (arrondie a l'inferieur) (".($creature['degat']/2).") plus le bonus de degat le l'action ".$action['degat']." = ".$degat."\n");
+                    $degat = floor($creature['degat']/2) + $tableauAction[$indexAction]['degat'];
+                    $fsObject->appendToFile($new_file_path,"degat de ".$creature['nom']." est egale à son degat diviser par deux (arrondie a l'inferieur) (".($creature['degat']/2).") plus le bonus de degat le l'action ".$tableauAction[$indexAction]['degat']." = ".$degat."\n");
                     $resistance = floor($tableauCreature[$cible]['resistance']/2);
                     $fsObject->appendToFile($new_file_path,"resistance de ".$tableauCreature[$cible]['nom']." est egale à sa resistance diviser par deux (arrondie a l'inferieur) (".($tableauCreature[$cible]['resistance']/2).") = ".$resistance."\n");
                     if($degat <= $resistance){
@@ -322,7 +321,7 @@ class MoteurCombatController extends AbstractController
 
 
                 }
-                $fsObject->appendToFile($new_file_path,"fin de l'action de ".$creature['nom']."\n");
+           //     $fsObject->appendToFile($new_file_path,"fin de l'action de ".$creature['nom']."\n");
 
             }
 
