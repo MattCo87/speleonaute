@@ -15,22 +15,20 @@ use App\Repository\FormationRepository;
 class MoteurCombatController extends AbstractController
 {
     /**
-     * @Route("/moteur/combat", name="app_moteur_combat")
+     * @Route("/moteur/combat", name="app_moteur_combat_J")
      */
     public function moteurCombat(CreatureRepository $creatureRepository): Response
     {
         $hotes = $creatureRepository->getFormationCreatures('DreamTeam');
         $monstres = $creatureRepository->getFormationCreatures('Nuisibles');
 
-
         // Ici tu peux formatter comme ceci
-        $hoteIds = array_map(static fn ($value) => $value['id'], $hotes);
-        $monstreIds = array_map(static fn ($value) => $value['id'], $monstres);
+        $hotesIds = array_map(static fn ($value) => $value['id'], $hotes);
+        $monstresIds = array_map(static fn ($value) => $value['id'], $monstres);
 
-        dd($hoteIds, $monstreIds);
+        dd($hotesIds, $monstresIds);
 
         return $this->render('moteur_combat/index.html.twig', [
             'controller_name' => 'MoteurCombatController',
         ]);
     }
-}
