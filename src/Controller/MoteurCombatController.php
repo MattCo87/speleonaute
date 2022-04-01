@@ -170,10 +170,10 @@ class MoteurCombatController extends AbstractController
     //////Moteur C PARTI
     $tour = 0;
     $tourAction = 0;
-    $alliéVivant = 1;
-    $ennemiVivant = 1;
+    $alliéVivant = 0;
+    $ennemiVivant = 0;
 
-    while( $tour < 50 || $alliéVivant == 0 || $ennemiVivant ==0 ){
+    while( ($tour < 50) && ($alliéVivant < 5) && ($ennemiVivant < 5) ){
 
         $tour++;
         $tourAction++;
@@ -219,12 +219,13 @@ class MoteurCombatController extends AbstractController
 
         foreach($tableauCreature as $creature){
 
-            if($creature['pvActuel'] > 0){
+            if($creature['pvActuel'] > 0 && $alliéVivant < 5 && $ennemiVivant <5 ){
 
                 if($tourAction == 6){
                     $tourAction = 1;
                 }
-                $indexAction = 0;
+                    $indexAction = 0;
+                    $fsObject->appendToFile($new_file_path,"tour Action ".$tourAction." \n");
                 foreach($tableauAction as $action){
                     if(($action['idCreature'] == $creature['id']) && ($action['positionAction'] == $tourAction)){
                         break;
@@ -259,6 +260,7 @@ class MoteurCombatController extends AbstractController
                             $isOk = 1;
                         }else{
                             $isOk = 0;
+                            $fsObject->appendToFile($new_file_path,"gogole "." \n");
                         }
                         //dd($cible);
                     }while($isOk == 0);
@@ -284,6 +286,7 @@ class MoteurCombatController extends AbstractController
                             $isOk = 1;
                         }else{
                             $isOk = 0;
+                            $fsObject->appendToFile($new_file_path,"gogole "." \n");
                         }
                         //dd($cible);
                     }while($isOk == 0);
@@ -312,6 +315,11 @@ class MoteurCombatController extends AbstractController
                         $tableauCreature[$cible]['pvActuel'] = $tableauCreature[$cible]['pvActuel']- $degatSubit;
                         if($tableauCreature[$cible]['pvActuel'] <= 0){
                             $fsObject->appendToFile($new_file_path,"".$tableauCreature[$cible]['nom']." est mort au combat"."\n");
+                            if($tableauCreature[$cible]['hote'] == 0){
+                                $alliéVivant++;
+                            }else{
+                                $ennemiVivant++;
+                            }
                         }
                         else{
                             $fsObject->appendToFile($new_file_path,"".$tableauCreature[$cible]['nom']." survit avec ".$tableauCreature[$cible]['pvActuel']." pv"."\n");
@@ -327,7 +335,7 @@ class MoteurCombatController extends AbstractController
 
 
 
-        }
+        }/*
         //on verifie que les team sont encore en vie
         $alliéVivant = 0;
         $ennemiVivant = 0;
@@ -339,12 +347,13 @@ class MoteurCombatController extends AbstractController
                     $ennemiVivant++;
                 }
             }
-        }
+        }*/
+        $fsObject->appendToFile($new_file_path,"Allie vivant".$alliéVivant."\n");
+        $fsObject->appendToFile($new_file_path,"Ennemi vivant".$ennemiVivant."\n");
 
 
 
-
-    }
+    } //dd($tableauCreature);
 
 ///Fin du combat
 if($alliéVivant ==0){
@@ -361,14 +370,14 @@ if($alliéVivant ==0){
             $fsObject->appendToFile($new_file_path,"".$tableauCreature[$i]['nom']." à gagné ".$recompense." pex"."\n");
         }
     }
-}
+}dd($tableauCreature);
 
 
 
 
 
 
-    dd($tableauCreature);
+   
     
     
     
@@ -390,14 +399,20 @@ if($alliéVivant ==0){
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-     /*
-    public function index(): Response
+     
+  
+
+
+}
+
+
+  public function index(): Response
     {
         return $this->render('moteur_combat/index.html.twig', [
             'controller_name' => 'MoteurCombatController',
         ]);
-    }*/
+    }
 
 
-}
+
 }
