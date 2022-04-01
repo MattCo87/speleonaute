@@ -146,7 +146,7 @@ class MoteurCombatController extends AbstractController
             
 
     }
-    dd($tableauAction);
+    //dd($tableauAction);
     ///////Ouverture de ficher
         // init file system
         $fsObject = new Filesystem();
@@ -235,33 +235,72 @@ class MoteurCombatController extends AbstractController
                 $indexAction;
             }
             if($creature['cote'] == 0){
-                $idCible = array_rand($tableauMonstre,1);
-                $cible = 0;
-                $tableauCreatureCopie = $tableauCreature;
-                foreach($tableauCreatureCopie as $creatureCopie){
-                    if($creatureCopie['id'] == $idCible){
-                        break;
+
+                do{
+                    $taille = count($tableauMonstre)-1;
+                    $a = rand(0, $taille);
+                    $idCible = $tableauMonstre[$a];
+                    //dd($idCible);
+                    $cible = 0;
+                    $tableauCreatureCopie = $tableauCreature;
+                    //dd($tableauCreature);
+                   // dd($tableauCreatureCopie,$tableauCreature);
+                    foreach($tableauCreatureCopie as $creatureCopie){
+                        if($creatureCopie['id'] == $idCible){
+                            break;
+                        }
+                        else{
+                            $cible++;
+                        }
+                        
                     }
-                    $idCible++;
-                }
-                //dd($cible);
+                    //dd($cible);
+                   //dd($tableauCreature[$cible]['pvActuel']);
+                    if($tableauCreature[$cible]['pvActuel'] > 0){
+                        $isOk = 1;
+                    }else{
+                        $isOk = 0;
+                    }
+                    //dd($cible);
+                }while($isOk == 0);
             }
             if($creature['cote'] == 1){
-                $cible = array_rand($tableauHote,1);
-                $cible = 0;
-                $tableauCreatureCopie = $tableauCreature;
-                foreach($tableauCreatureCopie as $creatureCopie){
-                    if($creatureCopie['id'] == $idCible){
-                        break;
+
+                do{
+                    $taille = count($tableauHote)-1;
+                    $a = rand(0, $taille);
+                    $idCible = $tableauHote[$a];
+                    //dd($idCible);
+                    $cible = 0;
+                    $tableauCreatureCopie = $tableauCreature;
+                    foreach($tableauCreatureCopie as $creatureCopie){
+                        if($creatureCopie['id'] == $idCible){
+                            break;
+                        }else{
+                            $cible++;
+                        }
+                        
                     }
-                    $idCible++;
-                }
+                    if($tableauCreature[$cible]['pvActuel'] > 0){
+                        $isOk = 1;
+                    }else{
+                        $isOk = 0;
+                    }
+                    //dd($cible);
+                }while($isOk == 0);
             }
             $d20 = rand(1,20);
             $toucher = $creature['toucher'] + $action['toucher'] + $d20;
             $fsObject->appendToFile($new_file_path,"".$creature['nom']." realise l'action ".$action['nom']."(Tier ".$action['tier'].") contre ".$tableauCreature[$cible]['nom']."\n");
             $fsObject->appendToFile($new_file_path,"attaque de ".$creature['nom']." est egale à son toucher ".$creature['toucher']." plus un jet de toucher (".$d20.") auquel on ajoute aussi le bonus de toucher le l'action ".$action['toucher']." = ".$toucher."\n");
+            $defense = $tableauCreature[$cible]['toucher'] + $d20;
+            $fsObject->appendToFile($new_file_path,"defense de ".$tableauCreature[$cible]['nom']." est egale à son toucher ".$tableauCreature[$cible]['toucher']." plus un jet de toucher (".$d20.") = ".$defense."\n");
+            if($toucher < $defense){
+                $fsObject->appendToFile($new_file_path,"Defense reussite"."\n");
+            }
+            else{
 
+            }
 
 
 
