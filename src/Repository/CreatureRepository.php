@@ -9,6 +9,8 @@ use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\CreatureFormation;
 use App\Entity\Formation;
+use App\Entity\Statistique;
+use App\Entity\StatistiqueCreature;
 
 /**
  * @method Creature|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,7 +49,7 @@ class CreatureRepository extends ServiceEntityRepository
         }
     }
 
-    public function getFormationCreatures($formation)
+    public function getFormationCreatures($formation): ?array
     {
         return $this->createQueryBuilder('c')
             ->select('c')
@@ -59,8 +61,27 @@ class CreatureRepository extends ServiceEntityRepository
             ->setParameter(1, $formation)
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult();
+            ->getArrayResult();
     }
+
+    public function getInfosCreatures($creatureId): ?array
+    {
+        return $this->createQueryBuilder('c')
+            ->select('c',)
+            ->leftJoin(StatistiqueCreature::class, 'statc')
+            ->leftJoin(Statistique::class, 'stat')
+            ->leftJoin(Statistique::class, 'stat')
+            ->where('cf.lienCreature = c.id')
+            ->andwhere('f.id = cf.lienFormation')
+            ->andwhere("f.nom = :")
+            ->setParameter(1, $formation)
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getArrayResult();
+    }
+
+    //    ->where('s.campaign = :campaign')
+    //    ->setParameter('campaign', $campaign)
 
     /**
      * @return Creature[] Returns an array of Creature objects

@@ -17,12 +17,18 @@ class MoteurCombatController extends AbstractController
     /**
      * @Route("/moteur/combat", name="app_moteur_combat")
      */
-    public function MoteurTest(CreatureRepository $formationCreatures): Response
+    public function moteurCombat(CreatureRepository $creatureRepository): Response
     {
-        $formation = "Nuisibles";
-        $ennemies = $formationCreatures->getFormationCreatures($formation);
+        $hotes = $creatureRepository->getFormationCreatures('DreamTeam');
+        $monstres = $creatureRepository->getFormationCreatures('Nuisibles');
 
-        dd($ennemies);
+
+        // Ici tu peux formatter comme ceci
+        $hoteIds = array_map(static fn ($value) => $value['id'], $hotes);
+        $monstreIds = array_map(static fn ($value) => $value['id'], $monstres);
+
+        dd($hoteIds, $monstreIds);
+
         return $this->render('moteur_combat/index.html.twig', [
             'controller_name' => 'MoteurCombatController',
         ]);
