@@ -5,9 +5,11 @@ namespace App\Form;
 use App\Entity\CreatureFormation;
 use App\Entity\Formation;
 use App\Entity\Creature;
+use App\Entity\Scenario;
 use App\Repository\FormationRepository;
 use App\Repository\CreatureFormationRepository;
 use App\Repository\CreatureRepository;
+use App\Repository\ScenarioRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,7 +20,7 @@ use Symfony\Component\Security\Core\Security as CoreSecurity;
 use Doctrine\Persistence\ManagerRegistry;
 
 
-class CreatureFormationType extends AbstractType
+class ChevallementType extends AbstractType
 {
     private $security;
 
@@ -41,48 +43,14 @@ class CreatureFormationType extends AbstractType
                 },
                 'choice_label' => 'nom',
             ))
-
-
-            // On affiche la liste des Créatures
-            ->add('lienCreature', EntityType::class, array(
-                'class' => Creature::class,
-                'query_builder' => function () {
-                    // Une sous requête affichant la liste des personnages appartenant à une formation
-                    $ecf = new CreatureFormationRepository($this->registry);
-                    $subQueryBuilder = $ecf->createQueryBuilder('cf');
-                    $subQuery = $subQueryBuilder
-                        ->select('IDENTITY(cf.lienCreature)');
-
-                    // Une requête retournant les personnages appartenants à l'utilisateur et qui ne sont pas dans une formation
-                    $er = new CreatureRepository($this->registry);
-                    $queryBuilder = $er->createQueryBuilder('c');
-                    $query = $queryBuilder
-                        ->where($queryBuilder->expr()->notIn('c.id', $subQuery->getDQL()))
-                        ->andwhere('c.lienUser = :val')
-                        ->setParameter('val', $this->security->getUser());
-                    return $query;
+            // On affiche la liste des Scenario
+            ->add('lienScenario', EntityType::class, array(
+                'class' => Scenario::class,
+                'query_builder' => function (ScenarioRepository $er) {
+                    return $er->createQueryBuilder('c');
                 },
                 'choice_label' => 'nom',
             ))
-
-            // On choisit sa localisation
-            ->add('localisation', ChoiceType::class, array(
-                'choices'  => [
-                    'Devant' => 0,
-                    'Milieu' => 1,
-                    'Derrière' => 2,
-                ],
-            ))
-
-            // On choisit la stratégie
-            ->add('strategie', ChoiceType::class, [
-                'choices'  => [
-                    '1' => 1,
-                    '2' => 2,
-                    '3' => 3,
-                    '4' => 4,
-                ],
-            ])
 
             // Bouton pour valider la création de la CreationFormation
             ->add('submit', SubmitType::class, [
@@ -94,7 +62,8 @@ class CreatureFormationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => CreatureFormation::class,
+            'data_class_formation' => Formation::class,
+            'data_class_scenario' => Scenario::class,
         ]);
     }
 }

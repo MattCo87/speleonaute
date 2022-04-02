@@ -12,14 +12,32 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Security\Core\Security as CoreSecurity;
 
 class MoteurCombatController extends AbstractController
 {
     /**
      * @Route("/moteur/combat/new/{id}", name="app_moteur_combat")
      */
-    public function new(Creature $creature, ManagerRegistry $doctrine, int $id): Response
+    public function new(Creature $creature, ManagerRegistry $doctrine, int $id,CoreSecurity $security): Response
     {
+
+        //try recuperation donnée user, ça a l'air ok
+        $this->security = $security;
+        //dd($security);
+        $user = $security->getUser();
+        //ça fonctionne meme si ça dit erreur!!!
+        //dd($user->getEmail());
+        $nomCombat = "".$user->getEmail()."_Combat_".$id."";
+        //dd($nomCombat);
+
+
+
+
+
+
+
+
         $id = 2;
         //Tableau Hote
         $tableauHote = array();
@@ -74,7 +92,7 @@ class MoteurCombatController extends AbstractController
             $Creature2['resistance']= $statCreature[2]->getValeur();
             $Creature2['vitesse']= $statCreature[3]->getValeur();
             $Creature2['endurance']= $statCreature[4]->getValeur();
-            $Creature2['pvMax']=$Creature2['endurance']+$Creature2['niveau']*2+20;
+            $Creature2['pvMax']=$Creature2['endurance']+$Creature2['niveau']*2+50;
             $Creature2['pvActuel']=$Creature2['pvMax'];
             $Creature2['cote']=1;
             $Creature2['initiative']=0;
@@ -101,7 +119,7 @@ class MoteurCombatController extends AbstractController
         $current_dir_path = getcwd();
         // create a new file and add contents
         try {
-            $new_file_path = $current_dir_path . "/../var/combatLog/bar.txt";
+            $new_file_path = $current_dir_path . "/../var/combatLog/".$nomCombat.".txt";
             if (!$fsObject->exists($new_file_path)){
                 $fsObject->touch($new_file_path);
                 $fsObject->chmod($new_file_path, 0777);
