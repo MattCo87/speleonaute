@@ -3,6 +3,7 @@
 namespace App\Controller;
 use App\Entity\ActionStrategie;
 use App\Entity\Creature;
+use App\Entity\Combat;
 use App\Entity\CreatureFormation;
 use App\Entity\StatistiqueCreature;
 use App\Entity\StrategieModele;
@@ -31,6 +32,10 @@ class MoteurCombatController extends AbstractController
         $nomCombat = "".$user->getEmail()."_Combat_".$id."";
         //dd($nomCombat);
 
+
+        // Creer formation pour Joueur
+        //Service Generation aleatoire d'un hote a partir d'un modele aleatoire
+        //Service Generation d'un monstre a partir d'un modele
 
 
 
@@ -129,6 +134,26 @@ class MoteurCombatController extends AbstractController
         } catch (IOExceptionInterface $exception) {
             echo "Error creating file at". $exception->getPath();
         }
+
+        ///Instancie Combat
+        /*
+        $instantCombat = new Combat();
+        $instantCombat->setFichierLog($new_file_path);
+        $instantCombat->setLienUser($user);
+        $manager->persist($instantCombat);
+        $manager->flush();
+        */
+
+
+
+
+
+
+
+
+
+
+
         //////Moteur C PARTI
         $tour = 0;
         $tourAction = 0;

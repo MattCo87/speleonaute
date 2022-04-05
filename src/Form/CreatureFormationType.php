@@ -48,17 +48,17 @@ class CreatureFormationType extends AbstractType
                 'class' => Creature::class,
                 'query_builder' => function () {
                     // Une sous requête affichant la liste des personnages appartenant à une formation
-                    $ecf = new CreatureFormationRepository($this->registry);
+                  /*  $ecf = new CreatureFormationRepository($this->registry);
                     $subQueryBuilder = $ecf->createQueryBuilder('cf');
                     $subQuery = $subQueryBuilder
-                        ->select('IDENTITY(cf.lienCreature)');
+                        ->select('IDENTITY(cf.lienCreature)');*/
 
                     // Une requête retournant les personnages appartenants à l'utilisateur et qui ne sont pas dans une formation
                     $er = new CreatureRepository($this->registry);
                     $queryBuilder = $er->createQueryBuilder('c');
                     $query = $queryBuilder
-                        ->where($queryBuilder->expr()->notIn('c.id', $subQuery->getDQL()))
-                        ->andwhere('c.lienUser = :val')
+                        /*->where($queryBuilder->expr()->notIn('c.id', $subQuery->getDQL()))*/
+                        ->where('c.lienUser = :val')
                         ->setParameter('val', $this->security->getUser());
                     return $query;
                 },

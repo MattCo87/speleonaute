@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\CreatureFormationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Security\Core\Security as CoreSecurity;
 
 class FormationController extends AbstractController
 {
@@ -23,8 +24,9 @@ class FormationController extends AbstractController
 
         //On crée le formulaire de création de CreatureFormation
         $form = $this->createForm(CreatureFormationType::class, $creatureFormation);
-        $form->handleRequest($request);
         
+        $form->handleRequest($request);
+        dd($form->getData());
         // Action sur la validation du formulaire
         if ($form->isSubmitted() && $form->isValid()) {
             // On ajoute la CreatureFormation 

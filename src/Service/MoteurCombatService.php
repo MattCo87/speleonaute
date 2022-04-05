@@ -17,8 +17,9 @@ use Symfony\Component\Filesystem\Filesystem;
 class MoteurCombatService
 {
       
-        public function combat(Creature $creature, ManagerRegistry $doctrine, Formation $formation, Scenario $scenario): Response
+        public function combat(ManagerRegistry $doctrine, Formation $formation, Scenario $scenario, int $idCombat): Response
         {
+            $nomCombat = "".$formation->getLienUser()->getEmail()."_Combat_".$idCombat."";
             $id = $formation->getId();
             //Tableau Hote
             $tableauHote = array();
@@ -101,7 +102,7 @@ class MoteurCombatService
             $current_dir_path = getcwd();
             // create a new file and add contents
             try {
-                $new_file_path = $current_dir_path . "/../var/combatLog/bar.txt";
+                $new_file_path = $current_dir_path . "/../var/combatLog/".$nomCombat.".txt";
                 if (!$fsObject->exists($new_file_path)){
                     $fsObject->touch($new_file_path);
                     $fsObject->chmod($new_file_path, 0777);
@@ -245,7 +246,9 @@ class MoteurCombatService
             }else{
                 $fsObject->appendToFile($new_file_path,"Vctoire "."\n");
                 //il faudrait recuperer les recompense associé au scenario
-                $recompense = 10;
+                $recompense = $scenario->getRecompense();
+                $reputation = $formation->getLienUser()->getReputation()+$recompense;
+                $formation->getLienUser()->setReputation($reputation);
                 //il faudrait ajouter les recoppense a la reputation de l'utilisateur
                 for($i=0; ($i<count($tableauCreature)) ; $i++){
                     if($tableauCreature[$i]['cote'] == 0){
