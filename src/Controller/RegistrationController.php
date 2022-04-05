@@ -46,13 +46,15 @@ class RegistrationController extends AbstractController
             );
 
             // J'affecte 5 nouveaux personnages à l'utilisateur 
+            $modele = $this->emm->findBy(['ouvrable' => 1]);
+
             for ($i = 0; $i < 5; $i++) {
 
-                // Je choisis un modèle au hasard
-                $modele = $this->emm->find(rand(1, 7));
+                $taille = count($modele)-1;
+                $a = rand(0, $taille);
 
                 // Je crée une nouvelle créature
-                $creature = $this->emc->makeCreature($modele);
+                $creature = $this->emc->makeCreature($modele[$a]);
                 $creature->setLienUser($user);
                 $entityManager->persist($creature);
             }

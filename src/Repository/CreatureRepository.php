@@ -87,7 +87,37 @@ class CreatureRepository extends ServiceEntityRepository
         return $creature;
     }
 
+    public function makeMonstre($modele)
+    {
+        $manager = $this->getEntityManager();
 
+        // On crée une nouvelle creature
+        $creature = new Creature();
+
+        // On rempli son identité
+        $creature->setNom('new_' . $modele->getNomModele());
+        $creature->setNiveau(1);
+        $creature->setExp(0);
+        $creature->setLienModele($modele);
+        $manager->persist($creature);
+
+        // On récupére toutes les statistiques du modèle
+        $statistiqueModele = $this->emsm->findBy(['lienModele' => $modele->getId()]);
+
+        // On ajoute chaque statistique à la créature
+        foreach ($statistiqueModele as $stat) {
+            $statistiqueCreature = new StatistiqueCreature();
+
+            $statistiqueCreature->setLienCreature($creature);
+            $statistiqueCreature->setLienStatistique($stat->getLienStatistique());
+            $statistiqueCreature->setValeur(floor(($stat->getValeurMin() + $stat->getValeurMax()/2)));
+
+            $manager->persist($statistiqueCreature);
+        }
+        $manager->flush();
+
+        return $creature;
+    }
 
     // /**
     //  * @return Creature[] Returns an array of Creature objects
