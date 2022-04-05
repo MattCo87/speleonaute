@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\CreatureRepository;
+use App\Repository\ModeleRepository;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,11 +16,22 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
 {
+
+    private $emm;
+    private $emc;
+
+    function __construct(CreatureRepository $emc, ModeleRepository $emm)
+    {
+        $this->emm = $emm;
+        $this->emc = $emc;
+    }
+
     /**
      * @Route("/register", name="app_register")
      */
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -26,11 +39,25 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
-            $userPasswordHasher->hashPassword(
+                $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
             );
+
+            // J'affecte 5 nouveaux personnages à l'utilisateur 
+            $modele = $this->emm->findBy(['ouvrable' => 1]);
+
+            for ($i = 0; $i < 5; $i++) {
+
+                $taille = count($modele)-1;
+                $a = rand(0, $taille);
+
+                // Je crée une nouvelle créature
+                $creature = $this->emc->makeCreature($modele[$a]);
+                $creature->setLienUser($user);
+                $entityManager->persist($creature);
+            }
 
             $entityManager->persist($user);
             $entityManager->flush();
