@@ -38,9 +38,11 @@ class MoteurCombatService extends ServiceEntityRepository
             $id = $formation->getId();
             //Tableau Hote
             $tableauHote = array();
+            $tableauHotePex = array();
             $tiersCrea = $this->doctrine->getRepository(CreatureFormation::class)->findBy(['lienFormation' => $id]);
             foreach($tiersCrea as $crea){
                 $idCrea = $crea->getlienCreature();
+                array_push($tableauHotePex, $idCrea);
                 array_push($tableauHote, $idCrea->getId());
             }
             //Tableau monstre
@@ -121,8 +123,9 @@ class MoteurCombatService extends ServiceEntityRepository
                 if (!$fsObject->exists($new_file_path)){
                     $fsObject->touch($new_file_path);
                     $fsObject->chmod($new_file_path, 0777);
-                    $fsObject->dumpFile($new_file_path, "Adding dummy content to bar.txt file.\n");
-                    $fsObject->appendToFile($new_file_path, "This should be added to the end of the file.\n");
+                    $fsObject->dumpFile($new_file_path, "###########################################################\n");
+                    $fsObject->appendToFile($new_file_path, "############           Log De Combat           ############\n");
+                    $fsObject->appendToFile($new_file_path, "###########################################################\n\n\n\n\n\n");
                 }
             } catch (IOExceptionInterface $exception) {
                 echo "Error creating file at". $exception->getPath();
@@ -135,8 +138,11 @@ class MoteurCombatService extends ServiceEntityRepository
             while( ($tour < 50) && ($alliéVivant < 5) && ($ennemiVivant < 5) ){
                 $tour++;
                 $tourAction++;
-                $fsObject->appendToFile($new_file_path, "Tour".$tour."\n");
-                $fsObject->appendToFile($new_file_path, "Phase d'initiative"."\n");
+                $fsObject->appendToFile($new_file_path, "\n\n\n");
+                $fsObject->appendToFile($new_file_path, "###################################################\n");
+                $fsObject->appendToFile($new_file_path, "############           Tour ".$tour."           ############\n");
+                $fsObject->appendToFile($new_file_path, "###################################################\n\n\n\n\n\n");
+                $fsObject->appendToFile($new_file_path, "Phase d'initiative"."\n\n");
                 ///////Initiative
                 for( $i=0; ($i<count($tableauCreature)) ; $i++){
                     if($tableauCreature[$i]['cote'] == 0 && $tableauCreature[$i]['pvActuel']>0){
@@ -145,6 +151,7 @@ class MoteurCombatService extends ServiceEntityRepository
                         $fsObject->appendToFile($new_file_path, "initiative de ".$tableauCreature[$i]['nom']." est egale à sa vitesse ".$tableauCreature[$i]['vitesse']." + un jet d'initiative (".$random.") = =".$tableauCreature[$i]['initiative']."\n");
                     }          
                 }
+                $fsObject->appendToFile($new_file_path, "\n");
                 for( $i=0; ($i<count($tableauCreature)) ; $i++){
                     if($tableauCreature[$i]['cote'] == 1 && $tableauCreature[$i]['pvActuel']>0){
                         $random = rand(1, 20);
@@ -152,6 +159,8 @@ class MoteurCombatService extends ServiceEntityRepository
                         $fsObject->appendToFile($new_file_path, "initiative de ".$tableauCreature[$i]['nom']." est egale à sa vitesse ".$tableauCreature[$i]['vitesse']." + un jet d'initiative (".$random.") = =".$tableauCreature[$i]['initiative']."\n");
                     }
                 }
+                $fsObject->appendToFile($new_file_path, "\n");
+                $fsObject->appendToFile($new_file_path, "###################################################\n\n");
                 //////Tri par initiative
                 $initiative = array();
                 foreach ($tableauCreature as $key => $row){
@@ -165,7 +174,6 @@ class MoteurCombatService extends ServiceEntityRepository
                             $tourAction = 1;
                         }
                         $indexAction = 0;
-                        $fsObject->appendToFile($new_file_path,"tour Action ".$tourAction." \n");
                         foreach($tableauAction as $action){
                             if(($action['idCreature'] == $creature['id']) && ($action['positionAction'] == $tourAction)){
                                 break;
@@ -218,26 +226,32 @@ class MoteurCombatService extends ServiceEntityRepository
                         }
                         $d20 = rand(1,20);
                         $toucher = $creature['toucher'] + $tableauAction[$indexAction]['toucher'] + $d20;
-                        $fsObject->appendToFile($new_file_path,"".$creature['nom']." realise l'action ".$tableauAction[$indexAction]['nom']."(Tier ".$tableauAction[$indexAction]['tier'].") contre ".$tableauCreature[$cible]['nom']."\n");
+                        $fsObject->appendToFile($new_file_path,"####".$creature['nom']." realise l'action ".$tableauAction[$indexAction]['nom']."(Tier ".$tableauAction[$indexAction]['tier'].") contre ".$tableauCreature[$cible]['nom']."\n");
                         $fsObject->appendToFile($new_file_path,"attaque de ".$creature['nom']." est egale à son toucher ".$creature['toucher']." plus un jet de toucher (".$d20.") auquel on ajoute aussi le bonus de toucher le l'action ".$tableauAction[$indexAction]['toucher']." = ".$toucher."\n");
+                        $fsObject->appendToFile($new_file_path, "\n");
                         $defense = $tableauCreature[$cible]['toucher'] + $d20;
                         $fsObject->appendToFile($new_file_path,"defense de ".$tableauCreature[$cible]['nom']." est egale à son toucher ".$tableauCreature[$cible]['toucher']." plus un jet de toucher (".$d20.") = ".$defense."\n");
                         if($toucher < $defense){
                             $fsObject->appendToFile($new_file_path,"Defense reussite"."\n");
+                            $fsObject->appendToFile($new_file_path, "\n");
                         }else{
-                            $fsObject->appendToFile($new_file_path,"Defense echoué"."\n");
+                            $fsObject->appendToFile($new_file_path,"Defense echoué"."\n\n");
                             $degat = floor($creature['degat']/2) + $tableauAction[$indexAction]['degat'];
                             $fsObject->appendToFile($new_file_path,"degat de ".$creature['nom']." est egale à son degat diviser par deux (arrondie a l'inferieur) (".floor($creature['degat']/2).") plus le bonus de degat le l'action ".$tableauAction[$indexAction]['degat']." = ".$degat."\n");
+                            $fsObject->appendToFile($new_file_path, "\n");
                             $resistance = floor($tableauCreature[$cible]['resistance']/2);
                             $fsObject->appendToFile($new_file_path,"resistance de ".$tableauCreature[$cible]['nom']." est egale à sa resistance diviser par deux (arrondie a l'inferieur) (".floor($tableauCreature[$cible]['resistance']/2).") = ".$resistance."\n");
                             if($degat <= $resistance){
                                 $fsObject->appendToFile($new_file_path,"".$tableauCreature[$cible]['nom']." à resister a l'attaque"."\n");
+                                $fsObject->appendToFile($new_file_path, "\n\n");
                             }else{
                                 $degatSubit = $degat - $resistance;
                                 $fsObject->appendToFile($new_file_path,"".$tableauCreature[$cible]['nom']." à subit ".$degatSubit." de degat"."\n");
+                                $fsObject->appendToFile($new_file_path, "\n");
                                 $tableauCreature[$cible]['pvActuel'] = $tableauCreature[$cible]['pvActuel']- $degatSubit;
                                 if($tableauCreature[$cible]['pvActuel'] <= 0){
                                     $fsObject->appendToFile($new_file_path,"".$tableauCreature[$cible]['nom']." est mort au combat"."\n");
+                                    $fsObject->appendToFile($new_file_path, "\n");
                                     if($tableauCreature[$cible]['cote'] == 0){
                                         $alliéVivant++;
                                     }else{
@@ -246,6 +260,7 @@ class MoteurCombatService extends ServiceEntityRepository
                                 }
                                 else{
                                     $fsObject->appendToFile($new_file_path,"".$tableauCreature[$cible]['nom']." survit avec ".$tableauCreature[$cible]['pvActuel']." pv"."\n");
+                                    $fsObject->appendToFile($new_file_path, "\n");
                                 }
     
                             }
@@ -253,27 +268,23 @@ class MoteurCombatService extends ServiceEntityRepository
     
                         }
                     }
+                    $fsObject->appendToFile($new_file_path, "######################################################\n\n");
                 }
+                
             }
             ///Fin du combat
             if($alliéVivant ==5){
-                $fsObject->appendToFile($new_file_path,"Defaite "."\n");
+                $fsObject->appendToFile($new_file_path, "\n");
+                $fsObject->appendToFile($new_file_path, "\n");
+                $fsObject->appendToFile($new_file_path, "###################################################\n");
+                $fsObject->appendToFile($new_file_path, "############           Defaite           ############\n");
+                $fsObject->appendToFile($new_file_path, "###################################################\n\n\n\n\n\n");
             }else{
-                $fsObject->appendToFile($new_file_path,"Vctoire "."\n");
+                $fsObject->appendToFile($new_file_path, "###################################################\n");
+                $fsObject->appendToFile($new_file_path, "############           Victoire           ############\n");
+                $fsObject->appendToFile($new_file_path, "###################################################\n\n\n\n\n\n");
                 //il faudrait recuperer les recompense associé au scenario
                 $recompense = $scenario->getRecompense();
-                $reputation = $formation->getLienUser()->getReputation()+$recompense;
-               // dd($formation->getLienUser());
-                $formation->getLienUser()->setReputation($reputation);
-               // $tempUser = $formation->getLienUser();
-                //dd($tempUser);
-                //dd($formation->getLienUser());
-              //  $manager = $this->manager->getEntityManager();
-              //  dd($manager);
-                $this->manager->persist($formation->getLienUser());
-                $this->manager->flush();
-
-
                 //il faudrait ajouter les recoppense a la reputation de l'utilisateur
                 for($i=0; ($i<count($tableauCreature)) ; $i++){
                     if($tableauCreature[$i]['cote'] == 0){
@@ -282,13 +293,22 @@ class MoteurCombatService extends ServiceEntityRepository
                         $fsObject->appendToFile($new_file_path,"".$tableauCreature[$i]['nom']." à gagné ".$recompense." pex"."\n");
                     }
                 }
+                for($i=0;$i<5;$i++){
+                    $pex = $tableauHotePex[$i]->getExp() + $recompense;
+                    $tableauHotePex[$i]->setExp($pex);
+                }
+                $reputation = $formation->getLienUser()->getReputation()+$recompense;
+                $formation->getLienUser()->setReputation($reputation);
+                $this->manager->persist($formation->getLienUser());
+                $this->manager->persist($tableauHotePex[0]);
+                $this->manager->persist($tableauHotePex[1]);
+                $this->manager->persist($tableauHotePex[2]);
+                $this->manager->persist($tableauHotePex[3]);
+                $this->manager->persist($tableauHotePex[4]);
+                $this->manager->flush();
+                $fsObject->appendToFile($new_file_path,"".$formation->getLienUser()->getPseudo()." vous avez gagné ".$recompense." de reputation, ce qui vous fait un total de ".$formation->getLienUser()->getReputation()." reputation\n");
+
             }dd($tableauCreature);
         }
-        /*public function index(): Response
-        {
-            return $this->render('moteur_combat/index.html.twig', [
-                'controller_name' => 'MoteurCombatController',
-            ]);
-        }*/
 }
     
