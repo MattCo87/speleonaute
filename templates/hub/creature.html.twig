@@ -1,0 +1,8 @@
+{{ creature.nom }}
+<ul>
+	{% for stat in statcreature %}
+		<li>
+			{{ stat.id }} => {{ stat.valeur }}
+		</li>
+	{% endfor %}
+</ul>

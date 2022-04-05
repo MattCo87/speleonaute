@@ -3,10 +3,16 @@
 namespace App\Repository;
 
 use App\Entity\Creature;
+use App\Entity\StatistiqueCreature;
+use App\Repository\StatistiqueModeleRepository;
+use Doctrine\ORM\EntityManagerInterface;
+
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+
 
 /**
  * @method Creature|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,9 +22,12 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CreatureRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $emsm;
+
+    public function __construct(ManagerRegistry $registry, StatistiqueModeleRepository $emsm)
     {
         parent::__construct($registry, Creature::class);
+        $this->emsm = $emsm;
     }
 
     /**
@@ -44,6 +53,41 @@ class CreatureRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+
+    public function makeCreature($modele)
+    {
+        $manager = $this->getEntityManager();
+        //$manager = new ObjectManager;
+        // On crée une nouvelle creature
+        $creature = new Creature();
+
+        // On rempli son identité
+        $creature->setNom('new_' . $modele->getNomModele());
+        $creature->setNiveau($modele->getPointNiv());
+        $creature->setExp(1);
+        $creature->setLienModele($modele);
+        $manager->persist($creature);
+
+        // On récupére toutes les statistiques du modèle
+        $statistiqueModele = $this->emsm->findBy(['lienModele' => $modele->getId()]);
+
+        // On ajoute chaque statistique à la créature
+        foreach ($statistiqueModele as $stat) {
+            $statistiqueCreature = new StatistiqueCreature();
+
+            $statistiqueCreature->setLienCreature($creature);
+            $statistiqueCreature->setLienStatistique($stat->getLienStatistique());
+            $statistiqueCreature->setValeur(rand($stat->getValeurMin(), $stat->getValeurMax()));
+
+            $manager->persist($statistiqueCreature);
+        }
+        $manager->flush();
+
+        return $creature;
+    }
+
+
 
     // /**
     //  * @return Creature[] Returns an array of Creature objects
