@@ -2,15 +2,20 @@
 
 namespace App\Repository;
 
-use App\Entity\Creature;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Creature;
 use App\Entity\CreatureFormation;
 use App\Entity\Formation;
-use App\Entity\Statistique;
 use App\Entity\StatistiqueCreature;
+use App\Entity\Statistique;
+use App\Entity\Modele;
+use App\Entity\StrategieModele;
+use App\Entity\Strategie;
+use App\Entity\ActionStrategie;
+use App\Entity\Action;
 
 /**
  * @method Creature|null find($id, $lockMode = null, $lockVersion = null)
@@ -59,26 +64,40 @@ class CreatureRepository extends ServiceEntityRepository
             ->andwhere('f.id = cf.lienFormation')
             ->andwhere("f.nom = ?1")
             ->setParameter(1, $formation)
-            ->setMaxResults(10)
             ->getQuery()
             ->getArrayResult();
     }
 
-    public function getInfosCreatures($creatureId): ?array
+    public function getStatsCreatures(int $creatureId): ?array
     {
         return $this->createQueryBuilder('c')
-            ->select('c',)
-            ->leftJoin(StatistiqueCreature::class, 'statc')
+            ->leftJoin(StatistiqueCreature::class, 'statc', 'WITH', 'statc.lienStatistique = stat.id')
             ->leftJoin(Statistique::class, 'stat')
-            ->leftJoin(Statistique::class, 'stat')
-            ->where('cf.lienCreature = c.id')
-            ->andwhere('f.id = cf.lienFormation')
-            ->andwhere("f.nom = :")
-            ->setParameter(1, $formation)
-            ->setMaxResults(10)
+            ->select('c.nom', 'statc.valeur', 'stat.nom')
+            ->where("c.id = :creatureId")
+            ->andwhere('statc.lienCreature = :creatureId')
+            ->setParameter('creatureId', $creatureId)
             ->getQuery()
             ->getArrayResult();
     }
+
+
+    public function getActionsCreatures(int $creatureId): ?array
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin(Modele::class, 'mod', 'WITH', 'mod.id = c.lienModele')
+            ->leftJoin(StrategieModele::class, 'smod', 'WITH', 'smod.lienModele = mod.id')
+            ->leftJoin(Strategie::class, 'strat', 'WITH', 'strat.id = smod.lienStrategie')
+            ->leftJoin(ActionStrategie::class, 'actstrat', 'WITH', 'actstrat.lienStrategie = strat.id')
+            ->leftJoin(Action::class, 'act', 'WITH', 'act.id = actstrat.lienAction')
+            ->select('c.nom', 'mod.nomModele', 'mod.rarete', 'mod.pointNiv', 'mod.ouvrable', 'smod.positionStrategie', 'strat.nom', 'actstrat.positionAction', 'act.nom', 'act.toucher', 'act.degat', 'act.tier')
+            ->distinct()
+            ->where("c.id = :creatureId")
+            ->setParameter('creatureId', $creatureId)
+            ->getQuery()
+            ->getArrayResult();
+    }
+
 
     //    ->where('s.campaign = :campaign')
     //    ->setParameter('campaign', $campaign)
