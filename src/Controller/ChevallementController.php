@@ -78,7 +78,7 @@ class ChevallementController extends AbstractController
             $manager->flush();
             //dd($combat,$scenario,$formation);
             $idCombat = $combat->getId();
-            $letsGO = $moteurCombatService->combat($doctrine,$formation, $scenario,$idCombat);
+            $moteurCombatService->combat(/*$doctrine,*/$formation, $scenario,$idCombat);
 
             return $this->redirectToRoute('app_chevallement');
         }

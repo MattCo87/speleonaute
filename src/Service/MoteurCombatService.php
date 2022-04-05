@@ -9,21 +9,36 @@ use App\Entity\Scenario;
 use App\Entity\StatistiqueCreature;
 use App\Entity\StrategieModele;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
-class MoteurCombatService
+class MoteurCombatService extends ServiceEntityRepository
 {
+
+
+         private $doctrine;
+        //private $emc;
+        // private $emsc;
+
+    function __construct(ManagerRegistry $doctrine, EntityManagerInterface $manager)
+    {
+        $this->doctrine = $doctrine;
+        $this->manager = $manager;
       
-        public function combat(ManagerRegistry $doctrine, Formation $formation, Scenario $scenario, int $idCombat): Response
+    }
+      
+        public function combat(/*ManagerRegistry $doctrine,*/ Formation $formation, Scenario $scenario, int $idCombat): Response
         {
+           // $doctrine = new ManagerRegistry;
             $nomCombat = "".$formation->getLienUser()->getEmail()."_Combat_".$idCombat."";
             $id = $formation->getId();
             //Tableau Hote
             $tableauHote = array();
-            $tiersCrea = $doctrine->getRepository(CreatureFormation::class)->findBy(['lienFormation' => $id]);
+            $tiersCrea = $this->doctrine->getRepository(CreatureFormation::class)->findBy(['lienFormation' => $id]);
             foreach($tiersCrea as $crea){
                 $idCrea = $crea->getlienCreature();
                 array_push($tableauHote, $idCrea->getId());
@@ -31,7 +46,7 @@ class MoteurCombatService
             //Tableau monstre
             $idScenario = $scenario->getlienFormation()->getId();
             $tableauMonstre = array();
-            $tiersCrea2 = $doctrine->getRepository(CreatureFormation::class)->findBy(['lienFormation' => $idScenario]);
+            $tiersCrea2 = $this->doctrine->getRepository(CreatureFormation::class)->findBy(['lienFormation' => $idScenario]);
             foreach($tiersCrea2 as $crea){
                 $idCrea2 = $crea->getlienCreature();
                 array_push($tableauMonstre, $idCrea2->getId());
@@ -39,7 +54,7 @@ class MoteurCombatService
             //TableauCreature
             $tableauCreature = array();
             foreach($tableauHote as $hote){
-                $creature = $doctrine->getRepository(Creature::class)->findBy(['id' => $hote]);
+                $creature = $this->doctrine->getRepository(Creature::class)->findBy(['id' => $hote]);
                 foreach($creature as $crea){
                     $Creature2['id'] = $crea->getId();
                     $Creature2['nom'] = $crea->getNom();
@@ -47,7 +62,7 @@ class MoteurCombatService
                     $Creature2['exp'] = $crea->getExp();
                     $Creature2['idModele'] = $crea->getlienModele()->getId();
                 }
-                $statCreature = $doctrine->getRepository(StatistiqueCreature::class)->findBy(['lienCreature' => $Creature2['id']]);
+                $statCreature = $this->doctrine->getRepository(StatistiqueCreature::class)->findBy(['lienCreature' => $Creature2['id']]);
                 $Creature2['toucher']= $statCreature[0]->getValeur();
                 $Creature2['degat']= $statCreature[1]->getValeur();
                 $Creature2['resistance']= $statCreature[2]->getValeur();
@@ -60,7 +75,7 @@ class MoteurCombatService
                 array_push($tableauCreature, $Creature2);
             }       
             foreach($tableauMonstre as $monstre){
-                $creature = $doctrine->getRepository(Creature::class)->findBy(['id' => $monstre]);
+                $creature = $this->doctrine->getRepository(Creature::class)->findBy(['id' => $monstre]);
                 foreach($creature as $crea){
                     $Creature2['id'] = $crea->getId();
                     $Creature2['nom'] = $crea->getNom();
@@ -68,7 +83,7 @@ class MoteurCombatService
                     $Creature2['exp'] = $crea->getExp();
                     $Creature2['idModele'] = $crea->getlienModele()->getId();
                     }
-                $statCreature = $doctrine->getRepository(StatistiqueCreature::class)->findBy(['lienCreature' => $Creature2['id']]);
+                $statCreature = $this->doctrine->getRepository(StatistiqueCreature::class)->findBy(['lienCreature' => $Creature2['id']]);
                 $Creature2['toucher']= $statCreature[0]->getValeur();
                 $Creature2['degat']= $statCreature[1]->getValeur();
                 $Creature2['resistance']= $statCreature[2]->getValeur();
@@ -83,9 +98,9 @@ class MoteurCombatService
             /////Tableau Action
             $tableauAction = array();
             foreach($tableauCreature as $creature){
-                $strategie = $doctrine->getRepository(StrategieModele::class)->findBy(['lienModele' => $creature['idModele']]);
+                $strategie = $this->doctrine->getRepository(StrategieModele::class)->findBy(['lienModele' => $creature['idModele']]);
                 $idStrategie = $strategie[0]->getlienStrategie()->getId();
-                $actions = $doctrine->getRepository(ActionStrategie::class)->findBy(['lienStrategie' => $idStrategie]);
+                $actions = $this->doctrine->getRepository(ActionStrategie::class)->findBy(['lienStrategie' => $idStrategie]);
                 foreach($actions as $action){
                     $Action2['idCreature'] = $creature['id'];
                     $Action2['positionAction'] = $action->getPositionAction();
@@ -248,7 +263,17 @@ class MoteurCombatService
                 //il faudrait recuperer les recompense associé au scenario
                 $recompense = $scenario->getRecompense();
                 $reputation = $formation->getLienUser()->getReputation()+$recompense;
+               // dd($formation->getLienUser());
                 $formation->getLienUser()->setReputation($reputation);
+               // $tempUser = $formation->getLienUser();
+                //dd($tempUser);
+                //dd($formation->getLienUser());
+              //  $manager = $this->manager->getEntityManager();
+              //  dd($manager);
+                $this->manager->persist($formation->getLienUser());
+                $this->manager->flush();
+
+
                 //il faudrait ajouter les recoppense a la reputation de l'utilisateur
                 for($i=0; ($i<count($tableauCreature)) ; $i++){
                     if($tableauCreature[$i]['cote'] == 0){
