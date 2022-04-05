@@ -53,6 +53,7 @@ As mattrayner info on DockerHub is out of date, go see [his github](https://gith
 `composer require symfony/webpack-encore-bundle`
 `npm install -g npm@8.5.3` && `npm install`
 `yarn encore dev` Essential or "asset manifest file doesn't exist" Error
+`npm run watch` Essential to create the public/build directory and files.
 
 # Make a new controller
 
