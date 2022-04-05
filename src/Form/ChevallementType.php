@@ -46,23 +46,7 @@ class ChevallementType extends AbstractType
                         ->setParameter('val', $this->security->getUser());
                 },
                 'choice_label' => 'nom',
-                /*'mapped' =>false*/
             ))
-        /*  ->add('lienUser', EntityType::class, array(
-                'class' => User::class,
-                'query_builder' => function (UserRepository $er) {
-                    return $er->createQueryBuilder('c')
-                    ->leftJoin(Formation::class,'f')
-                    ->where('f.lienUser = :val')
-                    ->setParameter('val', $this->security->getUser());
-                    
-                    
-                },
-                'choice_label' => 'nom',
-            ))*/
-            // On affiche la liste des Scenario
-            
-
             ->add('lienScenario', EntityType::class, array(
                 'class' => Scenario::class,
                 'query_builder' => function (ScenarioRepository $er) {
@@ -70,8 +54,6 @@ class ChevallementType extends AbstractType
                 },
                 'choice_label' => 'nom',
             ))
-            
-
             // Bouton pour valider la création de la CreationFormation
             ->add('submit', SubmitType::class, [
                     'label' => 'OK',
@@ -82,10 +64,6 @@ class ChevallementType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            /*'data_class' => Combat::class,
-            'arg1' =>Formation::class,
-            'required' => false,
-            'lienUser' =>$this->security->getUser(),*/
             'tab' => [
                 'data_class' => Combat::class,
                 'arg1' =>Formation::class,

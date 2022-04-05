@@ -31,7 +31,7 @@ class MoteurCombatService extends ServiceEntityRepository
       
     }
       
-        public function combat(/*ManagerRegistry $doctrine,*/ Formation $formation, Scenario $scenario, int $idCombat): Response
+        public function combat(Formation $formation, Scenario $scenario, int $idCombat)/*: Response*/
         {
            // $doctrine = new ManagerRegistry;
             $nomCombat = "".$formation->getLienUser()->getEmail()."_Combat_".$idCombat."";
@@ -267,8 +267,8 @@ class MoteurCombatService extends ServiceEntityRepository
     
     
                         }
+                        $fsObject->appendToFile($new_file_path, "######################################################\n\n");
                     }
-                    $fsObject->appendToFile($new_file_path, "######################################################\n\n");
                 }
                 
             }
@@ -308,7 +308,7 @@ class MoteurCombatService extends ServiceEntityRepository
                 $this->manager->flush();
                 $fsObject->appendToFile($new_file_path,"".$formation->getLienUser()->getPseudo()." vous avez gagné ".$recompense." de reputation, ce qui vous fait un total de ".$formation->getLienUser()->getReputation()." reputation\n");
 
-            }dd($tableauCreature);
+            }//dd($tableauCreature);
         }
 }
     

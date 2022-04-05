@@ -32,57 +32,30 @@ class ChevallementController extends AbstractController
     /**
      * @Route("/chevallement", name="app_chevallement")
      */
-    /*public function index(): Response
+    public function index(Request $request, EntityManagerInterface $manager, MoteurCombatService $moteurCombatService): Response
     {
-        return $this->render('chevallement/index.html.twig', [
-            'controller_name' => 'ChevallementController',
-        ]);
-    }*/
-    public function index(ManagerRegistry $doctrine,Request $request, ValidatorInterface $validator, EntityManagerInterface $manager, MoteurCombatService $moteurCombatService): Response
-    {
-        // On crée une CreatureFormation
-    $combat = new Combat();
-    $formation = new Formation();
-    $scenario = new Scenario();
-    $tab =array();
-        //dd(1);
+        // On crée un Combat
+        $combat = new Combat();
+        $formation = new Formation();
+        $scenario = new Scenario();
+        $tab =array();
         $user = $this->security->getUser();
-       // $tab['lienScenario']->setLienUser($user);
-
-       // dd($user);
-        //dd($user);
-        //$combat->setLienUser() = $user;
-        //On crée le formulaire de création de CreatureFormation
-        //$form = $this->createForm(ChevallementType::class, $combat, ['arg1' => $formation]);
         $form = $this->createForm(ChevallementType::class, $tab);
-        //dd($form->getData()->getLienUser());
-        
         $form->handleRequest($request);
-        //$form->setLienUser($user);
         $formation = $form['lienUser']->getData();
         $scenario = $form['lienScenario']->getData();
         $combat->setLienUser($user);
         $combat->setLienScenario($scenario);
         $combat->setDateCombat(new \DateTime('now'));
         $combat->setFichierLog('');
-
-        //dd($form['lienUser']->getData()->getnom(),$form['lienScenario']->getData()->getnom());
-        //dd($combat,$scenario,$formation);
-        //dd($formation,$scenario);
-        
         // Action sur la validation du formulaire
         if ($form->isSubmitted() && $form->isValid()) {
-            // On ajoute la CreatureFormation 
             $manager->persist($combat);
-            //dd($combat,$scenario,$formation);
             $manager->flush();
-            //dd($combat,$scenario,$formation);
             $idCombat = $combat->getId();
-            $moteurCombatService->combat(/*$doctrine,*/$formation, $scenario,$idCombat);
-
+            $moteurCombatService->combat($formation, $scenario,$idCombat);
             return $this->redirectToRoute('app_chevallement');
-        }
-        
+        } 
         return $this->render('chevallement/index.html.twig', [
             'form' => $form->createView(),
             'controller_name' => 'ChevallementController',           
