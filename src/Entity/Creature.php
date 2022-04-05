@@ -50,7 +50,7 @@ class Creature
     private $lienModele;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="creatures")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="creatures", cascade={"persist"})
      */
     private $lienUser;
 

@@ -3,10 +3,9 @@
 namespace App\Controller;
 
 use App\Repository\CreatureRepository;
-use App\Repository\StatistiqueCreatureRepository;
-use App\Entity\Creature;
-
 use App\Repository\ModeleRepository;
+use App\Repository\StatistiqueCreatureRepository;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

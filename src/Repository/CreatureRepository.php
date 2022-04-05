@@ -58,14 +58,14 @@ class CreatureRepository extends ServiceEntityRepository
     public function makeCreature($modele)
     {
         $manager = $this->getEntityManager();
-        //$manager = new ObjectManager;
+
         // On crée une nouvelle creature
         $creature = new Creature();
 
         // On rempli son identité
         $creature->setNom('new_' . $modele->getNomModele());
-        $creature->setNiveau($modele->getPointNiv());
-        $creature->setExp(1);
+        $creature->setNiveau(1);
+        $creature->setExp(0);
         $creature->setLienModele($modele);
         $manager->persist($creature);
 

@@ -57,7 +57,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $combats;
 
     /**
-     * @ORM\OneToMany(targetEntity=Creature::class, mappedBy="lienUser")
+     * @ORM\OneToMany(targetEntity=Creature::class, mappedBy="lienUser", cascade={"persist"})
      */
     private $creatures;
 
