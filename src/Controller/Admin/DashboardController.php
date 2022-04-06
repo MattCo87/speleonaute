@@ -7,6 +7,7 @@ use App\Entity\ActionStrategie;
 use App\Entity\CreatureFormation;
 use App\Entity\Formation;
 use App\Entity\Modele;
+use App\Entity\PageVisiteur;
 use App\Entity\Scenario;
 use App\Entity\Statistique;
 use App\Entity\StatistiqueModele;
@@ -50,6 +51,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('CreatureFormation', 'fas fa-list', CreatureFormation::class);
         yield MenuItem::linkToCrud('Formation', 'fas fa-list', Formation::class);
         yield MenuItem::linkToCrud('Scenario', 'fas fa-list', Scenario::class);
+        yield MenuItem::linkToCrud('PageVisiteur', 'fas fa-list', PageVisiteur::class);
         yield MenuItem::linkToCrud('User', 'fas fa-list', User::class);
     }
 }
