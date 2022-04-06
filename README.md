@@ -1,6 +1,19 @@
 # Installation notes
 
-# The system
+# Install avec notre image docker (container )
+
+Installation simplifiée : 
+
+(https://hub.docker.com/repository/docker/joelobrecht/speleoalpha)
+`docker container run -d --name SpeleoAlpha -p "1270:80" -v C:cheminversdossier/SpeleoAlpha:/app joelobrecht/speleoalpha`
+`docker start SpeleoAlpha`
+`docker exec -it SpeleoAlpha bash`
+`cd app`
+`composer update`
+`npm install`
+`yarn encore dev --watch`
+
+# The system (installation totale avec container basique)
 
 As mattrayner info on DockerHub is out of date, go see [his github](https://github.com/mattrayner/docker-lamp). There one can see that his latest images are built on php8. Therefore the most suitable image is `latest-2004-php7`.
 
