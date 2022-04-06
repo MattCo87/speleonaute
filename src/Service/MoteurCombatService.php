@@ -2,6 +2,7 @@
 // src/Service/Test.php
 namespace App\Service;
 use App\Entity\ActionStrategie;
+use App\Entity\Combat;
 use App\Entity\Creature;
 use App\Entity\CreatureFormation;
 use App\Entity\Formation;
@@ -129,6 +130,65 @@ class MoteurCombatService extends ServiceEntityRepository
             } catch (IOExceptionInterface $exception) {
                 echo "Error creating file at". $exception->getPath();
             }
+
+
+            $fsObject->appendToFile($new_file_path, "                         __________\n");
+            $fsObject->appendToFile($new_file_path, "                      .~#########%%;~.\n");
+            $fsObject->appendToFile($new_file_path, "                     /############%%;`\'"."\n");
+            $fsObject->appendToFile($new_file_path, "                    /######/~\/~\%%;,;,\'"."\n");
+            $fsObject->appendToFile($new_file_path, "                   |#######\    /;;;;.,.|\n");
+            $fsObject->appendToFile($new_file_path, "                   |#########\/%;;;;;.,.|\n");
+            $fsObject->appendToFile($new_file_path, "          XX       |##/~~\####%;;;/~~\;,|       XX\n");
+            $fsObject->appendToFile($new_file_path, "        XX..X      |#|  o  \##%;/  o  |.|      X..XX\n");
+            $fsObject->appendToFile($new_file_path, "      XX.....X     |##\____/##%;\____/.,|     X.....XX\n");
+            $fsObject->appendToFile($new_file_path, " XXXXX.....XX      \#########/\;;;;;;,, /      XX.....XXXXX\n");
+            $fsObject->appendToFile($new_file_path, "X |......XX%,.@      \######/%;\;;;;, /      @#%,XX......| X\n");
+            $fsObject->appendToFile($new_file_path, "X |.....X  @#%,.@     |######%%;;;;,.|     @#%,.@  X.....| X\n");
+            $fsObject->appendToFile($new_file_path, "X  \...X     @#%,.@   |# # # % ; ; ;,|   @#%,.@     X.../  X\n");
+            $fsObject->appendToFile($new_file_path, " X# \.X        @#%,.@                  @#%,.@        X./  #\n");
+            $fsObject->appendToFile($new_file_path, "  ##  X          @#%,.@              @#%,.@          X   #\n");
+            $fsObject->appendToFile($new_file_path, ", '# #X            @#%,.@          @#%,.@            X ##\n");
+            $fsObject->appendToFile($new_file_path, "   `###X             @#%,.@      @#%,.@             ####'\n");
+            $fsObject->appendToFile($new_file_path, "  . ' ###              @#%.,@  @#%,.@              ###`'\n");
+            $fsObject->appendToFile($new_file_path, "    . ';'                @#%.@#%,.@                ;'` ' .\n");
+            $fsObject->appendToFile($new_file_path, "      '                    @#%,.@                   ,.\n");
+            $fsObject->appendToFile($new_file_path, "      ` ,                @#%,.@  @@                `\n");
+            $fsObject->appendToFile($new_file_path, "                          @@@  @@@  \n");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             //////Moteur C PARTI
             $tour = 0;
             $tourAction = 0;
@@ -304,6 +364,9 @@ class MoteurCombatService extends ServiceEntityRepository
                 $this->manager->persist($tableauHotePex[2]);
                 $this->manager->persist($tableauHotePex[3]);
                 $this->manager->persist($tableauHotePex[4]);
+                $combat = $this->doctrine->getRepository(Combat::class)->findBy(['id' => $idCombat]);
+                $combat[0]->setFichierLog($new_file_path);
+                $this->manager->persist($combat[0]);
                 $this->manager->flush();
                 $fsObject->appendToFile($new_file_path,"".$formation->getLienUser()->getPseudo()." vous avez gagné ".$recompense." de reputation, ce qui vous fait un total de ".$formation->getLienUser()->getReputation()." reputation\n");
 

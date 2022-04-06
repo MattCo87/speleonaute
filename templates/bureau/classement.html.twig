@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Classement{% endblock %}
+
+{% block body %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Pseudo</th>
+                <th>Reputation</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for joueur in Joueurs %}
+            <tr>
+                <td>{{ joueur.pseudo }}</td>
+                <td>{{ joueur.reputation }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
