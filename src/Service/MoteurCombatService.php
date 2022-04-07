@@ -158,37 +158,6 @@ class MoteurCombatService extends ServiceEntityRepository
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             //////Moteur C PARTI
             $tour = 0;
             $tourAction = 0;
@@ -207,7 +176,7 @@ class MoteurCombatService extends ServiceEntityRepository
                     if($tableauCreature[$i]['cote'] == 0 && $tableauCreature[$i]['pvActuel']>0){
                         $random = rand(1, 20);
                         $tableauCreature[$i]['initiative'] = $tableauCreature[$i]['vitesse'] + $random;
-                        $fsObject->appendToFile($new_file_path, "initiative de ".$tableauCreature[$i]['nom']." est egale à sa vitesse ".$tableauCreature[$i]['vitesse']." + un jet d'initiative (".$random.") = =".$tableauCreature[$i]['initiative']."\n");
+                        $fsObject->appendToFile($new_file_path, "initiative de ".$tableauCreature[$i]['nom']." est egale à sa vitesse ".$tableauCreature[$i]['vitesse']." + un jet d'initiative (".$random.") =".$tableauCreature[$i]['initiative']."\n");
                     }          
                 }
                 $fsObject->appendToFile($new_file_path, "\n");
@@ -215,7 +184,7 @@ class MoteurCombatService extends ServiceEntityRepository
                     if($tableauCreature[$i]['cote'] == 1 && $tableauCreature[$i]['pvActuel']>0){
                         $random = rand(1, 20);
                         $tableauCreature[$i]['initiative'] = $tableauCreature[$i]['vitesse'] + $random;
-                        $fsObject->appendToFile($new_file_path, "initiative de ".$tableauCreature[$i]['nom']." est egale à sa vitesse ".$tableauCreature[$i]['vitesse']." + un jet d'initiative (".$random.") = =".$tableauCreature[$i]['initiative']."\n");
+                        $fsObject->appendToFile($new_file_path, "initiative de ".$tableauCreature[$i]['nom']." est egale à sa vitesse ".$tableauCreature[$i]['vitesse']." + un jet d'initiative (".$random.") =".$tableauCreature[$i]['initiative']."\n");
                     }
                 }
                 $fsObject->appendToFile($new_file_path, "\n");

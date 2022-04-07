@@ -1,9 +1,131 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+pre{
+        color:green;
+        white-space:pre-wrap;
+}
+.total{
+        height:100%;
+        width:100%;
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        margin:auto;
+        padding: auto;
+}
+.profil{
+        /*height:20vh;
+        width:80vh;*/
+        grid-area: 1 / 1 / 3 / 9;
+        background-color:red;
+}
+.contenue1{
+        height:60vh;
+        /*width:80vh;*/
+        overflow: hidden;
+        grid-area: 3 / 1 / 9 / 9; 
+        background-color:black;
+}
+.contenue2{
+        height:100%;
+        width:100%;
+        overflow: auto;
+        background-color:black;
+        padding-right: 20px;
+}
+.menu{
+        /*height:20vh;
+        width:80vh; */
+        grid-area: 9 / 1 / 11 / 9;
+        background-color:blue;
+}
+.liste{
+        /*height:100vh;
+        width:20vh;*/
+        grid-area: 1 / 9 / 11 / 11;
+        background-color:grey;
+}
+
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  width:100%;
+  height:10vh;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width:100%;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  width: 100%;
+  max-height:90vh;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  overflow:auto;
+  padding-right: 20px;
+  text-align:center;
+}
+.caché{
+        overflow:hidden;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+
+</style>
+{% endblock %}
 
 {% block body %}
-        {% for log in logs %}
-                <div>{{ log }}</div>
+<div class="total">
+<div class="profil"></div>
+        <div class="contenue1">
+        <div class="contenue2">
+                {% for log in logs %}
+                        {% for logu in log %}
+                        <pre>{{ logu }}</pre>
+                        {% endfor %}
+                {% endfor %}
+        </div>        
+        </div>   
+<div class="menu"></div>
+<div class="liste">
+<div class="dropdown">
+  <button class="dropbtn">Dropdown</button>
+  <div class="caché">
+  <div class="dropdown-content">
+        {% for idLog in idLogs %}
+                <a href="#">Link {{ idLog }}</a>
         {% endfor %}
+  </div>      
+  </div>
+</div>
+</div>     
+</div>
 {% endblock %}
