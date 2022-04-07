@@ -6,7 +6,7 @@ Installation simplifiée :
 
 (https://hub.docker.com/repository/docker/joelobrecht/speleoalpha)
 - `docker container run -d --name SpeleoAlpha -p "1270:80" -v C:cheminversdossier/SpeleoAlpha:/app joelobrecht/speleoalpha`
-- Version Windows sans volume `docker container run -d --name speleoalpha -p "1270:80" joelobrecht/speleoalpha
+- Version Windows sans volume `docker container run -d --name speleoalpha -p "1270:80" joelobrecht/speleoalpha`
 - `docker start SpeleoAlpha`
 - `docker exec -it SpeleoAlpha bash`
 - `cd app`
