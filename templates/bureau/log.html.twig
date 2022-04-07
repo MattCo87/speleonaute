@@ -9,7 +9,7 @@ pre{
         color:green;
         white-space:pre-wrap;
 }
-.total{
+/*.total{
         height:100%;
         width:100%;
         display: grid;
@@ -19,6 +19,18 @@ pre{
         grid-row-gap: 0px;
         margin:auto;
         padding: auto;
+}*/
+body{
+       /* height:100%;
+        width:100%;*/
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        margin:auto;
+        padding: auto;
+        scrollbar-width: none;
 }
 .profil{
         /*height:20vh;
@@ -38,13 +50,20 @@ pre{
         width:100%;
         overflow: auto;
         background-color:black;
-        padding-right: 20px;
+        scrollbar-width: none;
 }
 .menu{
         /*height:20vh;
         width:80vh; */
         grid-area: 9 / 1 / 11 / 9;
         background-color:blue;
+
+          display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: auto;
+                align-content: space-around;
 }
 .liste{
         /*height:100vh;
@@ -78,8 +97,8 @@ pre{
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   overflow:auto;
-  padding-right: 20px;
   text-align:center;
+  scrollbar-width: none;
 }
 .caché{
         overflow:hidden;
@@ -98,23 +117,31 @@ pre{
 
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
+.menu>a{
+  flex: 0 0 auto;
+  margin: auto;
+  font-size:30px;
+  color:red;
+}
+
 
 </style>
 {% endblock %}
 
 {% block body %}
-<div class="total">
+{#<div class="total">#}
 <div class="profil"></div>
         <div class="contenue1">
         <div class="contenue2">
                 {% for log in logs %}
                         {% for logu in log %}
                         <pre>{{ logu }}</pre>
+                        {#<div class="pre">{{ logu }}</div>#}
                         {% endfor %}
                 {% endfor %}
         </div>        
         </div>   
-<div class="menu"></div>
+<div class="menu"><a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a></div>
 <div class="liste">
 <div class="dropdown">
   <button class="dropbtn">Dropdown</button>
@@ -127,5 +154,5 @@ pre{
   </div>
 </div>
 </div>     
-</div>
+{#</div>#}
 {% endblock %}

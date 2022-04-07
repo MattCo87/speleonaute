@@ -19,10 +19,10 @@
         {% endblock %}
     </head>
     <body>
-    <a href="{{ path('app_login') }}"> Accueil </a>
+  {#  <a href="{{ path('app_login') }}"> Accueil </a>
     <a href="{{ path('app_formation') }}"> Formation </a>
-    <a href="{{ path('app_logout') }}"> Déconnexion </a>
+    <a href="{{ path('app_logout') }}"> Déconnexion </a> #}
         {% block body %}{% endblock %}
-        {% include 'base/footer.html.twig' %}
+{#         {% include 'base/footer.html.twig' %}   #}
     </body>
 </html>
