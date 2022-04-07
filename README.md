@@ -12,6 +12,8 @@
 - `npm install`
 - `yarn encore dev --watch`
 
+Le plugin de vscode qui fait tout marcher : (https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
+
 # The system (installation totale avec container basique)
 
 As mattrayner info on DockerHub is out of date, go see [his github](https://github.com/mattrayner/docker-lamp). There one can see that his latest images are built on php8. Therefore the most suitable image is `latest-2004-php7`.
