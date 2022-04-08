@@ -2,16 +2,14 @@
     font-family: 'Space Mono', monospace;
     font-family: 'Work Sans', sans-serif;
 */
-@use "vars.scss";
-@use "mixin.scss";
-@use 'reset.scss';
+
+@use './reset.scss';
 
 body {
     margin: 0;
     padding: 0;
 
     #accueil_wrapper {
-        display: grid;
         padding: 3rem;
         background-color: rgb(30, 32, 32);
         color: white;

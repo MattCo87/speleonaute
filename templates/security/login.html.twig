@@ -1,9 +1,11 @@
 {% extends 'accueil.twig' %}
 
 
-{% block title %}Log in!{% endblock %}
+{% block title %}péleonautes Connectez-vous !{% endblock %}
 
 {% block body %}
+<h1>Spéléonautes</h1>
+<blockquote>"La Grande Fosse est sans fond. La Grande Fosse est gigantesque. La Grande Fosse est source de richesses incommensurables pour qui ose y risquer sa vie." </blockquote>
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
