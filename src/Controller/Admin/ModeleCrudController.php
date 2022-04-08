@@ -4,6 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Modele;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class ModeleCrudController extends AbstractCrudController
 {
@@ -12,14 +15,15 @@ class ModeleCrudController extends AbstractCrudController
         return Modele::class;
     }
 
-    /*
+    
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            IntegerField::new('rarete'),
+            IntegerField::new('pointNiv'),
+            TextField::new('nomModele'),
+            BooleanField::new('ouvrable'),
         ];
     }
-    */
+    
 }

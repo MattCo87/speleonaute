@@ -1,0 +1,12 @@
+easy_admin:
+  entities:
+    ModeleFort:
+      class: App\Entity\Formation
+      controller: App\Controller\Admin\FormationCrudController
+      label: "modelo"
+      list:
+        dql_filter: "user.id"
+#    ModeleFaible:
+#      class: App\Entity\Modele
+#      search:
+#        dql_filter: "entity.rarete >= 4"
