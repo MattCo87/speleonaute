@@ -2,9 +2,9 @@
     font-family: 'Space Mono', monospace;
     font-family: 'Work Sans', sans-serif;
 */
-@use "vars.scss";
-@use "mixin.scss";
-@use 'reset.scss';
+@use "./vars.scss";
+@use "./mixins.scss";
+@use './reset.scss';
 
 body {
     margin: 0;
