@@ -1,6 +1,20 @@
 # Installation notes
 
-# The system
+# Installation simplifiée avec notre image docker
+
+(https://hub.docker.com/repository/docker/joelobrecht/speleoalpha)
+- `docker container run -d --name speleoalpha -p "1270:80" -v C:cheminversdossier/SpeleoAlpha:/app joelobrecht/speleoalpha`
+- Version Windows sans volume `docker container run -d --name speleoalpha -p "1270:80" joelobrecht/speleoalpha`
+- `docker start speleoalpha`
+- `docker exec -it speleoalpha bash`
+- `cd app`
+- `composer update`
+- `npm install`
+- `yarn encore dev --watch`
+
+Le plugin de vscode qui fait tout marcher : (https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
+
+# The system (installation totale avec container basique)
 
 As mattrayner info on DockerHub is out of date, go see [his github](https://github.com/mattrayner/docker-lamp). There one can see that his latest images are built on php8. Therefore the most suitable image is `latest-2004-php7`.
 
@@ -53,6 +67,7 @@ As mattrayner info on DockerHub is out of date, go see [his github](https://gith
 `composer require symfony/webpack-encore-bundle`
 `npm install -g npm@8.5.3` && `npm install`
 `yarn encore dev` Essential or "asset manifest file doesn't exist" Error
+`npm run watch` Essential to create the public/build directory and files.
 
 # Make a new controller
 
