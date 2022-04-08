@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Repository\CreatureRepository;
 use App\Repository\ModeleRepository;
 use App\Entity\User;
+use App\Entity\Formation;
+use App\Entity\CreatureFormation;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,8 +58,26 @@ class RegistrationController extends AbstractController
                 // Je crée une nouvelle créature
                 $creature = $this->emc->makeCreature($modele[$a]);
                 $creature->setLienUser($user);
+                $tab_creature[] = $creature;
                 $entityManager->persist($creature);
             }
+
+            // Je crée une formation
+            $var_formation = new Formation;
+            $var_formation_name = 'Speleo' . ucfirst(str_replace(' ', '', $user->getPseudo()));
+            $var_formation->setName($var_formation_name);
+            $var_formation->setUser($user);            
+            $entityManager->persist($var_formation);
+
+            // J'affecte les personnages de l'utilisateur à la formation
+            foreach ($tab_creature as $var_creature){
+                $var_creatureformation = new CreatureFormation;
+                $var_creatureformation->setLienCreature($var_creature);
+                $var_creatureformation->setLienFormation($var_formation);
+                $entityManager->persist($var_creatureformation);
+            }
+
+
 
             $entityManager->persist($user);
             $entityManager->flush();
