@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220408134140 extends AbstractMigration
+final class Version20220408145954 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -36,7 +36,7 @@ final class Version20220408134140 extends AbstractMigration
         $this->addSql('CREATE TABLE formation (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, lien_user_id INTEGER DEFAULT NULL, nom VARCHAR(255) NOT NULL)');
         $this->addSql('CREATE INDEX IDX_404021BF687F37D8 ON formation (lien_user_id)');
         $this->addSql('CREATE TABLE modele (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nom_modele VARCHAR(255) NOT NULL, rarete INTEGER NOT NULL, point_niv INTEGER NOT NULL, ouvrable BOOLEAN NOT NULL)');
-        $this->addSql('CREATE TABLE page_visiteur (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, titre VARCHAR(255) NOT NULL, contenue CLOB NOT NULL)');
+        $this->addSql('CREATE TABLE page_visiteur (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, titre VARCHAR(255) NOT NULL, contenu CLOB NOT NULL)');
         $this->addSql('CREATE TABLE reset_password_request (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, user_id INTEGER NOT NULL, selector VARCHAR(20) NOT NULL, hashed_token VARCHAR(100) NOT NULL, requested_at DATETIME NOT NULL --(DC2Type:datetime_immutable)
         , expires_at DATETIME NOT NULL --(DC2Type:datetime_immutable)
         )');

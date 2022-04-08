@@ -73,7 +73,7 @@ class PageVisiteurFixtures extends Fixture implements OrderedFixtureInterface
             // Populate the objects
             $$name = new PageVisiteur();
             $$name->setTitre($page["titre"])
-                ->setContenue($page["contenu"]);
+                ->setContenu($page["contenu"]);
             $manager->persist($$name);
             $this->addReference($name, $$name);
             //dump($name);

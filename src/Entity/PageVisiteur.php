@@ -25,7 +25,7 @@ class PageVisiteur
     /**
      * @ORM\Column(type="text")
      */
-    private $contenue;
+    private $contenu;
 
     public function getId(): ?int
     {
@@ -44,14 +44,14 @@ class PageVisiteur
         return $this;
     }
 
-    public function getContenue(): ?string
+    public function getContenu(): ?string
     {
-        return $this->contenue;
+        return $this->contenu;
     }
 
-    public function setContenue(string $contenue): self
+    public function setContenu(string $contenu): self
     {
-        $this->contenue = $contenue;
+        $this->contenu = $contenu;
 
         return $this;
     }
