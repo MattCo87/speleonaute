@@ -31,7 +31,7 @@ class PageVisiteurFixtures extends Fixture implements OrderedFixtureInterface
         <P>On ne peut pas le rater, il s'agit de la grande construction au-dessus de la Fosse. Hobb, son maître, décide à quel niveau vous avez droit d'aller. C'est lui qui gère les treuils qui envoient et remontent les cages d'exploration.</p>
         HTML];
         $pages["PG_mentionslegales"] = [
-            "titre" => "Règles", "contenu" =>
+            "titre" => "Mentions Légales", "contenu" =>
             <<<HTML
         <h1>Mentions légales</h1>
         <p>Merci de lire avec attention les différentes modalités d’utilisation du présent site avant d’en parcourir les pages. En vous connectant sur ce site, vous acceptez sans réserves les présentes modalités.</p>
@@ -47,7 +47,7 @@ class PageVisiteurFixtures extends Fixture implements OrderedFixtureInterface
         HTML
         ];
         $pages["PG_regles"] = [
-            "titre" => "Mentions Légales", "contenu" =>
+            "titre" => "Règles", "contenu" =>
             <<<HTML
         <h1>Règles du jeu</h1>
         <h2>Comment y jouer ?</h2>
