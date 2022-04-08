@@ -65,8 +65,8 @@ class RegistrationController extends AbstractController
             // Je crée une formation
             $var_formation = new Formation;
             $var_formation_name = 'Speleo' . ucfirst(str_replace(' ', '', $user->getPseudo()));
-            $var_formation->setName($var_formation_name);
-            $var_formation->setUser($user);            
+            $var_formation->setNom($var_formation_name);
+            $var_formation->setLienUser($user);            
             $entityManager->persist($var_formation);
 
             // J'affecte les personnages de l'utilisateur à la formation
