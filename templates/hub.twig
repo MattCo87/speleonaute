@@ -1,4 +1,13 @@
 {% extends 'base.html.twig' %}
-{% block htmldiv %}<article class="hub_wrapper">{% endblock htmldiv %}
-  {% block body %}{% endblock %}
-{% block htmldiv2 %}</article>{% endblock htmldiv2 %}
+
+{% block appWrapperdiv %}
+  <div id="hub_wrapper">
+  {% include 'base/menuAccueil.twig' %}
+{% endblock %}
+
+{% block body %}{% endblock %}
+
+{% block appWrapperclose %}
+  {% include 'base/footer.html.twig' %}
+  </div>
+{% endblock %}
