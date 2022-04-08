@@ -22,8 +22,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 class MoteurCombatService extends ServiceEntityRepository
 {
-
-
     private $doctrine;
     private $emm;
     private $emsm;
@@ -64,11 +62,14 @@ class MoteurCombatService extends ServiceEntityRepository
             $i++;
         }
 
+        // On mélange le tableau
+        shuffle($tab_tas);
+        var_dump($tab_tas);
+
         // On choisit la stat et on ajoute 1 point
         for ($z = 0; $z < 5; $z++) {
             $alea = rand(0, $total_points);
             $tab_final[] = $tab_tas[$alea];
-            var_dump($alea);
         }
         dd($tab_final);
     }
