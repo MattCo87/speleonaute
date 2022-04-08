@@ -3,17 +3,39 @@
     font-family: 'Work Sans', sans-serif;
 */
 
+@use './reset.scss';
+
 body {
+    color: red;
     margin: 0;
-    background-color: rgb(30, 32, 32);
-    color: white;
-    background-image: url("../img/BGAccueil.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-    height: 100vh;
-    width: 100vw;
-    font-family: 'Work Sans', sans-serif;
+    padding: 0;
+    overflow: hidden;
+
+    #accueil_wrapper {
+        padding: 3rem;
+        background-color: rgb(30, 32, 32);
+        color: white;
+        background-image: url("../img/BGAccueil.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+        height: 100vh;
+        width: 100vw;
+        font-family: 'Work Sans', sans-serif;
+    }
+
+    #hub_wrapper {
+        padding: 3rem;
+        background-color: rgb(30, 32, 32);
+        color: white;
+        background-image: url("../img/BGHUBSpeleo.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+        height: 100vh;
+        width: 100vw;
+        font-family: 'Work Sans', sans-serif;
+    }
 
     h1,
     h2,
