@@ -63,7 +63,7 @@ class MoteurCombatService extends ServiceEntityRepository
         shuffle($tab_tas);
         // On choisit la stat et on ajoute 1 point
         for ($z = 0; $z < $pointNiv; $z++) {
-            $alea = rand(0, $total_points);
+            $alea = rand(0, $total_points-1);
             $tab_final[] = $tab_tas[$alea];
         }
         $stat = $this->doctrine->getRepository(StatistiqueCreature::class)->findBy(['lienCreature' => $idModele->getId()]);
@@ -392,13 +392,13 @@ class MoteurCombatService extends ServiceEntityRepository
                 $tableauHotePex[$i]->setExp($pex);
                 //On verifie si les hotes passe un niveau
                 if($tableauHotePex[$i]->getNiveau() < 10){
-                    if ($tableauHotePex[$i]->getExp() > $tableauHotePex[$i]->getNiveau()*100 ){
+                    if ($tableauHotePex[$i]->getExp() >= $tableauHotePex[$i]->getNiveau()*100 ){
                         $tableauHotePex[$i]->setExp($tableauHotePex[$i]->getExp()-$tableauHotePex[$i]->getNiveau()*100);
                         $tableauHotePex[$i]->setNiveau($tableauHotePex[$i]->getNiveau()+1);
                         $this->NiveauPlus($tableauHotePex[$i]);
                     }
                 }else{
-                    if ($tableauHotePex[$i]->getExp() > $tableauHotePex[$i]->getNiveau()*1000 ){
+                    if ($tableauHotePex[$i]->getExp() >= $tableauHotePex[$i]->getNiveau()*1000 ){
                         $tableauHotePex[$i]->setExp($tableauHotePex[$i]->getExp()-$tableauHotePex[$i]->getNiveau()*1000);
                         $tableauHotePex[$i]->setNiveau($tableauHotePex[$i]->getNiveau()+1);
                         $this->NiveauPlus($tableauHotePex[$i]);
