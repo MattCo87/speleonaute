@@ -23,8 +23,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 class MoteurCombatService extends ServiceEntityRepository
 {
     private $doctrine;
-    private $emm;
-    private $emsm;
 
     function __construct(ManagerRegistry $doctrine, EntityManagerInterface $manager, ModeleRepository $emm, StatistiqueModeleRepository $emsm)
     {
@@ -35,11 +33,12 @@ class MoteurCombatService extends ServiceEntityRepository
     }
 
 
-    public function NiveauPlus()
+    public function NiveauPlus( Creature $creature)
     {
+        $idModele = $creature->getLienModele();
+        $pointNiv = $creature->getLienModele()->getPointNiv();
         // On récupére le modèle
-        $tab_stat = $this->emsm->findBy(['lienModele' => 1]);
-
+        $tab_stat = $this->emsm->findBy(['lienModele' => $idModele]);
         // On fabrique un tableau avec le Numéro de la statistique et sa valeur de niveau
         $i = 0;
         $total_points = 0;
@@ -49,7 +48,6 @@ class MoteurCombatService extends ServiceEntityRepository
             $total_points = $total_points + $tabStat[$i][1];
             $i++;
         }
-
         // Pour chaque statistique
         $i = 0;
         foreach ($tabStat as $stat) {
@@ -61,23 +59,53 @@ class MoteurCombatService extends ServiceEntityRepository
             }
             $i++;
         }
-
         // On mélange le tableau
         shuffle($tab_tas);
-        var_dump($tab_tas);
-
         // On choisit la stat et on ajoute 1 point
-        for ($z = 0; $z < 5; $z++) {
+        for ($z = 0; $z < $pointNiv; $z++) {
             $alea = rand(0, $total_points);
             $tab_final[] = $tab_tas[$alea];
         }
-        dd($tab_final);
+        $stat = $this->doctrine->getRepository(StatistiqueCreature::class)->findBy(['lienCreature' => $idModele->getId()]);
+        for( $z = 0; $z < count($tab_final); $z++){
+            switch ($tab_final[$z]->getId()){
+                case $stat[0]->getLienStatistique()->getId():
+                    $statFinal = $stat[0]->getValeur()+1;
+                    $stat[0]->setValeur($statFinal);
+                    $this->manager->persist($stat[0]);
+                break;
+
+                case $stat[1]->getLienStatistique()->getId():
+                    $statFinal = $stat[1]->getValeur()+1;
+                    $stat[1]->setValeur($statFinal);
+                    $this->manager->persist($stat[1]);
+                break;
+
+                case $stat[2]->getLienStatistique()->getId():
+                    $statFinal = $stat[2]->getValeur()+1;
+                    $stat[2]->setValeur($statFinal);
+                    $this->manager->persist($stat[2]);
+                break;
+
+                case $stat[3]->getLienStatistique()->getId():
+                    $statFinal = $stat[3]->getValeur()+1;
+                    $stat[3]->setValeur($statFinal);
+                    $this->manager->persist($stat[3]);
+                break;
+
+                case $stat[4]->getLienStatistique()->getId():
+                    $statFinal = $stat[4]->getValeur()+1;
+                    $stat[4]->setValeur($statFinal);
+                    $this->manager->persist($stat[4]);
+                break;
+            }
+        }
     }
 
 
     public function combat(Formation $formation, Scenario $scenario, int $idCombat)
     {
-        $this->NiveauPlus();
+        
         $nomCombat = "" . $formation->getLienUser()->getEmail() . "_Combat_" . $idCombat . "";
         $id = $formation->getId();
         //Tableau Hote
@@ -362,6 +390,20 @@ class MoteurCombatService extends ServiceEntityRepository
             for ($i = 0; $i < 5; $i++) {
                 $pex = $tableauHotePex[$i]->getExp() + $recompense;
                 $tableauHotePex[$i]->setExp($pex);
+                //On verifie si les hotes passe un niveau
+                if($tableauHotePex[$i]->getNiveau() < 10){
+                    if ($tableauHotePex[$i]->getExp() > $tableauHotePex[$i]->getNiveau()*100 ){
+                        $tableauHotePex[$i]->setExp($tableauHotePex[$i]->getExp()-$tableauHotePex[$i]->getNiveau()*100);
+                        $tableauHotePex[$i]->setNiveau($tableauHotePex[$i]->getNiveau()+1);
+                        $this->NiveauPlus($tableauHotePex[$i]);
+                    }
+                }else{
+                    if ($tableauHotePex[$i]->getExp() > $tableauHotePex[$i]->getNiveau()*1000 ){
+                        $tableauHotePex[$i]->setExp($tableauHotePex[$i]->getExp()-$tableauHotePex[$i]->getNiveau()*1000);
+                        $tableauHotePex[$i]->setNiveau($tableauHotePex[$i]->getNiveau()+1);
+                        $this->NiveauPlus($tableauHotePex[$i]);
+                    }
+                }
             }
             $reputation = $formation->getLienUser()->getReputation() + $recompense;
             $formation->getLienUser()->setReputation($reputation);
