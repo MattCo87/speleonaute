@@ -74,6 +74,30 @@ class StatistiqueCreatureFixtures extends Fixture implements OrderedFixtureInter
         $statistiquesCreatures["STRATCREAT_Ver t 104"] = ["lienCreature" => "Ver toxique 2", "lienStatistique" => "STAT_vites", "valeur" => 4];
         $statistiquesCreatures["STRATCREAT_Ver t 105"] = ["lienCreature" => "Ver toxique 2", "lienStatistique" => "STAT_endur", "valeur" => 15];
 
+        $statistiquesCreatures["STRATCREAT_Gue v 111"] = ["lienCreature" => "Guepe venimeuse geante 1", "lienStatistique" => "STAT_touch", "valeur" => 7];
+        $statistiquesCreatures["STRATCREAT_Gue v 112"] = ["lienCreature" => "Guepe venimeuse geante 1", "lienStatistique" => "STAT_degat", "valeur" => 9];
+        $statistiquesCreatures["STRATCREAT_Gue v 113"] = ["lienCreature" => "Guepe venimeuse geante 1", "lienStatistique" => "STAT_resis", "valeur" => 5];
+        $statistiquesCreatures["STRATCREAT_Gue v 114"] = ["lienCreature" => "Guepe venimeuse geante 1", "lienStatistique" => "STAT_vites", "valeur" => 4];
+        $statistiquesCreatures["STRATCREAT_Gue v 115"] = ["lienCreature" => "Guepe venimeuse geante 1", "lienStatistique" => "STAT_endur", "valeur" => 17];
+
+        $statistiquesCreatures["STRATCREAT_Gue v 161"] = ["lienCreature" => "Guepe venimeuse geante 2", "lienStatistique" => "STAT_touch", "valeur" => 5];
+        $statistiquesCreatures["STRATCREAT_Gue v 162"] = ["lienCreature" => "Guepe venimeuse geante 2", "lienStatistique" => "STAT_degat", "valeur" => 6];
+        $statistiquesCreatures["STRATCREAT_Gue v 163"] = ["lienCreature" => "Guepe venimeuse geante 2", "lienStatistique" => "STAT_resis", "valeur" => 8];
+        $statistiquesCreatures["STRATCREAT_Gue v 164"] = ["lienCreature" => "Guepe venimeuse geante 2", "lienStatistique" => "STAT_vites", "valeur" => 5];
+        $statistiquesCreatures["STRATCREAT_Gue v 165"] = ["lienCreature" => "Guepe venimeuse geante 2", "lienStatistique" => "STAT_endur", "valeur" => 20];
+
+        $statistiquesCreatures["STRATCREAT_Gue v 171"] = ["lienCreature" => "Guepe venimeuse geante 3", "lienStatistique" => "STAT_touch", "valeur" => 6];
+        $statistiquesCreatures["STRATCREAT_Gue v 172"] = ["lienCreature" => "Guepe venimeuse geante 3", "lienStatistique" => "STAT_degat", "valeur" => 8];
+        $statistiquesCreatures["STRATCREAT_Gue v 173"] = ["lienCreature" => "Guepe venimeuse geante 3", "lienStatistique" => "STAT_resis", "valeur" => 5];
+        $statistiquesCreatures["STRATCREAT_Gue v 174"] = ["lienCreature" => "Guepe venimeuse geante 3", "lienStatistique" => "STAT_vites", "valeur" => 5];
+        $statistiquesCreatures["STRATCREAT_Gue v 175"] = ["lienCreature" => "Guepe venimeuse geante 3", "lienStatistique" => "STAT_endur", "valeur" => 15];
+
+        $statistiquesCreatures["STRATCREAT_Dra b 995"] = ["lienCreature" => "Dragon blanc au yeux bleu", "lienStatistique" => "STAT_touch", "valeur" => 15];
+        $statistiquesCreatures["STRATCREAT_Dra b 996"] = ["lienCreature" => "Dragon blanc au yeux bleu", "lienStatistique" => "STAT_degat", "valeur" => 18];
+        $statistiquesCreatures["STRATCREAT_Dra b 997"] = ["lienCreature" => "Dragon blanc au yeux bleu", "lienStatistique" => "STAT_resis", "valeur" => 18];
+        $statistiquesCreatures["STRATCREAT_Dra b 998"] = ["lienCreature" => "Dragon blanc au yeux bleu", "lienStatistique" => "STAT_vites", "valeur" => 18];
+        $statistiquesCreatures["STRATCREAT_Dra b 999"] = ["lienCreature" => "Dragon blanc au yeux bleu", "lienStatistique" => "STAT_endur", "valeur" => 350];
+
         foreach ($statistiquesCreatures as $name => $statistiqueCreature) {
             // Populate the objects
             $$name = new StatistiqueCreature();
