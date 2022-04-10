@@ -58,6 +58,33 @@ class ActionStrategieFixtures extends Fixture implements OrderedFixtureInterface
         $actionStrategies["ACTIONSTRAT_33"] = ["lienStrategie" => "STRAT_Poiso", "lienAction" => "ACT_contactaf", "positionAction" =>  2];
         $actionStrategies["ACTIONSTRAT_34"] = ["lienStrategie" => "STRAT_Poiso", "lienAction" => "ACT_contactaf", "positionAction" =>  4];
         $actionStrategies["ACTIONSTRAT_35"] = ["lienStrategie" => "STRAT_Poiso", "lienAction" => "ACT_jetdepois", "positionAction" =>  1];
+        $actionStrategies["ACTIONSTRAT_36"] = ["lienStrategie" => "STRAT_Volto", "lienAction" => "ACT_dardempoi", "positionAction" =>  1];
+        $actionStrategies["ACTIONSTRAT_37"] = ["lienStrategie" => "STRAT_Volto", "lienAction" => "ACT_dardempoi", "positionAction" =>  4];
+        $actionStrategies["ACTIONSTRAT_38"] = ["lienStrategie" => "STRAT_Volto", "lienAction" => "ACT_mortvenue", "positionAction" =>  2];
+        $actionStrategies["ACTIONSTRAT_39"] = ["lienStrategie" => "STRAT_Volto", "lienAction" => "ACT_perforati", "positionAction" =>  5];
+        $actionStrategies["ACTIONSTRAT_40"] = ["lienStrategie" => "STRAT_Volto", "lienAction" => "ACT_perforati", "positionAction" =>  3];
+        $actionStrategies["ACTIONSTRAT_41"] = ["lienStrategie" => "STRAT_Destr", "lienAction" => "ACT_chargedes", "positionAction" =>  2];
+        $actionStrategies["ACTIONSTRAT_42"] = ["lienStrategie" => "STRAT_Destr", "lienAction" => "ACT_chargedes", "positionAction" =>  5];
+        $actionStrategies["ACTIONSTRAT_43"] = ["lienStrategie" => "STRAT_Destr", "lienAction" => "ACT_pietineme", "positionAction" =>  1];
+        $actionStrategies["ACTIONSTRAT_44"] = ["lienStrategie" => "STRAT_Destr", "lienAction" => "ACT_pietineme", "positionAction" =>  3];
+        $actionStrategies["ACTIONSTRAT_45"] = ["lienStrategie" => "STRAT_Destr", "lienAction" => "ACT_briseos", "positionAction" =>  4];
+        $actionStrategies["ACTIONSTRAT_46"] = ["lienStrategie" => "STRAT_Mortd", "lienAction" => "ACT_seismeter", "positionAction" =>  1];
+        $actionStrategies["ACTIONSTRAT_47"] = ["lienStrategie" => "STRAT_Mortd", "lienAction" => "ACT_amputatio", "positionAction" =>  4];
+        $actionStrategies["ACTIONSTRAT_48"] = ["lienStrategie" => "STRAT_Mortd", "lienAction" => "ACT_amputatio", "positionAction" =>  2];
+        $actionStrategies["ACTIONSTRAT_49"] = ["lienStrategie" => "STRAT_Mortd", "lienAction" => "ACT_ensevelis", "positionAction" =>  5];
+        $actionStrategies["ACTIONSTRAT_50"] = ["lienStrategie" => "STRAT_Mortd", "lienAction" => "ACT_ensevelis", "positionAction" =>  3];
+        $actionStrategies["ACTIONSTRAT_51"] = ["lienStrategie" => "STRAT_Putre", "lienAction" => "ACT_devoremen", "positionAction" =>  3];
+        $actionStrategies["ACTIONSTRAT_52"] = ["lienStrategie" => "STRAT_Putre", "lienAction" => "ACT_ailetranc", "positionAction" =>  5];
+        $actionStrategies["ACTIONSTRAT_53"] = ["lienStrategie" => "STRAT_Putre", "lienAction" => "ACT_ailetranc", "positionAction" =>  2];
+        $actionStrategies["ACTIONSTRAT_54"] = ["lienStrategie" => "STRAT_Putre", "lienAction" => "ACT_morsurevo", "positionAction" =>  4];
+        $actionStrategies["ACTIONSTRAT_55"] = ["lienStrategie" => "STRAT_Putre", "lienAction" => "ACT_morsurevo", "positionAction" =>  1];
+        $actionStrategies["ACTIONSTRAT_56"] = ["lienStrategie" => "STRAT_Magie", "lienAction" => "ACT_auraterri", "positionAction" =>  1];
+        $actionStrategies["ACTIONSTRAT_57"] = ["lienStrategie" => "STRAT_Magie", "lienAction" => "ACT_auraterri", "positionAction" =>  3];
+        $actionStrategies["ACTIONSTRAT_58"] = ["lienStrategie" => "STRAT_Magie", "lienAction" => "ACT_regardmor", "positionAction" =>  2];
+        $actionStrategies["ACTIONSTRAT_59"] = ["lienStrategie" => "STRAT_Magie", "lienAction" => "ACT_regardmor", "positionAction" =>  4];
+        $actionStrategies["ACTIONSTRAT_60"] = ["lienStrategie" => "STRAT_Magie", "lienAction" => "ACT_soufflede", "positionAction" =>  5];
+        
+        
 
         foreach ($actionStrategies as $name => $actionStrategie) {
             // Populate the objects
