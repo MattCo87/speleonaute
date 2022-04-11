@@ -1,9 +1,9 @@
 {% extends 'accueil.twig' %}
 
-{% block title %}{{ glossaire.titre }}{% endblock %}
+{% block title %}{{ glossaire.titre }} - Spéléonautes{% endblock %}
 
 {% block body %}
-{{ glossaire.contenue | raw }}
+{{ glossaire.contenu | raw }}
 {% endblock %}
 
 

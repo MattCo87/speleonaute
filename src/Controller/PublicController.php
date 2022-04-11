@@ -16,10 +16,10 @@ class PublicController extends AbstractController
     public function mentionslegales(ManagerRegistry $doctrine): Response
     {
         $page = new PageVisiteur();
-        $page = $doctrine->getRepository(PageVisiteur::class)->findBy(['titre' => 'Mentions légales']);
-
-        return $this->render('public/mentionlegales.html.twig', [
-            'mentionsLegales' => $page[0],
+        $page = $doctrine->getRepository(PageVisiteur::class)->findOneBy(['titre' => 'Mentions Légales']);
+        //dd($page);
+        return $this->render('public/mentionslegales.html.twig', [
+            'mentionsLegales' => $page,
             'controller_name' => 'PublicController',
         ]);
     }
@@ -29,10 +29,10 @@ class PublicController extends AbstractController
     public function glossaire(ManagerRegistry $doctrine): Response
     {
         $page = new PageVisiteur();
-        $page = $doctrine->getRepository(PageVisiteur::class)->findBy(['titre' => 'Glossaire']);
+        $page = $doctrine->getRepository(PageVisiteur::class)->findOneBy(['titre' => 'Glossaire']);
 
         return $this->render('public/glossaire.html.twig', [
-            'glossaire' => $page[0],
+            'glossaire' => $page,
             'controller_name' => 'PublicController',
         ]);
     }
@@ -42,10 +42,10 @@ class PublicController extends AbstractController
     public function regles(ManagerRegistry $doctrine): Response
     {
         $page = new PageVisiteur();
-        $page = $doctrine->getRepository(PageVisiteur::class)->findBy(['titre' => 'Règles']);
+        $page = $doctrine->getRepository(PageVisiteur::class)->findOneBy(['titre' => 'Règles']);
 
         return $this->render('public/regles.html.twig', [
-            'regles' => $page[0],
+            'regles' => $page,
             'controller_name' => 'PublicController',
         ]);
     }
@@ -55,10 +55,10 @@ class PublicController extends AbstractController
     public function team(ManagerRegistry $doctrine): Response
     {
         $page = new PageVisiteur();
-        $page = $doctrine->getRepository(PageVisiteur::class)->findBy(['titre' => 'Team']);
+        $page = $doctrine->getRepository(PageVisiteur::class)->findOneBy(['titre' => 'Team']);
 
         return $this->render('public/team.html.twig', [
-            'team' => $page[0],
+            'team' => $page,
             'controller_name' => 'PublicController',
         ]);
     }
