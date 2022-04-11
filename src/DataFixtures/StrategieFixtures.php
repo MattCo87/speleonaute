@@ -31,6 +31,11 @@ class StrategieFixtures extends Fixture implements OrderedFixtureInterface
         $strategies["STRAT_Figer"] = ["nom" => "Figer et Empaler "];
         $strategies["STRAT_Attaq"] = ["nom" => "Attaque incessante "];
         $strategies["STRAT_Poiso"] = ["nom" => "Poison mortel "];
+        $strategies["STRAT_Volto"] = ["nom" => "Vol Toxique "];
+        $strategies["STRAT_Destr"] = ["nom" => "Destruction incarnée "];
+        $strategies["STRAT_Mortd"] = ["nom" => "Mor du dessous "];
+        $strategies["STRAT_Putre"] = ["nom" => "Putrefaction "];
+        $strategies["STRAT_Magie"] = ["nom" => "Magie Draconique "];
 
         foreach ($strategies as $name => $strategy) {
             // Populate the objects

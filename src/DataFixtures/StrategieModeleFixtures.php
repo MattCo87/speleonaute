@@ -30,6 +30,11 @@ class StrategieModeleFixtures extends Fixture implements OrderedFixtureInterface
         $strategieModele["STRATMOD_55"] = ["lienStrategie" => "STRAT_Figer", "lienModele" => "MODEL_Basilicgea", "positionStrategie" => 1];
         $strategieModele["STRATMOD_66"] = ["lienStrategie" => "STRAT_Attaq", "lienModele" => "MODEL_Ratsanguin", "positionStrategie" => 1];
         $strategieModele["STRATMOD_77"] = ["lienStrategie" => "STRAT_Poiso", "lienModele" => "MODEL_Vertoxique", "positionStrategie" => 1];
+        $strategieModele["STRATMOD_88"] = ["lienStrategie" => "STRAT_Volto", "lienModele" => "MODEL_Guepeveni", "positionStrategie" => 1];
+        $strategieModele["STRATMOD_99"] = ["lienStrategie" => "STRAT_Destr", "lienModele" => "MODEL_Behemotde", "positionStrategie" => 1];
+        $strategieModele["STRATMOD_98"] = ["lienStrategie" => "STRAT_Mortd", "lienModele" => "MODEL_Jeuneguiv", "positionStrategie" => 1];
+        $strategieModele["STRATMOD_97"] = ["lienStrategie" => "STRAT_Putre", "lienModele" => "MODEL_Scarabepu", "positionStrategie" => 1];
+        $strategieModele["STRATMOD_96"] = ["lienStrategie" => "STRAT_Magie", "lienModele" => "MODEL_Dragonbla", "positionStrategie" => 1];
 
         foreach ($strategieModele as $name => $strategieMod) {
             // Populate the objects
