@@ -1,0 +1,12 @@
+
+{% block body %}
+{% block menu %}
+<nav class="menuHub">
+<a class="chevalement" href="{{ path('app_chevalement') }}"><img src="{{ asset('build/images/Chevalement.png') }}" alt="Chevalement"></a>
+<a class="entrepot" href="{{ path('app_entrepot') }}"><img src="{{ asset('build/images/Entrepot.png') }}" alt="Entrepôt"></a>
+<a class="formation" href="{{ path('app_formation') }}"><img src="{{ asset('build/images/Equipe.png') }}" alt="Formation"></a>
+<a class="bureau" href="{{ path('app_bureau') }}"><img src="{{ asset('build/images/Bureau.png') }}" alt="Bureau"></a>
+<a class="hotelventes" href="{{ path('app_hotel_ventes') }}"><img src="{{ asset('build/images/HotelVentes.png') }}" alt="Hôtel des Ventes"></a>
+</nav>
+{% endblock %}
+{% endblock %}
