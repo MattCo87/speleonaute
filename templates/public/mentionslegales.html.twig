@@ -1,0 +1,7 @@
+{% extends 'accueil.twig' %}
+
+{% block title %}{{ mentionsLegales.titre }} - Spéléonautes{% endblock %}
+
+{% block body %}
+{{ mentionsLegales.contenu | raw }}
+{% endblock %}

@@ -2,7 +2,11 @@
 
 namespace App\Controller;
 
+use App\Repository\CreatureRepository;
+use App\Repository\ModeleRepository;
 use App\Entity\User;
+use App\Entity\Formation;
+use App\Entity\CreatureFormation;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,11 +18,22 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
 {
+
+    private $emm;
+    private $emc;
+
+    function __construct(CreatureRepository $emc, ModeleRepository $emm)
+    {
+        $this->emm = $emm;
+        $this->emc = $emc;
+    }
+
     /**
      * @Route("/register", name="app_register")
      */
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -26,11 +41,43 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
-            $userPasswordHasher->hashPassword(
+                $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
             );
+
+            // J'affecte 5 nouveaux personnages à l'utilisateur 
+            $modele = $this->emm->findBy(['ouvrable' => 1]);
+
+            for ($i = 0; $i < 5; $i++) {
+
+                $taille = count($modele)-1;
+                $a = rand(0, $taille);
+
+                // Je crée une nouvelle créature
+                $creature = $this->emc->makeCreature($modele[$a]);
+                $creature->setLienUser($user);
+                $tab_creature[] = $creature;
+                $entityManager->persist($creature);
+            }
+
+            // Je crée une formation
+            $var_formation = new Formation;
+            $var_formation_name = 'Speleo' . ucfirst(str_replace(' ', '', $user->getPseudo()));
+            $var_formation->setNom($var_formation_name);
+            $var_formation->setLienUser($user);            
+            $entityManager->persist($var_formation);
+
+            // J'affecte les personnages de l'utilisateur à la formation
+            foreach ($tab_creature as $var_creature){
+                $var_creatureformation = new CreatureFormation;
+                $var_creatureformation->setLienCreature($var_creature);
+                $var_creatureformation->setLienFormation($var_formation);
+                $entityManager->persist($var_creatureformation);
+            }
+
+
 
             $entityManager->persist($user);
             $entityManager->flush();

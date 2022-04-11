@@ -1,0 +1,67 @@
+/* Project-specific mixins */
+
+@mixin attribZones($zone) {
+    .#{$zone} {
+        grid-area: $zone;
+    }
+}
+
+
+
+
+
+
+/* Generic mixins */
+
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin imgAdapt {
+    height: auto;
+    max-width: 100%;
+    margin: auto;
+    object-fit: contain;
+}
+
+@mixin aTitled {
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+@mixin aButton {
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 1.4rem;
+    border: 0.05rem solid $surfGreen;
+    padding: 1rem 4rem;
+    color: $surfGreen;
+    background-color: $white;
+    display: block;
+    margin-top: 2rem;
+    width: fit-content;
+}
+
+@mixin marginAuto {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@mixin openSans {
+    font-family: 'Open Sans', sans-serif;
+}
+
+@mixin openCondensed {
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+@mixin sourceSans {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+@mixin flexColumn {
+    display: flex;
+    flex-direction: column;
+}
