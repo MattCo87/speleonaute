@@ -14,7 +14,7 @@ body {
         display: grid;
         background-color: rgb(30, 32, 32);
         color: white;
-        background-image: url("../img/BGAccueil.png");
+        background-image: url("../images/BGAccueil.png");
         background-repeat: no-repeat;
         background-position: center;
         background-size: 100%;
@@ -26,7 +26,7 @@ body {
     #hub_wrapper {
         background-color: rgb(30, 32, 32);
         color: white;
-        background-image: url("../img/BGHUBSpeleo.png");
+        background-image: url("../images/BGHUBSpeleo.png");
         background-repeat: no-repeat;
         background-position: center;
         background-size: 100%;
@@ -48,4 +48,38 @@ body {
     a {
         color: white;
     }
+}
+
+.menuHub {
+
+    display: flex;
+
+    a {
+        display: flex;
+        align-items: center;
+        width: 4rem;
+        height: 4rem;
+        background: rgb(221, 221, 221);
+        padding: 1rem;
+        margin: 1rem;
+        border-style: dotted;
+        border-color: rgb(185, 185, 185);
+        border-radius: 0.5rem;
+        border-width: thick;
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
+    .chevalement {}
+
+    .entreport {}
+
+    .formation {}
+
+    .bureau {}
+
+    .hotelventes {}
 }
