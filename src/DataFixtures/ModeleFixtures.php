@@ -31,6 +31,11 @@ class ModeleFixtures extends Fixture implements OrderedFixtureInterface
             $modeles["MODEL_Basilicgea"] = ["nom_modele" => "Basilic géant", "rarete" => 5, "point_niv" => 6, "ouvrable" => TRUE];
             $modeles["MODEL_Ratsanguin"] = ["nom_modele" => "Rat sanguinaire", "rarete" => 1, "point_niv" => 5, "ouvrable" => FALSE];
             $modeles["MODEL_Vertoxique"] = ["nom_modele" => "Ver toxique", "rarete" => 2, "point_niv" => 5, "ouvrable" => FALSE];
+            $modeles["MODEL_Guepeveni"] = ["nom_modele" => "Guêpe venimeuse géante", "rarete" => 2, "point_niv" => 5, "ouvrable" => TRUE];
+            $modeles["MODEL_Behemotde"] = ["nom_modele" => "Béhémot des profondeurs", "rarete" => 5, "point_niv" => 6, "ouvrable" => TRUE];
+            $modeles["MODEL_Jeuneguiv"] = ["nom_modele" => "Jeune Guivre", "rarete" => 4, "point_niv" => 5, "ouvrable" => TRUE];
+            $modeles["MODEL_Scarabepu"] = ["nom_modele" => "Scarabe putride", "rarete" => 3, "point_niv" => 5, "ouvrable" => FALSE];
+            $modeles["MODEL_Dragonbla"] = ["nom_modele" => "Dragon blanc au yeux bleu", "rarete" => 6, "point_niv" => 7, "ouvrable" => FALSE];
         }
 
         foreach ($modeles as $name => $modele) {

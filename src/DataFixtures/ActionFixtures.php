@@ -41,6 +41,21 @@ class ActionFixtures extends Fixture implements OrderedFixtureInterface
         $actions["ACT_bavetoxiq"] = ["nom" => "bave toxique ", "tier" => 1, "toucher" => 2, "degat" => 3];
         $actions["ACT_contactaf"] = ["nom" => "contact affaiblissant ", "tier" => 2, "toucher" => 4, "degat" => 4];
         $actions["ACT_jetdepois"] = ["nom" => "jet de poison ", "tier" => 3, "toucher" => 7, "degat" => 9];
+        $actions["ACT_dardempoi"] = ["nom" => "dard empoisonnée ", "tier" => 1, "toucher" => 2, "degat" => 3];
+        $actions["ACT_mortvenue"] = ["nom" => "mort venue du ciel ", "tier" => 3, "toucher" => 6, "degat" => 8];
+        $actions["ACT_perforati"] = ["nom" => "perforation toxique ", "tier" => 2, "toucher" => 5, "degat" => 4];
+        $actions["ACT_chargedes"] = ["nom" => "charge destructrice ", "tier" => 2, "toucher" => 6, "degat" => 12];
+        $actions["ACT_pietineme"] = ["nom" => "piétinement incessant ", "tier" => 1, "toucher" => 4, "degat" => 4];
+        $actions["ACT_briseos"] = ["nom" => " ", "tier" => 3, "toucher" => 7, "degat" => 14];
+        $actions["ACT_seismeter"] = ["nom" => "seisme terrible ", "tier" => 3, "toucher" => 10, "degat" => 8];
+        $actions["ACT_amputatio"] = ["nom" => "amputation vorace ", "tier" => 2, "toucher" => 3, "degat" => 7];
+        $actions["ACT_ensevelis"] = ["nom" => "ensevelissement ", "tier" => 1, "toucher" => 1, "degat" => 4];
+        $actions["ACT_devoremen"] = ["nom" => "dévorement ", "tier" => 3, "toucher" => 8, "degat" => 9];
+        $actions["ACT_ailetranc"] = ["nom" => "aile tranchante ", "tier" => 2, "toucher" => 5, "degat" => 6];
+        $actions["ACT_morsurevo"] = ["nom" => "morsure vorace ", "tier" => 1, "toucher" => 4, "degat" => 3];
+        $actions["ACT_auraterri"] = ["nom" => "aura terrifiante ", "tier" => 1, "toucher" => 7, "degat" => 8];
+        $actions["ACT_regardmor"] = ["nom" => "regard mortelle ", "tier" => 2, "toucher" => 10, "degat" => 15];
+        $actions["ACT_soufflede"] = ["nom" => "souffle destructeur ", "tier" => 3, "toucher" => 15, "degat" => 20];
 
 
         foreach ($actions as $name => $action) {

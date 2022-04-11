@@ -24,6 +24,8 @@ class ScenarioFixtures extends Fixture implements OrderedFixtureInterface
         $scenarios = array();
         // Create the entries
         $scenarios["SCENAR_nueenuisible"] = ["nom" => "nuée de nuisibles", "description" => "lorem ipsum", "recompense" => 15, "lienFormation" => "FORM_Nuisibles1"];
+        $scenarios["SCENAR_embuscadetoxique"] = ["nom" => "embuscade toxique", "description" => "lorem ipsum", "recompense" => 20, "lienFormation" => "FORM_Venimeuse3"];
+        $scenarios["SCENAR_tresordragon"] = ["nom" => "trésor du dragon", "description" => "lorem ipsum", "recompense" => 100, "lienFormation" => "FORM_Boss4"];
 
         foreach ($scenarios as $name => $scenario) {
             // Populate the objects

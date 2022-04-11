@@ -58,6 +58,31 @@ class StatistiqueModeleFixture extends Fixture implements OrderedFixtureInterfac
         $statistiquesModele["STATMOD_7336"] = ["lienModele" => "MODEL_Vertoxique", "lienStatistique" => "STAT_resis", "valeurMin" => 3, "valeurMax" => 6, "valeurNiv" => 6];
         $statistiquesModele["STATMOD_7435"] = ["lienModele" => "MODEL_Vertoxique", "lienStatistique" => "STAT_vites", "valeurMin" => 3, "valeurMax" => 5, "valeurNiv" => 4];
         $statistiquesModele["STATMOD_7515"] = ["lienModele" => "MODEL_Vertoxique", "lienStatistique" => "STAT_endur", "valeurMin" => 15, "valeurMax" => 18, "valeurNiv" => 6];
+        $statistiquesModele["STATMOD_8001"] = ["lienModele" => "MODEL_Guepeveni", "lienStatistique" => "STAT_touch", "valeurMin" => 5, "valeurMax" => 5, "valeurNiv" => 8];
+        $statistiquesModele["STATMOD_8002"] = ["lienModele" => "MODEL_Guepeveni", "lienStatistique" => "STAT_degat", "valeurMin" => 4, "valeurMax" => 6, "valeurNiv" => 8];
+        $statistiquesModele["STATMOD_8003"] = ["lienModele" => "MODEL_Guepeveni", "lienStatistique" => "STAT_resis", "valeurMin" => 3, "valeurMax" => 6, "valeurNiv" => 7];
+        $statistiquesModele["STATMOD_8004"] = ["lienModele" => "MODEL_Guepeveni", "lienStatistique" => "STAT_vites", "valeurMin" => 5, "valeurMax" => 7, "valeurNiv" => 7];
+        $statistiquesModele["STATMOD_8005"] = ["lienModele" => "MODEL_Guepeveni", "lienStatistique" => "STAT_endur", "valeurMin" => 10, "valeurMax" => 20, "valeurNiv" => 5];
+        $statistiquesModele["STATMOD_8011"] = ["lienModele" => "MODEL_Behemotde", "lienStatistique" => "STAT_touch", "valeurMin" => 7, "valeurMax" => 11, "valeurNiv" => 12];
+        $statistiquesModele["STATMOD_8012"] = ["lienModele" => "MODEL_Behemotde", "lienStatistique" => "STAT_degat", "valeurMin" => 9, "valeurMax" => 12, "valeurNiv" => 12];
+        $statistiquesModele["STATMOD_8013"] = ["lienModele" => "MODEL_Behemotde", "lienStatistique" => "STAT_resis", "valeurMin" => 6, "valeurMax" => 11, "valeurNiv" => 10];
+        $statistiquesModele["STATMOD_8014"] = ["lienModele" => "MODEL_Behemotde", "lienStatistique" => "STAT_vites", "valeurMin" => 3, "valeurMax" => 8, "valeurNiv" => 5];
+        $statistiquesModele["STATMOD_8015"] = ["lienModele" => "MODEL_Behemotde", "lienStatistique" => "STAT_endur", "valeurMin" => 22, "valeurMax" => 35, "valeurNiv" => 8];
+        $statistiquesModele["STATMOD_8021"] = ["lienModele" => "MODEL_Jeuneguiv", "lienStatistique" => "STAT_touch", "valeurMin" => 5, "valeurMax" => 8, "valeurNiv" => 10];
+        $statistiquesModele["STATMOD_8022"] = ["lienModele" => "MODEL_Jeuneguiv", "lienStatistique" => "STAT_degat", "valeurMin" => 8, "valeurMax" => 10, "valeurNiv" => 9];
+        $statistiquesModele["STATMOD_8023"] = ["lienModele" => "MODEL_Jeuneguiv", "lienStatistique" => "STAT_resis", "valeurMin" => 6, "valeurMax" => 12, "valeurNiv" => 8];
+        $statistiquesModele["STATMOD_8024"] = ["lienModele" => "MODEL_Jeuneguiv", "lienStatistique" => "STAT_vites", "valeurMin" => 4, "valeurMax" => 8, "valeurNiv" => 5];
+        $statistiquesModele["STATMOD_8025"] = ["lienModele" => "MODEL_Jeuneguiv", "lienStatistique" => "STAT_endur", "valeurMin" => 18, "valeurMax" => 23, "valeurNiv" => 9];
+        $statistiquesModele["STATMOD_8031"] = ["lienModele" => "MODEL_Scarabepu", "lienStatistique" => "STAT_touch", "valeurMin" => 4, "valeurMax" => 8, "valeurNiv" => 10];
+        $statistiquesModele["STATMOD_8032"] = ["lienModele" => "MODEL_Scarabepu", "lienStatistique" => "STAT_degat", "valeurMin" => 5, "valeurMax" => 10, "valeurNiv" => 9];
+        $statistiquesModele["STATMOD_8033"] = ["lienModele" => "MODEL_Scarabepu", "lienStatistique" => "STAT_resis", "valeurMin" => 4, "valeurMax" => 8, "valeurNiv" => 8];
+        $statistiquesModele["STATMOD_8034"] = ["lienModele" => "MODEL_Scarabepu", "lienStatistique" => "STAT_vites", "valeurMin" => 3, "valeurMax" => 6, "valeurNiv" => 7];
+        $statistiquesModele["STATMOD_8035"] = ["lienModele" => "MODEL_Scarabepu", "lienStatistique" => "STAT_endur", "valeurMin" => 15, "valeurMax" => 22, "valeurNiv" => 6];
+        $statistiquesModele["STATMOD_8031"] = ["lienModele" => "MODEL_Dragonbla", "lienStatistique" => "STAT_touch", "valeurMin" => 14, "valeurMax" => 20, "valeurNiv" => 10];
+        $statistiquesModele["STATMOD_8032"] = ["lienModele" => "MODEL_Dragonbla", "lienStatistique" => "STAT_degat", "valeurMin" => 14, "valeurMax" => 20, "valeurNiv" => 10];
+        $statistiquesModele["STATMOD_8033"] = ["lienModele" => "MODEL_Dragonbla", "lienStatistique" => "STAT_resis", "valeurMin" => 14, "valeurMax" => 20, "valeurNiv" => 10];
+        $statistiquesModele["STATMOD_8034"] = ["lienModele" => "MODEL_Dragonbla", "lienStatistique" => "STAT_vites", "valeurMin" => 14, "valeurMax" => 20, "valeurNiv" => 10];
+        $statistiquesModele["STATMOD_8035"] = ["lienModele" => "MODEL_Dragonbla", "lienStatistique" => "STAT_endur", "valeurMin" => 300, "valeurMax" => 400, "valeurNiv" => 10];
 
         foreach ($statistiquesModele as $name => $statistiqueModele) {
             // Populate the objects

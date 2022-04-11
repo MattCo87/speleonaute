@@ -25,6 +25,8 @@ class FormationFixtures extends Fixture implements OrderedFixtureInterface
         // Create the entries
         $formations["FORM_Nuisibles1"] = ["nom" => "Nuisibles", "idUser" => "USER_Matt"];
         $formations["FORM_DreamTeam2"] = ["nom" => "DreamTeam", "idUser" => "admin"];
+        $formations["FORM_Venimeuse3"] = ["nom" => "Venimeuse", "idUser" => "USER_Matt"];
+        $formations["FORM_Boss4"] = ["nom" => "Boss", "idUser" => "USER_Matt"];
 
         foreach ($formations as $name => $formation) {
             // Populate the objects
