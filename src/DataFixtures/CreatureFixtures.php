@@ -36,7 +36,7 @@ class CreatureFixtures extends Fixture implements OrderedFixtureInterface
         $creatures["Ver toxique 2"] = ["niveau" => 1, "experience" => 0, "nom" => "Ver toxique 2", "idUser" => "admin", "idModele" => "MODEL_Vertoxique"];
         $creatures["Guepe venimeuse geante 1"] = ["niveau" => 1, "experience" => 0, "nom" => "Guêpe venimeuse géante 1", "idUser" => "admin", "idModele" => "MODEL_Guepeveni"];
         $creatures["Guepe venimeuse geante 2"] = ["niveau" => 1, "experience" => 0, "nom" => "Guêpe venimeuse géante 2", "idUser" => "admin", "idModele" => "MODEL_Guepeveni"];
-        $creatures["Guepe venimeuse geante 2"] = ["niveau" => 1, "experience" => 0, "nom" => "Guêpe venimeuse géante 3", "idUser" => "admin", "idModele" => "MODEL_Guepeveni"];
+        $creatures["Guepe venimeuse geante 3"] = ["niveau" => 1, "experience" => 0, "nom" => "Guêpe venimeuse géante 3", "idUser" => "admin", "idModele" => "MODEL_Guepeveni"];
         $creatures["Dragon blanc au yeux bleu"] = ["niveau" => 1, "experience" => 0, "nom" => "Dragon blanc au yeux bleu", "idUser" => "admin", "idModele" => "MODEL_Dragonbla"];
 
 

@@ -21,6 +21,7 @@ use App\Entity\StrategieModele;
 use App\Entity\Strategie;
 use App\Entity\ActionStrategie;
 use App\Entity\Action;
+use App\Entity\StatistiqueModele;
 
 /**
  * @method Creature|null find($id, $lockMode = null, $lockVersion = null)
@@ -30,12 +31,11 @@ use App\Entity\Action;
  */
 class CreatureRepository extends ServiceEntityRepository
 {
-    private $emsm;
 
-    public function __construct(ManagerRegistry $registry, StatistiqueModeleRepository $emsm)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Creature::class);
-        $this->emsm = $emsm;
+        $this->emsm = new StatistiqueModeleRepository($registry);
     }
 
     /**
@@ -66,6 +66,8 @@ class CreatureRepository extends ServiceEntityRepository
     public function makeCreature($modele)
     {
         $manager = $this->getEntityManager();
+
+
 
         // On crée une nouvelle creature
         $creature = new Creature();
