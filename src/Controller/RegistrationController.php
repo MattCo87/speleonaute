@@ -47,10 +47,10 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            // J'affecte 5 nouveaux personnages à l'utilisateur 
+            // J'affecte 6 nouveaux personnages à l'utilisateur 
             $modele = $this->emm->findBy(['ouvrable' => 1]);
 
-            for ($i = 0; $i < 5; $i++) {
+            for ($i = 0; $i < 6; $i++) {
 
                 $taille = count($modele)-1;
                 $a = rand(0, $taille);
@@ -69,6 +69,14 @@ class RegistrationController extends AbstractController
             $var_formation->setLienUser($user);            
             $entityManager->persist($var_formation);
 
+            // Puis une deuxième pour l'exemple
+            $var_formation2 = new Formation;
+            $var_formation2_name = ucfirst(str_replace(' ', '', $user->getPseudo())). "Boyz";
+            $var_formation2->setNom($var_formation2_name);
+            $var_formation2->setLienUser($user);            
+            $entityManager->persist($var_formation2);
+
+/*
             // J'affecte les personnages de l'utilisateur à la formation
             foreach ($tab_creature as $var_creature){
                 $var_creatureformation = new CreatureFormation;
@@ -76,7 +84,7 @@ class RegistrationController extends AbstractController
                 $var_creatureformation->setLienFormation($var_formation);
                 $entityManager->persist($var_creatureformation);
             }
-
+*/
 
 
             $entityManager->persist($user);

@@ -62,18 +62,19 @@ class CreatureRepository extends ServiceEntityRepository
         }
     }
 
-
     public function makeCreature($modele)
     {
         $manager = $this->getEntityManager();
-
-
 
         // On crée une nouvelle creature
         $creature = new Creature();
 
         // On rempli son identité
-        $creature->setNom('new_' . $modele->getNomModele());
+        $alea = rand(0,9999);
+        $nom_modele = $modele->getNomModele();
+        $nom_modele = $nom_modele . " #". $alea;
+
+        $creature->setNom($nom_modele);
         $creature->setNiveau(1);
         $creature->setExp(0);
         $creature->setLienModele($modele);
@@ -105,7 +106,10 @@ class CreatureRepository extends ServiceEntityRepository
         $creature = new Creature();
 
         // On rempli son identité
-        $creature->setNom('new_' . $modele->getNomModele());
+        $alea = rand(0,999);
+        $nom_modele = $modele->getNomModele();
+        $nom_modele = $nom_modele . " #". $alea;
+        $creature->setNom($nom_modele);
         $creature->setNiveau(1);
         $creature->setExp(0);
         $creature->setLienModele($modele);
@@ -138,6 +142,20 @@ class CreatureRepository extends ServiceEntityRepository
             ->where('cf.lienCreature = c.id')
             ->andwhere('f.id = cf.lienFormation')
             ->andwhere("f.nom = ?1")
+            ->setParameter(1, $formation)
+            ->getQuery()
+            ->getArrayResult();
+    }
+
+    public function getFormationCreatures2($formation): ?array
+    {
+        return $this->createQueryBuilder('c')
+            ->select('c')
+            ->leftJoin(CreatureFormation::class, 'cf')
+            ->leftJoin(Formation::class, 'f')
+            ->where('cf.lienCreature = c.id')
+            ->andwhere('f.id = cf.lienFormation')
+            ->andwhere("f.id = ?1")
             ->setParameter(1, $formation)
             ->getQuery()
             ->getArrayResult();

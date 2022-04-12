@@ -45,6 +45,48 @@ class FormationRepository extends ServiceEntityRepository
         }
     }
 
+
+
+
+    public function findByFormation($id_user)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT formation.name, formation.id
+            FROM formation f, user u
+            WHERE u.id = :id_user
+            AND f.lien_user_id = u.id
+            ';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['id_user' => $id_user]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }    
+
+
+
+
+    public function findByUser($id_user)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+        SELECT f.id
+        FROM formation f, user u
+        WHERE u.id = :id_user
+        AND f.lien_user_id = u.id
+            ';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['id_user' => $id_user]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
     // /**
     //  * @return Formation[] Returns an array of Formation objects
     //  */
