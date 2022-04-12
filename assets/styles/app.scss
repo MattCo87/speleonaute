@@ -24,6 +24,10 @@ body {
     }
 
     #hub_wrapper {
+        display: grid;
+        grid-template-areas: 'zone_titre zone_titre zone_titre zone_titre liste'
+            'zone_jeu zone_jeu zone_jeu zone_jeu liste'
+            'menuHub menuHub menuHub menuHub menu_plus';
         background-color: rgb(30, 32, 32);
         color: white;
         background-image: url("../images/BGHUBSpeleo.png");
@@ -50,9 +54,19 @@ body {
     }
 }
 
-.menuHub {
-
+.zone_titre {
     display: flex;
+    grid-area: zone_titre;
+}
+
+.zone_jeu {
+    display: flex;
+    grid-area: zone_jeu;
+}
+
+.menuHub {
+    display: flex;
+    grid-area: menuHub;
 
     a {
         display: flex;
@@ -79,4 +93,12 @@ body {
 
 }
 
-.zone_titre {}
+.liste {
+    display: flex;
+    grid-area: liste;
+}
+
+.menu_plus {
+    display: flex;
+    grid-area: menu_plus;
+}
