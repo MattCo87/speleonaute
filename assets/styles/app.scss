@@ -3,8 +3,10 @@
     font-family: 'Work Sans', sans-serif;
 */
 @use "./vars.scss";
-@use "./mixins.scss";
 @use './reset.scss';
+
+@import "./mixins.scss";
+
 
 body {
     margin: 0;
@@ -24,20 +26,28 @@ body {
     }
 
     #hub_wrapper {
-        display: grid;
-        grid-template-columns: 5fr 1fr;
-        grid-template-rows: 1fr 10fr 1fr;
-        grid-template-areas: 'zone_titre liste''zone_jeu liste''menuHub menu_plus';
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-color: rgb(30, 32, 32);
         color: white;
         background-image: url("../images/BGHUBSpeleo.png");
+        background-origin: content-box;
         background-repeat: no-repeat;
-        background-position: center;
-        background-size: 100%;
-        height: 100vh;
-        width: 100vw;
+        background-size: cover;
         font-family: 'Work Sans', sans-serif;
+
+        .game_width {
+            height: 100vh;
+            width: 100vw;
+            display: grid;
+            grid-template-columns: 5fr 1fr;
+            grid-template-rows: 1fr 10fr 1fr;
+            grid-template-areas: 'zone_titre liste''zone_jeu liste''menuHub menu_plus';
+        }
     }
+
+
 
     h1,
     h2,
@@ -55,26 +65,27 @@ body {
 }
 
 .zone_titre {
-    display: flex;
     grid-area: zone_titre;
+    padding: 0.5rem 5%;
 }
 
 .zone_jeu {
-    display: flex;
     grid-area: zone_jeu;
+    padding: 0.5rem 5%;
 }
 
 .menuHub {
     display: flex;
     grid-area: menuHub;
+    padding: 0.5rem 5%;
 
     a {
         display: flex;
         align-items: center;
-        width: 4rem;
-        height: 4rem;
+        max-width: 4rem;
+        max-height: 4rem;
         background: rgba(255, 255, 255, 0.73);
-        padding: 1rem;
+        padding: 0.5rem;
         margin: 1rem;
         border-radius: 0.5rem;
         border-width: thick;
@@ -86,19 +97,16 @@ body {
 
 
         img {
-            max-width: 100%;
-            height: auto;
+            @include imgAdapt;
         }
     }
 
 }
 
 .liste {
-    display: flex;
     grid-area: liste;
 }
 
 .menu_plus {
-    display: flex;
     grid-area: menu_plus;
 }
