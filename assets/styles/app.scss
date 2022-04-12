@@ -59,13 +59,17 @@ body {
         align-items: center;
         width: 4rem;
         height: 4rem;
-        background: rgb(221, 221, 221);
+        background: rgba(255, 255, 255, 0.73);
         padding: 1rem;
         margin: 1rem;
-        border-style: dotted;
-        border-color: rgb(185, 185, 185);
         border-radius: 0.5rem;
         border-width: thick;
+        border-image-source: url(../images/border-image_fer-forge.svg);
+        border-image-slice: 82%;
+        border-image-outset: 0.5rem;
+        border-image-width: 12rem;
+        border-image-repeat: round;
+
 
         img {
             max-width: 100%;
