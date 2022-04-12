@@ -2,18 +2,16 @@
 
 {% block appWrapperdiv %}
   <main id="hub_wrapper">
-{% include "blocs_jeu/jeu_titre.twig" %}
+  {% include "blocs_jeu/jeu_titre.twig" %}
+  <div class="zone_jeu">
 {% endblock %}
 
-{% block contenu_jeu %}
-<div class="zone_jeu">Zone Jeu
 {% block body %}{% endblock %}
-</div>
-{% endblock %}
 
 {% block appWrapperclose %}
-{% include "blocs_jeu/jeu_menu_hub.twig" %}
-{% include "blocs_jeu/jeu_menu_listeur.twig" %}
-{% include "blocs_jeu/jeu_menu_plus.twig" %}
-</main>
+  </div>
+  {% include "blocs_jeu/jeu_menu_hub.twig" %}
+  {% include "blocs_jeu/jeu_menu_listeur.twig" %}
+  {% include "blocs_jeu/jeu_menu_plus.twig" %}
+  </main>
 {% endblock %}
