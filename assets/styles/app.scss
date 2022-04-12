@@ -25,9 +25,9 @@ body {
 
     #hub_wrapper {
         display: grid;
-        grid-template-areas: 'zone_titre zone_titre zone_titre zone_titre liste'
-            'zone_jeu zone_jeu zone_jeu zone_jeu liste'
-            'menuHub menuHub menuHub menuHub menu_plus';
+        grid-template-columns: 5fr 1fr;
+        grid-template-rows: 1fr 10fr 1fr;
+        grid-template-areas: 'zone_titre liste''zone_jeu liste''menuHub menu_plus';
         background-color: rgb(30, 32, 32);
         color: white;
         background-image: url("../images/BGHUBSpeleo.png");
