@@ -7,62 +7,103 @@
 
 @import "./mixins.scss";
 
+html {
+    font-size: 16px;
+}
 
 body {
     margin: 0;
     padding: 0;
+}
 
-    #accueil_wrapper {
-        display: grid;
-        background-color: rgb(30, 32, 32);
-        color: white;
-        background-image: url("../images/BGAccueil.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 100%;
-        height: 100vh;
-        width: 100vw;
-        font-family: 'Work Sans', sans-serif;
-    }
+#accueil_wrapper {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(30, 32, 32);
+    color: white;
+    background-image: url("../images/BGAccueil.png");
+    background-size: cover;
+    background-repeat: repeat-x;
+    background-position: center;
+    font-family: 'Work Sans', sans-serif;
 
-    #hub_wrapper {
+    .accueil_text_wrapper {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: rgb(30, 32, 32);
-        color: white;
-        background-image: url("../images/BGHUBSpeleo.png");
-        background-origin: content-box;
-        background-repeat: no-repeat;
-        background-size: cover;
-        font-family: 'Work Sans', sans-serif;
+        flex-direction: column;
+        max-width: 1000px;
+    }
 
-        .game_width {
-            height: 100vh;
-            width: 100vw;
-            display: grid;
-            grid-template-columns: 5fr 1fr;
-            grid-template-rows: 1fr 10fr 1fr;
-            grid-template-areas: 'zone_titre liste''zone_jeu liste''menuHub menu_plus';
+    header,
+    footer,
+    main {
+        padding: 1.5rem;
+
+        a {
+            text-decoration: none;
+            padding-right: 2rem;
+            font-size: 1.2rem;
         }
+
+        h1 {
+            font-size: 2rem;
+            padding: 3rem 0;
+            @include marginAuto;
+        }
+
     }
 
+    footer {
+        display: flex;
+        justify-content: center;
 
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-family: 'Space Mono', monospace;
     }
 
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
-    a {
-        color: white;
     }
 }
+
+#hub_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(30, 32, 32);
+    color: white;
+    background-image: url("../images/BGHUBSpeleo.png");
+    background-origin: content-box;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Work Sans', sans-serif;
+
+    .game_width {
+        height: 100vh;
+        width: 100vw;
+        display: grid;
+        grid-template-columns: 5fr 1fr;
+        grid-template-rows: 1fr 10fr 1fr;
+        grid-template-areas: 'zone_titre liste''zone_jeu liste''menuHub menu_plus';
+    }
+}
+
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Space Mono', monospace;
+}
+
+
+a {
+    color: white;
+}
+
 
 .zone_titre {
     grid-area: zone_titre;
