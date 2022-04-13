@@ -16,6 +16,42 @@ body {
     padding: 0;
 }
 
+.table_formation {
+    border: 2px solid black;
+    width: 100%;
+    font-size: 20px;
+
+    tr {
+        height: 70px;
+        border: 2px solid red;
+    }
+
+    td {
+        color: black;
+        border: 2px solid blue;
+    }
+
+    .tdtitre {
+        column-span: all;
+        color: red;
+        text-align: center;
+        font-size: 20px;
+
+    }
+
+    .tdnormal {
+
+        text-align: center;
+
+        a {
+            font-size: 20px;
+            color: yellowgreen;
+            text-decoration: none;
+        }
+    }
+
+}
+
 #accueil_wrapper {
     display: flex;
     justify-content: center;
