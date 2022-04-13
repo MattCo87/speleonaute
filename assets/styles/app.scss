@@ -129,6 +129,7 @@ body {
         height: 8rem;
         border-width: thick;
         border-image-source: url(../images/border-image_fer-forge.svg);
+        background-image: url(../images/BGBoutonAccueil.png);
         border-image-slice: 82%;
         border-image-outset: 0.5rem;
         border-image-width: 12rem;
@@ -136,12 +137,16 @@ body {
         font-size: 1.2rem;
         background-color: white;
         cursor: pointer;
+        background-position: 275px 300px;
+        transition: 10s;
     }
 
     .btn-lg:hover {
         background-color: rgb(29, 29, 29);
         color: rgb(248, 248, 248);
         transition: 1s;
+        background-position: 275px 2200px;
+        transition: 10s;
     }
 
     .register {

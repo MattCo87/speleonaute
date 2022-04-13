@@ -63,10 +63,17 @@ class PageVisiteurFixtures extends Fixture implements OrderedFixtureInterface
         $pages["PG_team"] = [
             "titre" => "Team", "contenu" =>
             <<<HTML
-        <p><strong>Yanis</strong> : l'idée originale vient d'un jeu auquel il a beaucoup joué, aujourd'hui disparu ! Le moteur de combat, c'est lui.</p>
-        <p><strong>Matthieu</strong> : Notre référent technique en Symfony, toujours prêt pour un petit <code>php bin/console</code> !</p>
-        <p><strong>Joël</strong> : Sa passion pour <em>Made in Abyss</em> lui a donné envie de créer un univers parallèle avec une Fosse et des monstres ;)</p>
-        HTML
+            <h1>La Team</h1>
+            <h2>Les créateurs</h2>
+            <p><strong>Yanis</strong> : l'idée originale vient d'un jeu auquel il a beaucoup joué, aujourd'hui disparu ! Le moteur de combat, c'est lui.</p>
+            <p><strong>Matthieu</strong> : Notre référent technique en Symfony, toujours prêt pour un petit <code>php bin/console</code> !</p>
+            <p><strong>Joël</strong> : Sa passion pour <em>Made in Abyss</em> lui a donné envie de créer un univers parallèle avec une Fosse et des monstres ;)</p>
+            <h2>Remerciements</h2>
+            <p><strong>Baptiste</strong> : C'est lui qui nous a rassemblés dans cette aventure et convaincus de travailler avec sqlite.</p>
+            <p><strong>Nicolas</strong> : Nous a remis sur les rails quand on partait par tous les chemins.</p>
+            <p><strong>Adeline</strong> : A été d'une aide patiente et précieuse.</p>
+            <p><strong>Maxime</strong> : Sans lui on ne serait pas autant à l'aise avec Symfony aujourd'hui.</p>
+            HTML
         ];
         $pages["PG_Accueil"] = [
             "titre" => "Accueil", "contenu" =>
