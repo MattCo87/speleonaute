@@ -238,6 +238,29 @@ form[name=registration_form] {
             margin-left: 2rem;
         }
 
+        .formations {
+            @include flexColumn;
+        }
+
+        .hotes {
+            @include flexRow
+        }
+
+        .hote {
+            margin: 0.5rem;
+            border-color: white;
+            border-style: solid;
+            display: block;
+            border-width: 0.01rem;
+            border-radius: 1rem;
+            padding: 0.6rem;
+            max-width: 14rem;
+
+            p {
+                margin-bottom: 0.2rem;
+            }
+        }
+
     }
 
     .contenu_liste {
