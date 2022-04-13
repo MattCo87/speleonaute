@@ -8,12 +8,13 @@
 @import "./mixins.scss";
 
 html {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 body {
     margin: 0;
     padding: 0;
+    line-height: 1.2rem;
 }
 
 .table_formation {
@@ -79,6 +80,7 @@ body {
         color: rgb(129, 128, 128);
         font-family: 'Grape Nuts', cursive;
         font-size: 1.8rem;
+        line-height: 1.8rem;
     }
 
     .log-in {
@@ -241,7 +243,9 @@ body {
     }
 }
 
-
+p {
+    margin-bottom: 2rem;
+}
 
 h1,
 h2,
@@ -250,8 +254,12 @@ h4,
 h5,
 h6 {
     font-family: 'Space Mono', monospace;
+    margin-bottom: 1rem;
 }
 
+h2 {
+    font-size: 1.2rem;
+}
 
 a {
     color: white;
@@ -295,6 +303,28 @@ a {
         }
     }
 
+}
+
+.separateur {
+    margin-top: 6rem;
+}
+
+.histoire {
+    p {
+        margin-top: 2rem;
+        font-family: serif;
+        font-style: italic;
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+        letter-spacing: 0.02rem;
+    }
+
+    .centered {
+        @include marginAuto;
+        margin-top: 6rem;
+        margin-bottom: 6rem;
+        width: fit-content;
+    }
 }
 
 .liste {
