@@ -42,7 +42,7 @@ class CreatureFormationType extends AbstractType
                 'choice_label' => 'nom',
             ))
 
-
+/*
             // On affiche la liste des Créatures
             ->add('lienCreature', EntityType::class, array(
                 'class' => Creature::class,
@@ -61,6 +61,18 @@ class CreatureFormationType extends AbstractType
                         ->andwhere('c.lienUser = :val')
                         ->setParameter('val', $this->security->getUser());
                     return $query;
+                },
+                'choice_label' => 'nom',
+            ))
+*/
+
+            // On affiche la liste des Créatures
+            ->add('lienCreature', EntityType::class, array(
+                'class' => Creature::class,
+                'query_builder' => function (CreatureRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->where('c.lienUser = :val')
+                        ->setParameter('val', $this->security->getUser());
                 },
                 'choice_label' => 'nom',
             ))

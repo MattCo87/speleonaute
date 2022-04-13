@@ -180,6 +180,42 @@ body {
         justify-content: center;
 
     }
+
+    .table_formation {
+        border: 2px solid black;
+        width: 100%;
+        font-size: 20px;
+
+        tr {
+            height: 70px;
+            border: 2px solid red;
+        }
+
+        td {
+            color: black;
+            border: 2px solid blue;
+        }
+
+        .tdtitre {
+            column-span: all;
+            color: red;
+            text-align: center;
+            font-size: 20px;
+
+        }
+
+        .tdnormal {
+
+            text-align: center;
+
+            a {
+                font-size: 20px;
+                color: yellowgreen;
+                text-decoration: none;
+            }
+        }
+
+    }
 }
 
 #hub_wrapper {
@@ -267,4 +303,5 @@ a {
 
 .menu_plus {
     grid-area: menu_plus;
+
 }

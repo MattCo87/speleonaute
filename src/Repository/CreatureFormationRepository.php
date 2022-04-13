@@ -45,6 +45,28 @@ class CreatureFormationRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function existCreatureFormation($tmp_formation,$tmp_creature)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT *
+            FROM creature_formation cf
+            WHERE cf.lien_creature_id = :id_creature
+            AND cf.lien_formation_id = :id_formation
+            ';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['id_creature' => $tmp_creature, 'id_formation' => $tmp_formation]);
+        if($resultSet->fetchAllAssociative()){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+
     // /**
     //  * @return CreatureFormation[] Returns an array of CreatureFormation objects
     //  */

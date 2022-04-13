@@ -7,9 +7,41 @@
 
 	<div>
 		<h1>FORMATION</h1>
+	</div>
+
+	<section>
+		{{ form(form) }}
+			<hr>
+		</section>
 
 		<section>
-			{{ form(form) }}
-			</section>
-		</div>
+			{% set i = 0 %}
+			<table class="table_formation">
+				{% for formation in tabformations %}
+					<tr>
+						<td class="tdtitre">
+							{{ formation.nom }}
+						</td>
+					</tr>
+					<tr>
+						{% for varcreature in formation.composition %}
+							<td class="tdnormal">
+								<a href="{{ path('app_formation_delete', {'formation': formation.id , 'creature' : varcreature.id}) }}">
+
+									{{ varcreature.nom }}
+									<br>
+									LOC:{{ varcreature.position }}
+									<br>
+									STRAT:{{ varcreature.strategie }}
+								</a>
+							</td>
+
+						{% endfor %}
+					</tr>
+
+					{% set i = i + 1 %}
+				{% endfor %}
+
+			</table>
+		</section>
 	{% endblock %}
