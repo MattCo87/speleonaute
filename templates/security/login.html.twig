@@ -13,7 +13,7 @@
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
         </div>
     {% endif %}
 
@@ -42,7 +42,7 @@
     </button>
 </form>
 <div class="register"><a href="{{ path('app_register') }}">Créer un compte</a><a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié</a></div>
-
-
+<div class="separateur"></div>
+{{contenu_page.contenu | raw}}
 
 {% endblock %}
