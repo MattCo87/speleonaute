@@ -46,7 +46,7 @@ class ActionFixtures extends Fixture implements OrderedFixtureInterface
         $actions["ACT_perforati"] = ["nom" => "perforation toxique ", "tier" => 2, "toucher" => 5, "degat" => 4];
         $actions["ACT_chargedes"] = ["nom" => "charge destructrice ", "tier" => 2, "toucher" => 6, "degat" => 12];
         $actions["ACT_pietineme"] = ["nom" => "piétinement incessant ", "tier" => 1, "toucher" => 4, "degat" => 4];
-        $actions["ACT_briseos"] = ["nom" => " ", "tier" => 3, "toucher" => 7, "degat" => 14];
+        $actions["ACT_briseos"] = ["nom" => "brise os ", "tier" => 3, "toucher" => 7, "degat" => 14];
         $actions["ACT_seismeter"] = ["nom" => "seisme terrible ", "tier" => 3, "toucher" => 10, "degat" => 8];
         $actions["ACT_amputatio"] = ["nom" => "amputation vorace ", "tier" => 2, "toucher" => 3, "degat" => 7];
         $actions["ACT_ensevelis"] = ["nom" => "ensevelissement ", "tier" => 1, "toucher" => 1, "degat" => 4];

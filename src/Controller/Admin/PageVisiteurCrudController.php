@@ -19,7 +19,7 @@ class PageVisiteurCrudController extends AbstractCrudController
     {
         return [
             TextField::new('titre'),
-            TextEditorField::new('contenue'),
+            TextEditorField::new('contenu'),
         ];
     }
     

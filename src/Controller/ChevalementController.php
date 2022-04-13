@@ -7,7 +7,7 @@ use App\Entity\Formation;
 use App\Form\ChevalementType;
 use App\Entity\Scenario;
 use App\Entity\User;
-use App\Service\MoteurCombatService;
+use App\Service\MoteurCombatService2;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +31,7 @@ class ChevalementController extends AbstractController
     /**
      * @Route("/chevalement", name="app_chevalement")
      */
-    public function index(Request $request, EntityManagerInterface $manager, MoteurCombatService $moteurCombatService): Response
+    public function index(Request $request, EntityManagerInterface $manager, MoteurCombatService2 $moteurCombatService): Response
     {
         // On crée un Combat
         $combat = new Combat();
