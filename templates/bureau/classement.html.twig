@@ -1,8 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'hub.twig' %}
 
 {% block title %}Classement{% endblock %}
 
 {% block body %}
+<div class="contenu_jeu">
+
     <table class="table">
         <thead>
             <tr>
@@ -23,4 +25,5 @@
         {% endfor %}
         </tbody>
     </table>
+    </div>
 {% endblock %}

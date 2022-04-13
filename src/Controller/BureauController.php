@@ -14,16 +14,6 @@ class BureauController extends AbstractController
     /**
      * @Route("/bureau", name="app_bureau")
      */
-    public function index(): Response
-    {
-        return $this->render('bureau/index.html.twig', [
-            'controller_name' => 'BureauController',
-        ]);
-    }
-
-    /**
-     * @Route("/bureau/log", name="app_bureau_log")
-     */
     public function indexLog(ManagerRegistry $doctrine): Response
     {
 
@@ -31,15 +21,15 @@ class BureauController extends AbstractController
         $idLog = array();
         $i = 0;
         $combats = $doctrine->getRepository(Combat::class)->findAll();
-        foreach( $combats as $combat ){
+        foreach ($combats as $combat) {
             $logTemp = $combat->getFichierLog();
             $buffer = [];
-            if(false !== $handle = @fopen($logTemp, 'r')) {
+            if (false !== $handle = @fopen($logTemp, 'r')) {
                 while (($word = fgets($handle)) !== false) {
                     $buffer[] = $word;
                 }
                 fclose($handle);
-            }else{
+            } else {
                 $buffer[] = "Pas de listes";
             }
             array_push($tableauLog, $buffer);
@@ -60,17 +50,17 @@ class BureauController extends AbstractController
     {
         $tableauJoueur = array();
         $joueurs = $doctrine->getRepository(User::class)->findAll();
-        foreach( $joueurs as $joueur ){
+        foreach ($joueurs as $joueur) {
             $joueurTemp['reputation'] = $joueur->getReputation();
             $joueurTemp['pseudo'] = $joueur->getPseudo();
             array_push($tableauJoueur, $joueurTemp);
         }
 
         $reputation = array();
-            foreach ($tableauJoueur as $key => $row){
-                $reputation[$key] = $row['reputation'];
-            }
-            array_multisort($reputation, SORT_DESC, $tableauJoueur);
+        foreach ($tableauJoueur as $key => $row) {
+            $reputation[$key] = $row['reputation'];
+        }
+        array_multisort($reputation, SORT_DESC, $tableauJoueur);
 
         return $this->render('bureau/classement.html.twig', [
             'Joueurs' => $tableauJoueur,

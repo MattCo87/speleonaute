@@ -1,2 +1,10 @@
 
-<div class="liste">Zone Listeur</div>
+<div class="liste">
+{% if form is defined and form.vars.id != 'chevalement' %}
+<div class="contenu_liste">
+
+		{{ form(form) }}
+
+</div>
+{% endif %}
+</div>
