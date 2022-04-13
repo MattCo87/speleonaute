@@ -37,14 +37,15 @@ class ChevalementType extends AbstractType
     {
         $builder
             // On affiche la liste des Formations
-           ->add('lienUser', EntityType::class, array(
+            ->add('lienUser', EntityType::class, array(
                 'class' => Formation::class,
                 'query_builder' => function (FormationRepository $er) {
                     return $er->createQueryBuilder('c')
-                        ->leftJoin(User::class,'u')
+                        ->leftJoin(User::class, 'u')
                         ->where('c.lienUser = :val')
                         ->setParameter('val', $this->security->getUser());
                 },
+                'label' => "Veuillez choisir votre formation",
                 'choice_label' => 'nom',
             ))
             ->add('lienScenario', EntityType::class, array(
@@ -52,11 +53,15 @@ class ChevalementType extends AbstractType
                 'query_builder' => function (ScenarioRepository $er) {
                     return $er->createQueryBuilder('c');
                 },
+                'label' => "À quelle mission souhaitez-vous vous attaquer ?",
                 'choice_label' => 'nom',
             ))
             // Bouton pour valider la création de la CreationFormation
-            ->add('submit', SubmitType::class, [
-                    'label' => 'OK',
+            ->add(
+                'submit',
+                SubmitType::class,
+                [
+                    'label' => 'Envoyer dans la Fosse',
                 ]
             );
     }
@@ -66,9 +71,9 @@ class ChevalementType extends AbstractType
         $resolver->setDefaults([
             'tab' => [
                 'data_class' => Combat::class,
-                'arg1' =>Formation::class,
+                'arg1' => Formation::class,
             ]
-            
+
         ]);
     }
 }
