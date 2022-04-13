@@ -3,80 +3,212 @@
     font-family: 'Work Sans', sans-serif;
 */
 @use "./vars.scss";
-@use "./mixins.scss";
 @use './reset.scss';
+
+@import "./mixins.scss";
+
+html {
+    font-size: 16px;
+}
 
 body {
     margin: 0;
     padding: 0;
+}
 
-    #accueil_wrapper {
+.table_formation {
+    border: 2px solid black;
+    width: 100%;
+    font-size: 20px;
+
+    tr {
+        height: 70px;
+        border: 2px solid red;
+    }
+
+    td {
+        color: black;
+        border: 2px solid blue;
+    }
+
+    .tdtitre {
+        column-span: all;
+        color: red;
+        text-align: center;
+        font-size: 20px;
+
+    }
+
+    .tdnormal {
+
+        text-align: center;
+
+        a {
+            font-size: 20px;
+            color: yellowgreen;
+            text-decoration: none;
+        }
+    }
+
+}
+
+#accueil_wrapper {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(30, 32, 32);
+    color: white;
+    background-image: url("../images/BGAccueil.png");
+    min-height: 100vh;
+    background-size: cover;
+    background-repeat: repeat-x;
+    background-position-y: top;
+    font-family: 'Work Sans', sans-serif;
+
+    .accueil_text_wrapper {
+        display: flex;
+        flex-direction: column;
+        max-width: 1000px;
+    }
+
+    .title {
+        font-size: 4rem;
+    }
+
+    blockquote {
+        padding: 4rem 2rem 6rem 2rem;
+        color: rgb(129, 128, 128);
+        font-family: 'Grape Nuts', cursive;
+        font-size: 1.8rem;
+    }
+
+    .log-in {
         display: grid;
-        background-color: rgb(30, 32, 32);
-        color: white;
-        //background-image: url("../images/BGAccueil.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 100%;
-        height: 100vh;
-        width: 100vw;
-        font-family: 'Work Sans', sans-serif;
+        grid-template-areas: "mail mi si"
+            "pw pwi si";
+        max-width: 800px;
+        @include marginAuto;
     }
 
-    #hub_wrapper {
-        background-color: rgb(30, 32, 32);
-        color: white;
-        //background-image: url("../images/BGHUBSpeleo.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 100%;
-        height: 100vh;
-        width: 100vw;
-        font-family: 'Work Sans', sans-serif;
+    label[for=inputEmail],
+    #inputEmail,
+    label[for=inputPassword],
+    #inputPassword {
+        margin: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        font-size: 1.4rem;
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-family: 'Space Mono', monospace;
+    #inputEmail,
+    #inputPassword {
+        max-width: 18rem;
     }
 
-
-    a {
-        color: white;
+    label[for=inputEmail] {
+        grid-area: mail;
     }
 
-    .table_formation{
+    #inputEmail {
+        grid-area: mi;
+    }
+
+    label[for=inputPassword] {
+        grid-area: pw;
+    }
+
+    #inputPassword {
+        grid-area: pwi;
+    }
+
+    .btn-lg {
+        grid-area: si;
+        margin: 0.5rem 2rem;
+        width: 8rem;
+        height: 8rem;
+        border-width: thick;
+        border-image-source: url(../images/border-image_fer-forge.svg);
+        border-image-slice: 82%;
+        border-image-outset: 0.5rem;
+        border-image-width: 12rem;
+        border-image-repeat: round;
+        font-size: 1.2rem;
+        background-color: white;
+        cursor: pointer;
+    }
+
+    .btn-lg:hover {
+        background-color: rgb(29, 29, 29);
+        color: rgb(248, 248, 248);
+        transition: 1s;
+    }
+
+    .register {
+        max-width: 800px;
+        @include marginAuto;
+        font-size: 2rem;
+        padding: 2rem;
+    }
+
+    header,
+    footer,
+    main {
+        padding: 1.5rem;
+
+        a {
+            text-decoration: none;
+            padding-right: 2rem;
+            font-size: 1.2rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            padding: 3rem 0;
+            @include marginAuto;
+        }
+
+    }
+
+    footer {
+        display: flex;
+        justify-content: center;
+
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+    }
+
+    .table_formation {
         border: 2px solid black;
         width: 100%;
         font-size: 20px;
 
-        tr{
+        tr {
             height: 70px;
             border: 2px solid red;
         }
 
-        td{
+        td {
             color: black;
             border: 2px solid blue;
         }
 
-        .tdtitre{
+        .tdtitre {
             column-span: all;
             color: red;
             text-align: center;
             font-size: 20px;
-            
+
         }
 
-        .tdnormal{
+        .tdnormal {
 
-            text-align: center;  
-            
-            a{
+            text-align: center;
+
+            a {
                 font-size: 20px;
                 color: yellowgreen;
                 text-decoration: none;
@@ -86,38 +218,90 @@ body {
     }
 }
 
-.menuHub {
-
+#hub_wrapper {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(30, 32, 32);
+    color: white;
+    background-image: url("../images/BGHUBSpeleo.png");
+    min-height: 100vh;
+    background-origin: content-box;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Work Sans', sans-serif;
+
+    .game_width {
+        height: 100vh;
+        width: 100vw;
+        display: grid;
+        grid-template-columns: 5fr 1fr;
+        grid-template-rows: 1fr 10fr 1fr;
+        grid-template-areas: 'zone_titre menu_plus''zone_jeu liste''menuHub liste';
+    }
+}
+
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Space Mono', monospace;
+}
+
+
+a {
+    color: white;
+}
+
+
+.zone_titre {
+    grid-area: zone_titre;
+    padding: 0.5rem 5%;
+}
+
+.zone_jeu {
+    grid-area: zone_jeu;
+    padding: 0.5rem 5%;
+}
+
+.menuHub {
+    display: flex;
+    grid-area: menuHub;
+    padding: 0.5rem 5%;
 
     a {
         display: flex;
         align-items: center;
-        width: 4rem;
-        height: 4rem;
-        background: rgb(221, 221, 221);
-        padding: 1rem;
+        max-width: 4rem;
+        max-height: 4rem;
+        background: rgba(255, 255, 255, 0.73);
+        padding: 0.5rem;
         margin: 1rem;
-        border-style: dotted;
-        border-color: rgb(185, 185, 185);
         border-radius: 0.5rem;
         border-width: thick;
+        border-image-source: url(../images/border-image_fer-forge.svg);
+        border-image-slice: 82%;
+        border-image-outset: 0.5rem;
+        border-image-width: 12rem;
+        border-image-repeat: round;
+
 
         img {
-            max-width: 100%;
-            height: auto;
+            @include imgAdapt;
         }
     }
 
-    .chevalement {}
+}
 
-    .entreport {}
+.liste {
+    grid-area: liste;
+}
 
-    .formation {
+.menu_plus {
+    grid-area: menu_plus;
 
-    }
-
-    .bureau {}
-
-    .hotelventes {}
 }

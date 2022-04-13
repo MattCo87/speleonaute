@@ -1,12 +1,12 @@
 {% extends 'accueil.twig' %}
 
 
-{% block title %}péleonautes Connectez-vous !{% endblock %}
+{% block title %}Spéleonautes - Connectez-vous !{% endblock %}
 
 {% block body %}
-<h1>Spéléonautes</h1>
+<h1 class="title">Spéléonautes</h1>
 <blockquote>"La Grande Fosse est sans fond. La Grande Fosse est gigantesque. La Grande Fosse est source de richesses incommensurables pour qui ose y risquer sa vie." </blockquote>
-<form method="post">
+<form class="log-in" method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -17,10 +17,9 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
+    <label for="inputEmail">Courriel</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
+    <label for="inputPassword">Mot de passe</label>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
     <input type="hidden" name="_csrf_token"
@@ -39,9 +38,11 @@
     #}
 
     <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+        Connexion
     </button>
 </form>
-<div><a href="{{ path('app_register') }}">Enregistrement</a><a href="{{ path('app_forgot_password_request') }}">MDP perdu</a></div>
+<div class="register"><a href="{{ path('app_register') }}">Créer un compte</a><a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié</a></div>
+
+
 
 {% endblock %}

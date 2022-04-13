@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block appWrapperdiv %}
-  <main id="accueil_wrapper">
+<div id="accueil_wrapper">
+<div class="accueil_text_wrapper">
   {% include 'base/menuAccueil.twig' %}
+  <main>
 {% endblock %}
 
 {% block body %}{% endblock %}
 
 {% block appWrapperclose %}
-  {% include 'base/footer.html.twig' %}
   </main>
+  {% include 'base/footer.html.twig' %}
+  </div>
+  </div>
 {% endblock %}
