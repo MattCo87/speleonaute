@@ -278,7 +278,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
         $tourAction = 0;
         $alliéVivant = 0;
         $ennemiVivant = 0;
-        while (($tour < 50) && ($alliéVivant < 5) && ($ennemiVivant < 5)) {
+        while (($tour < 50) && (!empty($tableauHote)) && (!empty($tableauMonstre))){
             $tour++;
             $tourAction++;
             $fsObject->appendToFile($new_file_path, "\n\n\n");
@@ -325,14 +325,24 @@ class MoteurCombatService2 extends ServiceEntityRepository
                         }
                     }
 
+
+                    $tableauMonstre1Copie = $tableauMonstre1;
+                    $tableauMonstre2Copie = $tableauMonstre2;
+                    $tableauMonstre3Copie = $tableauMonstre3;
+                    $tableauHote1Copie = $tableauHote1;
+                    $tableauHote2Copie = $tableauHote2;
+                    $tableauHote3Copie = $tableauHote3;
+                    $nbCible = $tableauAction[$indexAction]['nombreCible'];
                     //cherche target de l'action
                     if ($creature['cote'] == 0) {
-                        do {
-                            $taille = count($tableauMonstre) - 1;
+                        //target devant
+                        if($tableauAction[$indexAction]['localisation'] == 1 && !$tableauMonstre1Copie){
+                            $taille = count($tableauMonstre1Copie) - 1;
                             $a = rand(0, $taille);
-                            $idCible = $tableauMonstre[$a];
+                            $idCible = $tableauMonstre1Copie[$a];
                             $cible = 0;
                             $tableauCreatureCopie = $tableauCreature;
+                            array_splice($tableauMonstre1Copie, $a-1, 1);
                             foreach ($tableauCreatureCopie as $creatureCopie) {
                                 if ($creatureCopie['id'] == $idCible) {
                                     break;
@@ -340,34 +350,293 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                     $cible++;
                                 }
                             }
-                            if ($tableauCreature[$cible]['pvActuel'] > 0) {
-                                $isOk = 1;
-                            } else {
-                                $isOk = 0;
-                            }
-                        } while ($isOk == 0);
-                    }
-                    //cherche target de l'caction pour l'autre equipe
-                    if ($creature['cote'] == 1){
-                        do {
-                            $taille = count($tableauHote) - 1;
+                        }
+                        else if($tableauAction[$indexAction]['localisation'] == 1 && empty($tableauMonstre1Copie) && !$tableauMonstre2Copie){
+                            $taille = count($tableauMonstre2Copie) - 1;
                             $a = rand(0, $taille);
-                            $idCible = $tableauHote[$a];
+                            $idCible = $tableauMonstre2Copie[$a];
                             $cible = 0;
                             $tableauCreatureCopie = $tableauCreature;
-                            foreach ($tableauCreatureCopie as $creatureCopie){
+                            array_splice($tableauMonstre2Copie, $a-1, 1);
+                            foreach ($tableauCreatureCopie as $creatureCopie) {
                                 if ($creatureCopie['id'] == $idCible) {
                                     break;
                                 } else {
                                     $cible++;
                                 }
                             }
-                            if ($tableauCreature[$cible]['pvActuel'] > 0) {
-                                $isOk = 1;
-                            } else {
-                                $isOk = 0;
+                        }
+                        else if($tableauAction[$indexAction]['localisation'] == 1 && empty($tableauMonstre1Copie) && empty($tableauMonstre2Copie) && !$tableauMonstre3Copie){
+                            $taille = count($tableauMonstre3Copie) - 1;
+                            $a = rand(0, $taille);
+                            $idCible = $tableauMonstre3Copie[$a];
+                            $cible = 0;
+                            $tableauCreatureCopie = $tableauCreature;
+                            array_splice($tableauMonstre3Copie, $a-1, 1);
+                            foreach ($tableauCreatureCopie as $creatureCopie) {
+                                if ($creatureCopie['id'] == $idCible) {
+                                    break;
+                                } else {
+                                    $cible++;
+                                }
                             }
-                        } while ($isOk == 0);
+                        }
+                        else if($tableauAction[$indexAction]['localisation'] == 1 && empty($tableauMonstre1Copie) && empty($tableauMonstre2Copie) && empty($tableauMonstre3Copie)){
+                            $nbCible = 0;
+                        }
+
+                        //target millieu
+                        else if($tableauAction[$indexAction]['localisation'] == 2 && !$tableauMonstre2Copie){
+                            $taille = count($tableauMonstre2Copie) - 1;
+                            $a = rand(0, $taille);
+                            $idCible = $tableauMonstre2Copie[$a];
+                            $cible = 0;
+                            $tableauCreatureCopie = $tableauCreature;
+                            array_splice($tableauMonstre2Copie, $a-1, 1);
+                            foreach ($tableauCreatureCopie as $creatureCopie) {
+                                if ($creatureCopie['id'] == $idCible) {
+                                    break;
+                                } else {
+                                    $cible++;
+                                }
+                            }
+                        }
+                        else if($tableauAction[$indexAction]['localisation'] == 2 && empty($tableauMonstre2Copie) && !$tableauMonstre3Copie){
+                            $taille = count($tableauMonstre3Copie) - 1;
+                            $a = rand(0, $taille);
+                            $idCible = $tableauMonstre3Copie[$a];
+                            $cible = 0;
+                            $tableauCreatureCopie = $tableauCreature;
+                            array_splice($tableauMonstre3Copie, $a-1, 1);
+                            foreach ($tableauCreatureCopie as $creatureCopie) {
+                                if ($creatureCopie['id'] == $idCible) {
+                                    break;
+                                } else {
+                                    $cible++;
+                                }
+                            }
+                        }
+                        else if($tableauAction[$indexAction]['localisation'] == 2 && empty($tableauMonstre2Copie) && empty($tableauMonstre3Copie) && !$tableauMonstre1Copie){
+                            $taille = count($tableauMonstre1Copie) - 1;
+                            $a = rand(0, $taille);
+                            $idCible = $tableauMonstre1Copie[$a];
+                            $cible = 0;
+                            $tableauCreatureCopie = $tableauCreature;
+                            array_splice($tableauMonstre1Copie, $a-1, 1);
+                            foreach ($tableauCreatureCopie as $creatureCopie) {
+                                if ($creatureCopie['id'] == $idCible) {
+                                    break;
+                                } else {
+                                    $cible++;
+                                }
+                            }
+                        }
+                        else if($tableauAction[$indexAction]['localisation'] == 2 && empty($tableauMonstre2Copie) && empty($tableauMonstre3Copie) && empty($tableauMonstre1Copie)){
+                            $nbCible = 0;
+                        }
+
+                        //target derriere
+                        else if($tableauAction[$indexAction]['localisation'] == 3 && !$tableauMonstre3Copie){
+                            $taille = count($tableauMonstre3Copie) - 1;
+                            $a = rand(0, $taille);
+                            $idCible = $tableauMonstre3Copie[$a];
+                            $cible = 0;
+                            $tableauCreatureCopie = $tableauCreature;
+                            array_splice($tableauMonstre3Copie, $a-1, 1);
+                            foreach ($tableauCreatureCopie as $creatureCopie) {
+                                if ($creatureCopie['id'] == $idCible) {
+                                    break;
+                                } else {
+                                    $cible++;
+                                }
+                            }
+                        }
+                        else if($tableauAction[$indexAction]['localisation'] == 3 && empty($tableauMonstre3Copie) && !$tableauMonstre1Copie){
+                            $taille = count($tableauMonstre1Copie) - 1;
+                            $a = rand(0, $taille);
+                            $idCible = $tableauMonstre1Copie[$a];
+                            $cible = 0;
+                            $tableauCreatureCopie = $tableauCreature;
+                            array_splice($tableauMonstre1Copie, $a-1, 1);
+                            foreach ($tableauCreatureCopie as $creatureCopie) {
+                                if ($creatureCopie['id'] == $idCible) {
+                                    break;
+                                } else {
+                                    $cible++;
+                                }
+                            }
+                        }
+                        else if($tableauAction[$indexAction]['localisation'] == 3 && empty($tableauMonstre3Copie) && empty($tableauMonstre1Copie) && !$tableauMonstre2Copie){
+                            $taille = count($tableauMonstre2Copie) - 1;
+                            $a = rand(0, $taille);
+                            $idCible = $tableauMonstre2Copie[$a];
+                            $cible = 0;
+                            $tableauCreatureCopie = $tableauCreature;
+                            array_splice($tableauMonstre2Copie, $a-1, 1);
+                            foreach ($tableauCreatureCopie as $creatureCopie) {
+                                if ($creatureCopie['id'] == $idCible) {
+                                    break;
+                                } else {
+                                    $cible++;
+                                }
+                            }
+                        }
+                        else if($tableauAction[$indexAction]['localisation'] == 3 && empty($tableauMonstre3Copie) && empty($tableauMonstre1Copie) && empty($tableauMonstre2Copie)){
+                            $nbCible = 0;
+                        }
+                    }
+                    
+                    //cherche target de l'caction pour l'autre equipe
+                    if ($creature['cote'] == 1){
+                        //target devant
+                        if($tableauAction[$indexAction]['localisation'] == 1 && !$tableauHote1Copie){
+                            $taille = count($tableauHote1Copie) - 1;
+                            $a = rand(0, $taille);
+                            $idCible = $tableauHote1Copie[$a];
+                            $cible = 0;
+                            $tableauCreatureCopie = $tableauCreature;
+                            array_splice($tableauHote1Copie, $a-1, 1);
+                            foreach ($tableauCreatureCopie as $creatureCopie) {
+                                if ($creatureCopie['id'] == $idCible) {
+                                    break;
+                                } else {
+                                    $cible++;
+                                }
+                            }
+                        }
+                        else if($tableauAction[$indexAction]['localisation'] == 1 && empty($tableauHote1Copie) && !$tableauHote2Copie){
+                            $taille = count($tableauHote2Copie) - 1;
+                            $a = rand(0, $taille);
+                            $idCible = $tableauHote2Copie[$a];
+                            $cible = 0;
+                            $tableauCreatureCopie = $tableauCreature;
+                            array_splice($tableauHote2Copie, $a-1, 1);
+                            foreach ($tableauCreatureCopie as $creatureCopie) {
+                                if ($creatureCopie['id'] == $idCible) {
+                                    break;
+                                } else {
+                                    $cible++;
+                                }
+                            }
+                        }
+                        else if($tableauAction[$indexAction]['localisation'] == 1 && empty($tableauHote1Copie) && empty($tableauHote2Copie) && !$tableauHote3Copie){
+                            $taille = count($tableauHote3Copie) - 1;
+                            $a = rand(0, $taille);
+                            $idCible = $tableauHote3Copie[$a];
+                            $cible = 0;
+                            $tableauCreatureCopie = $tableauCreature;
+                            array_splice($tableauHote3Copie, $a-1, 1);
+                            foreach ($tableauCreatureCopie as $creatureCopie) {
+                                if ($creatureCopie['id'] == $idCible) {
+                                    break;
+                                } else {
+                                    $cible++;
+                                }
+                            }
+                        }
+                        else if($tableauAction[$indexAction]['localisation'] == 1 && empty($tableauHote1Copie) && empty($tableauHote2Copie) && empty($tableauHote3Copie)){
+                            $nbCible = 0;
+                        }
+
+                        //target millieu
+                        else if($tableauAction[$indexAction]['localisation'] == 2 && !$tableauHote2Copie){
+                            $taille = count($tableauHote2Copie) - 1;
+                            $a = rand(0, $taille);
+                            $idCible = $tableauHote2Copie[$a];
+                            $cible = 0;
+                            $tableauCreatureCopie = $tableauCreature;
+                            array_splice($tableauHote2Copie, $a-1, 1);
+                            foreach ($tableauCreatureCopie as $creatureCopie) {
+                                if ($creatureCopie['id'] == $idCible) {
+                                    break;
+                                } else {
+                                    $cible++;
+                                }
+                            }
+                        }
+                        else if($tableauAction[$indexAction]['localisation'] == 2 && empty($tableauHote2Copie) && !$tableauHote3Copie){
+                            $taille = count($tableauHote3Copie) - 1;
+                            $a = rand(0, $taille);
+                            $idCible = $tableauHote3Copie[$a];
+                            $cible = 0;
+                            $tableauCreatureCopie = $tableauCreature;
+                            array_splice($tableauHote3Copie, $a-1, 1);
+                            foreach ($tableauCreatureCopie as $creatureCopie) {
+                                if ($creatureCopie['id'] == $idCible) {
+                                    break;
+                                } else {
+                                    $cible++;
+                                }
+                            }
+                        }
+                        else if($tableauAction[$indexAction]['localisation'] == 2 && empty($tableauHote2Copie) && empty($tableauHote3Copie) && !$tableauHote1Copie){
+                            $taille = count($tableauHote1Copie) - 1;
+                            $a = rand(0, $taille);
+                            $idCible = $tableauHote1Copie[$a];
+                            $cible = 0;
+                            $tableauCreatureCopie = $tableauCreature;
+                            array_splice($tableauHote1Copie, $a-1, 1);
+                            foreach ($tableauCreatureCopie as $creatureCopie) {
+                                if ($creatureCopie['id'] == $idCible) {
+                                    break;
+                                } else {
+                                    $cible++;
+                                }
+                            }
+                        }
+                        else if($tableauAction[$indexAction]['localisation'] == 2 && empty($tableauHote2Copie) && empty($tableauHote3Copie) && empty($tableauHote1Copie)){
+                            $nbCible = 0;
+                        }
+
+                        //target derriere
+                        else if($tableauAction[$indexAction]['localisation'] == 3 && !$tableauHote3Copie){
+                            $taille = count($tableauHote3Copie) - 1;
+                            $a = rand(0, $taille);
+                            $idCible = $tableauHote3Copie[$a];
+                            $cible = 0;
+                            $tableauCreatureCopie = $tableauCreature;
+                            array_splice($tableauHote3Copie, $a-1, 1);
+                            foreach ($tableauCreatureCopie as $creatureCopie) {
+                                if ($creatureCopie['id'] == $idCible) {
+                                    break;
+                                } else {
+                                    $cible++;
+                                }
+                            }
+                        }
+                        else if($tableauAction[$indexAction]['localisation'] == 3 && empty($tableauHote3Copie) && !$tableauHote1Copie){
+                            $taille = count($tableauHote1Copie) - 1;
+                            $a = rand(0, $taille);
+                            $idCible = $tableauHote1Copie[$a];
+                            $cible = 0;
+                            $tableauCreatureCopie = $tableauCreature;
+                            array_splice($tableauHote1Copie, $a-1, 1);
+                            foreach ($tableauCreatureCopie as $creatureCopie) {
+                                if ($creatureCopie['id'] == $idCible) {
+                                    break;
+                                } else {
+                                    $cible++;
+                                }
+                            }
+                        }
+                        else if($tableauAction[$indexAction]['localisation'] == 3 && empty($tableauHote3Copie) && empty($tableauHote1Copie) && !$tableauHote2Copie){
+                            $taille = count($tableauHote2Copie) - 1;
+                            $a = rand(0, $taille);
+                            $idCible = $tableauHote2Copie[$a];
+                            $cible = 0;
+                            $tableauCreatureCopie = $tableauCreature;
+                            array_splice($tableauHote2Copie, $a-1, 1);
+                            foreach ($tableauCreatureCopie as $creatureCopie) {
+                                if ($creatureCopie['id'] == $idCible) {
+                                    break;
+                                } else {
+                                    $cible++;
+                                }
+                            }
+                        }
+                        else if($tableauAction[$indexAction]['localisation'] == 3 && empty($tableauHote3Copie) && empty($tableauHote1Copie) && empty($tableauHote2Copie)){
+                            $nbCible = 0;
+                        }
                     }
 
 
@@ -460,8 +729,65 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                 $fsObject->appendToFile($new_file_path, "\n");
                                 if ($tableauCreature[$cible]['cote'] == 0) {
                                     $alliéVivant++;
+                                    //vide le tableauhote correspond pour pas cibler quelqu'un de mort
+                                    switch($tableauCreature[$cible]['localisation']){
+                                        case 1:
+                                            for($i = 0; $i < count($tableauHote1); $i++){
+                                                if($tableauCreature[$cible]['id'] == $tableauHote1[$i]){
+                                                    array_splice($tableauHote1, $i-1, 1);
+                                                }
+                                            }
+                                        break;
+                                        case 2:
+                                            for($i = 0; $i < count($tableauHote2); $i++){
+                                                if($tableauCreature[$cible]['id'] == $tableauHote2[$i]){
+                                                    array_splice($tableauHote2, $i-1, 1);
+                                                }
+                                            }
+                                        break;
+                                        case 3:
+                                            for($i = 0; $i < count($tableauHote3); $i++){
+                                                if($tableauCreature[$cible]['id'] == $tableauHote3[$i]){
+                                                    array_splice($tableauHote3, $i-1, 1);
+                                                }
+                                            }
+                                        break;
+                                    }
+                                    for($i = 0; $i < count($tableauHote); $i++){
+                                        if($tableauCreature[$cible]['id'] == $tableauHote[$i]){
+                                            array_splice($tableauHote, $i-1, 1);
+                                        }
+                                    }    
                                 } else {
                                     $ennemiVivant++;
+                                    switch($tableauCreature[$cible]['localisation']){
+                                        case 1:
+                                            for($i = 0; $i < count($tableauMonstre1); $i++){
+                                                if($tableauCreature[$cible]['id'] == $tableauMonstre1[$i]){
+                                                    array_splice($tableauMonstre1, $i-1, 1);
+                                                }
+                                            }
+                                        break;
+                                        case 2:
+                                            for($i = 0; $i < count($tableauMonstre2); $i++){
+                                                if($tableauCreature[$cible]['id'] == $tableauMonstre2[$i]){
+                                                    array_splice($tableauMonstre2, $i-1, 1);
+                                                }
+                                            }
+                                        break;
+                                        case 3:
+                                            for($i = 0; $i < count($tableauMonstre3); $i++){
+                                                if($tableauCreature[$cible]['id'] == $tableauMonstre3[$i]){
+                                                    array_splice($tableauMonstre3, $i-1, 1);
+                                                }
+                                            }
+                                        break;
+                                    }
+                                    for($i = 0; $i < count($tableauMonstre); $i++){
+                                        if($tableauCreature[$cible]['id'] == $tableauMonstre[$i]){
+                                            array_splice($tableauMonstre, $i-1, 1);
+                                        }
+                                    }
                                 }
                             } else {
                                 $fsObject->appendToFile($new_file_path, "" . $tableauCreature[$cible]['nom'] . " survit avec " . $tableauCreature[$cible]['pvActuel'] . " pv" . "\n");
@@ -474,7 +800,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
             }
         }
         ///Fin du combat
-        if ($alliéVivant == 5) {
+        if (empty($tableauHote)) {
             $fsObject->appendToFile($new_file_path, "\n");
             $fsObject->appendToFile($new_file_path, "\n");
             $fsObject->appendToFile($new_file_path, "###################################################\n");
