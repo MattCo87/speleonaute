@@ -7,4 +7,19 @@
 
 </div>
 {% endif %}
+
+
+	<!-- Pour la page de l'entrepot -->
+	<div class="liste">
+		{% if tabcreatures is defined %}
+			<ul>
+				<div class="contenu_liste">
+					{% for creature in tabcreatures  %}
+						<li>
+							<a href="{{ path('app_entrepot', {'idcreature' : creature.id}) }}"> {{ creature.nom }}</a>
+						</li>
+					{% endfor %}
+				</div>
+			</ul>
+		{% endif %}
 </div>
