@@ -1,11 +1,50 @@
 {% extends 'hub.twig' %}
 
-{% block title %}Hello EntrepotController!{% endblock %}
+{% block title %}Hello EntrepotController!
+{% endblock %}
 
 {% block body %}
-<div class="contenu_jeu">
-<h1>Votre entrepôt</h1>
-<h2>Liste et caractéristiques des hôtes disponibles</h2>
-</div>
+	<div class="contenu_jeu">
+		<h1>Votre entrepôt</h1>
+		<h2>Liste et caractéristiques des hôtes disponibles</h2>
 
+		<!-- Si il y'a eu un clic sur un personnage -->
+		{% if idcreature is defined and infocreature != '' %}
+			<!-- On affiche son identité -->
+			<div class="hotes">
+				<div class="hote">
+					<h3>{{ infocreature.nom }}</h3>
+					<p>Niveau :{{ infocreature.niveau }}</p>
+					<p>Experience :{{ infocreature.exp }}</p>
+					<p>Rareté :{{ infocreature.rarete }}</p>
+				</div>
+				<!-- On affiche ses statistiques -->
+				<div class="hote">
+					<h3>Statistiques :</h3>
+					<p>Toucher :{{ infocreature.toucher }}</p>
+					<p>Dégâts :{{ infocreature.degat }}</p>
+					<p>Résistance :{{ infocreature.resistance }}</p>
+					<p>Vitesse :{{ infocreature.vitesse }}</p>
+					<p>Endurance :{{ infocreature.endurance }}</p>
+				</div>
+				<!-- On affiche les stratégies -->
+				<div class="hote">
+					<h3>Stratégie :<br>
+						{{ infocreature.strategie1 }}</h3>
+					<!-- Et pour chaque stratégie on affiche les actions qui la compose -->
+					{% for action in infocreature.Actionstrategie1 %}
+						<div class="hote">
+							<p>{{ action.nom }}</p>
+							<p>Toucher :
+								{{ action.toucher }}</p>
+							<p>Tier :
+								{{ action.tier }}</p>
+							<p>Dégâts :
+								{{ action.degat }}</p>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		{% endif %}
+	</div>
 {% endblock %}

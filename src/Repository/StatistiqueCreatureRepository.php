@@ -45,6 +45,8 @@ class StatistiqueCreatureRepository extends ServiceEntityRepository
         }
     }
 
+    
+
     // /**
     //  * @return StatistiqueCreature[] Returns an array of StatistiqueCreature objects
     //  */

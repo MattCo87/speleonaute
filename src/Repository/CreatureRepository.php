@@ -147,7 +147,7 @@ class CreatureRepository extends ServiceEntityRepository
             ->getArrayResult();
     }
 
-    public function getFormationCreatures2($formation): ?array
+    public function getFormationCreatures2($var_user_id): ?array
     {
         return $this->createQueryBuilder('c')
             ->select('c')
@@ -156,7 +156,7 @@ class CreatureRepository extends ServiceEntityRepository
             ->where('cf.lienCreature = c.id')
             ->andwhere('f.id = cf.lienFormation')
             ->andwhere("f.id = ?1")
-            ->setParameter(1, $formation)
+            ->setParameter(1, $var_user_id)
             ->getQuery()
             ->getArrayResult();
     }
@@ -189,6 +189,23 @@ class CreatureRepository extends ServiceEntityRepository
             ->setParameter('creatureId', $creatureId)
             ->getQuery()
             ->getArrayResult();
+    }
+
+    public function findByUser($id_user)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+        SELECT *
+        FROM creature c
+        WHERE c.lien_user_id = :id_user
+            ';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['id_user' => $id_user]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
     }
 
     // /**

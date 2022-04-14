@@ -4,28 +4,29 @@
 {% endblock %}
 
 {% block body %}
-<div class="contenu_jeu">
-    <h1>Vérifiez vos formations</h1>
-    <p>Dans le menu de droite vous pouvez ajouter des hôtes à votre formation et en préciser l'emplacement et la stratégie. Ci-dessous vous pouvez enlever des hôtes de votre formation.</p>
+	<div class="contenu_jeu">
+		<h1>Vérifiez vos formations</h1>
+		<p>Dans le menu de droite vous pouvez ajouter des hôtes à votre formation et en préciser l'emplacement et la stratégie. Ci-dessous vous pouvez enlever des hôtes de votre formation.</p>
 
-	{% set i = 0 %}
-    <div class="formations">
-    {% for formation in tabformations %}
-        <div class="formation">
-        <h2>Formation : {{ formation.nom }}</h2>
-        <div class="hotes">
-        {% for varcreature in formation.composition %}
-            <div class="hote">
-                <h3>{{ varcreature.nom }}</h3>
-                <p>Location :{{ varcreature.position }}</p>
-                <p>Stratégie :{{ varcreature.strategie }}</p>
-                <a href="{{ path('app_formation_delete', {'formation': formation.id , 'creature' : varcreature.id}) }}">Enlever de la formation</a>
-            </div>
-        {% endfor %}
-        </div>
-        </div>
-        {% set i = i + 1 %}
-    {% endfor %}
+		{% set i = 0 %}
+		<div class="formations">
+			{% for formation in tabformations %}
+				<div class="formation">
+					<h2>Formation :
+						{{ formation.nom }}</h2>
+					<div class="hotes">
+						{% for varcreature in formation.composition %}
+							<div class="hote">
+								<h3>{{ varcreature.nom }}</h3>
+								<p>Location :{{ varcreature.position }}</p>
+								<p>Stratégie :{{ varcreature.strategie }}</p>
+								<a href="{{ path('app_formation_delete', {'formation': formation.id , 'creature' : varcreature.id}) }}">Enlever de la formation</a>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+				{% set i = i + 1 %}
+			{% endfor %}
+		</div>
 	</div>
-</div>
-	{% endblock %}
+{% endblock %}
