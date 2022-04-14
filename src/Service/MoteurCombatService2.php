@@ -322,15 +322,16 @@ class MoteurCombatService2 extends ServiceEntityRepository
             }
             array_multisort($initiative, SORT_DESC, $tableauCreature);
             ////////Action des differente creature
-            foreach ($tableauCreature as $creature) {
-                if ($creature['pvActuel'] > 0 && $tableauHote && $tableauMonstre ) {
-                    var_dump($creature);
+            for($z=0;$z < count($tableauCreature); $z++ ){
+          /*  foreach ($tableauCreature as $creature) {*/
+                if ($tableauCreature[$z]['pvActuel'] > 0 && $tableauHote && $tableauMonstre ) {
+                    var_dump($tableauCreature);
                     if ($tourAction == 6) {
                         $tourAction = 1;
                     }
                     $indexAction = 0;
                     foreach ($tableauAction as $action) {
-                        if (($action['idCreature'] == $creature['id']) && ($action['positionAction'] == $tourAction)) {
+                        if (($action['idCreature'] == $tableauCreature[$z]['id']) && ($action['positionAction'] == $tourAction)) {
                             break;
                         } else {
                             $indexAction++;
@@ -350,7 +351,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
                        // $cible = 0;
                         //cherche target de l'action
 
-                        if ($creature['cote'] == 0) {
+                        if ($tableauCreature[$z]['cote'] == 0) {
                             //target devant
                             if($tableauAction[$indexAction]['localisation'] == 1 && $tableauMonstre1Copie){
                                 $taille = count($tableauMonstre1Copie) - 1;
@@ -388,7 +389,9 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                 $idCible = $tableauMonstre3Copie[$a];
                                 $cible = 0;
                                 $tableauCreatureCopie = $tableauCreature;
+                                //var_dump($tableauMonstre3Copie);
                                 array_splice($tableauMonstre3Copie, $a, 1);
+                                //var_dump($tableauMonstre3Copie);
                                 foreach ($tableauCreatureCopie as $creatureCopie) {
                                     if ($creatureCopie['id'] == $idCible) {
                                         break;
@@ -503,7 +506,8 @@ class MoteurCombatService2 extends ServiceEntityRepository
                         }
                         //var_dump($tableauHote1Copie,$tableauHote2Copie,$tableauHote3Copie,$tableauMonstre1Copie,$tableauMonstre2Copie,$tableauMonstre3Copie,$tableauHote,$tableauMonstre);
                         //cherche target de l'caction pour l'autre equipe
-                        if ($creature['cote'] == 1){
+                        
+                        if ($tableauCreature[$z]['cote'] == 1){
                             //target devant
                             if($tableauAction[$indexAction]['localisation'] == 1 && $tableauHote1Copie){
                                 $taille = count($tableauHote1Copie) - 1;
@@ -654,109 +658,109 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                 $nbCible = 0;
                             }
                         }
-                        //realise l'action
-                        $d20 = rand(1, 20);
-                        $toucher = $creature['toucher'] + $tableauAction[$indexAction]['toucher'] + $d20;
-                        $fsObject->appendToFile($new_file_path, "####" . $creature['nom'] . " realise l'action " . $tableauAction[$indexAction]['nom'] . "(Tier " . $tableauAction[$indexAction]['tier'] . ") contre " . $tableauCreature[$cible]['nom'] . "\n");
-                        $fsObject->appendToFile($new_file_path, "attaque de " . $creature['nom'] . " est egale à son toucher " . $creature['toucher'] . " plus un jet de toucher (" . $d20 . ") auquel on ajoute aussi le bonus de toucher le l'action " . $tableauAction[$indexAction]['toucher'] . " = " . $toucher . "\n");
-                        $fsObject->appendToFile($new_file_path, "\n");
-                        $defense = $tableauCreature[$cible]['toucher'] + $d20;
-                        $fsObject->appendToFile($new_file_path, "defense de " . $tableauCreature[$cible]['nom'] . " est egale à son toucher " . $tableauCreature[$cible]['toucher'] . " plus un jet de toucher (" . $d20 . ") = " . $defense . "\n");
-                        if ($toucher < $defense) {
-                            $fsObject->appendToFile($new_file_path, "Defense reussite" . "\n");
+
+                        if($nbCible > 0){
+                            //realise l'action
+                            $d20 = rand(1, 20);
+                            $toucher = $tableauCreature[$z]['toucher'] + $tableauAction[$indexAction]['toucher'] + $d20;
+                            $fsObject->appendToFile($new_file_path, "####" . $tableauCreature[$z]['nom'] . " realise l'action " . $tableauAction[$indexAction]['nom'] . "(Tier " . $tableauAction[$indexAction]['tier'] . ") contre " . $tableauCreature[$cible]['nom'] . "\n");
+                            $fsObject->appendToFile($new_file_path, "attaque de " . $tableauCreature[$z]['nom'] . " est egale à son toucher " . $tableauCreature[$z]['toucher'] . " plus un jet de toucher (" . $d20 . ") auquel on ajoute aussi le bonus de toucher le l'action " . $tableauAction[$indexAction]['toucher'] . " = " . $toucher . "\n");
                             $fsObject->appendToFile($new_file_path, "\n");
-                        } else {
-                            $fsObject->appendToFile($new_file_path, "Defense echoué" . "\n\n");
-                            $degat = floor($creature['degat'] / 2) + $tableauAction[$indexAction]['degat'];
-                            $fsObject->appendToFile($new_file_path, "degat de " . $creature['nom'] . " est egale à son degat diviser par deux (arrondie a l'inferieur) (" . floor($creature['degat'] / 2) . ") plus le bonus de degat le l'action " . $tableauAction[$indexAction]['degat'] . " = " . $degat . "\n");
-                            $fsObject->appendToFile($new_file_path, "\n");
-                            $resistance = floor($tableauCreature[$cible]['resistance'] / 2);
-                            $fsObject->appendToFile($new_file_path, "resistance de " . $tableauCreature[$cible]['nom'] . " est egale à sa resistance diviser par deux (arrondie a l'inferieur) (" . floor($tableauCreature[$cible]['resistance'] / 2) . ") = " . $resistance . "\n");
-                            if ($degat <= $resistance) {
-                                $fsObject->appendToFile($new_file_path, "" . $tableauCreature[$cible]['nom'] . " à resister a l'attaque" . "\n");
-                                $fsObject->appendToFile($new_file_path, "\n\n");
-                            } else {
-                                $degatSubit = $degat - $resistance;
-                                if($degatSubit < 0){
-                                    $degatSubit = 0;
-                                }
-                                $fsObject->appendToFile($new_file_path, "" . $tableauCreature[$cible]['nom'] . " à subit " . $degatSubit . " de degat" . "\n");
+                            $defense = $tableauCreature[$cible]['toucher'] + $d20;
+                            $fsObject->appendToFile($new_file_path, "defense de " . $tableauCreature[$cible]['nom'] . " est egale à son toucher " . $tableauCreature[$cible]['toucher'] . " plus un jet de toucher (" . $d20 . ") = " . $defense . "\n");
+                            if ($toucher < $defense) {
+                                $fsObject->appendToFile($new_file_path, "Defense reussite" . "\n");
                                 $fsObject->appendToFile($new_file_path, "\n");
-                                $tableauCreature[$cible]['pvActuel'] = $tableauCreature[$cible]['pvActuel'] - $degatSubit;
-                                if ($tableauCreature[$cible]['pvActuel'] <= 0) {
-                                    var_dump($tableauCreature[$cible]);
-                                    $fsObject->appendToFile($new_file_path, "" . $tableauCreature[$cible]['nom'] . " est mort au combat" . "\n");
-                                    $fsObject->appendToFile($new_file_path, "\n");
-                                    if ($tableauCreature[$cible]['cote'] == 0) {
-                                        $alliéVivant++;
-                                        //vide le tableauhote correspond pour pas cibler quelqu'un de mort
-                                        switch($tableauCreature[$cible]['localisation']){
-                                            case 1:
-                                                for($i = 0; $i < count($tableauHote1); $i++){
-                                                    if($tableauCreature[$cible]['id'] == $tableauHote1[$i]){
-                                                        array_splice($tableauHote1, $i, 1);
-                                                    }
-                                                }
-                                            break;
-                                            case 2:
-                                                for($i = 0; $i < count($tableauHote2); $i++){
-                                                    if($tableauCreature[$cible]['id'] == $tableauHote2[$i]){
-                                                        array_splice($tableauHote2, $i, 1);
-                                                    }
-                                                }
-                                            break;
-                                            case 3:
-                                                for($i = 0; $i < count($tableauHote3); $i++){
-                                                    if($tableauCreature[$cible]['id'] == $tableauHote3[$i]){
-                                                        array_splice($tableauHote3, $i, 1);
-                                                    }
-                                                }
-                                            break;
-                                        }
-                                        for($i = 0; $i < count($tableauHote); $i++){
-                                            if($tableauCreature[$cible]['id'] == $tableauHote[$i]){    
-                                                array_splice($tableauHote, $i, 1);
-                                            }
-                                        }    
-                                    } else {
-                                        $ennemiVivant++;
-                                        switch($tableauCreature[$cible]['localisation']){
-                                            case 1:
-                                                for($i = 0; $i < count($tableauMonstre1); $i++){
-                                                    if($tableauCreature[$cible]['id'] == $tableauMonstre1[$i]){
-                                                        array_splice($tableauMonstre1, $i, 1);
-                                                    }
-                                                }
-                                            break;
-                                            case 2:
-                                                for($i = 0; $i < count($tableauMonstre2); $i++){
-                                                    if($tableauCreature[$cible]['id'] == $tableauMonstre2[$i]){
-                                                        array_splice($tableauMonstre2, $i, 1);
-                                                    }
-                                                }
-                                            break;
-                                            case 3:
-                                                for($i = 0; $i < count($tableauMonstre3); $i++){
-                                                    if($tableauCreature[$cible]['id'] == $tableauMonstre3[$i]){
-                                                        array_splice($tableauMonstre3, $i, 1);
-                                                    }
-                                                }
-                                            break;
-                                        }
-                                        for($i = 0; $i < count($tableauMonstre); $i++){
-                                            if($tableauCreature[$cible]['id'] == $tableauMonstre[$i]){
-                                                array_splice($tableauMonstre, $i, 1);
-                                            }
-                                        }
-                                    }
+                            } else {
+                                $fsObject->appendToFile($new_file_path, "Defense echoué" . "\n\n");
+                                $degat = floor($tableauCreature[$z]['degat'] / 2) + $tableauAction[$indexAction]['degat'];
+                                $fsObject->appendToFile($new_file_path, "degat de " . $tableauCreature[$z]['nom'] . " est egale à son degat diviser par deux (arrondie a l'inferieur) (" . floor($tableauCreature[$z]['degat'] / 2) . ") plus le bonus de degat le l'action " . $tableauAction[$indexAction]['degat'] . " = " . $degat . "\n");
+                                $fsObject->appendToFile($new_file_path, "\n");
+                                $resistance = floor($tableauCreature[$cible]['resistance'] / 2);
+                                $fsObject->appendToFile($new_file_path, "resistance de " . $tableauCreature[$cible]['nom'] . " est egale à sa resistance diviser par deux (arrondie a l'inferieur) (" . floor($tableauCreature[$cible]['resistance'] / 2) . ") = " . $resistance . "\n");
+                                if ($degat <= $resistance) {
+                                    $fsObject->appendToFile($new_file_path, "" . $tableauCreature[$cible]['nom'] . " à resister a l'attaque" . "\n");
+                                    $fsObject->appendToFile($new_file_path, "\n\n");
                                 } else {
-                                    $fsObject->appendToFile($new_file_path, "" . $tableauCreature[$cible]['nom'] . " survit avec " . $tableauCreature[$cible]['pvActuel'] . " pv" . "\n");
+                                    $degatSubit = $degat - $resistance;
+                                    $fsObject->appendToFile($new_file_path, "" . $tableauCreature[$cible]['nom'] . " à subit " . $degatSubit . " de degat" . "\n");
                                     $fsObject->appendToFile($new_file_path, "\n");
+                                    $tableauCreature[$cible]['pvActuel'] = $tableauCreature[$cible]['pvActuel'] - $degatSubit;
+                                    if ($tableauCreature[$cible]['pvActuel'] <= 0) {
+                                        var_dump($tableauCreature[$cible]);
+                                        $fsObject->appendToFile($new_file_path, "" . $tableauCreature[$cible]['nom'] . " est mort au combat" . "\n");
+                                        $fsObject->appendToFile($new_file_path, "\n");
+                                        if ($tableauCreature[$cible]['cote'] == 0) {
+                                            $alliéVivant++;
+                                            //vide le tableauhote correspond pour pas cibler quelqu'un de mort
+                                            switch($tableauCreature[$cible]['localisation']){
+                                                case 1:
+                                                    for($i = 0; $i < count($tableauHote1); $i++){
+                                                        if($tableauCreature[$cible]['id'] == $tableauHote1[$i]){
+                                                            array_splice($tableauHote1, $i, 1);
+                                                        }
+                                                    }
+                                                break;
+                                                case 2:
+                                                    for($i = 0; $i < count($tableauHote2); $i++){
+                                                        if($tableauCreature[$cible]['id'] == $tableauHote2[$i]){
+                                                            array_splice($tableauHote2, $i, 1);
+                                                        }
+                                                    }
+                                                break;
+                                                case 3:
+                                                    for($i = 0; $i < count($tableauHote3); $i++){
+                                                        if($tableauCreature[$cible]['id'] == $tableauHote3[$i]){
+                                                            array_splice($tableauHote3, $i, 1);
+                                                        }
+                                                    }
+                                                break;
+                                            }
+                                            for($i = 0; $i < count($tableauHote); $i++){
+                                                if($tableauCreature[$cible]['id'] == $tableauHote[$i]){    
+                                                    array_splice($tableauHote, $i, 1);
+                                                }
+                                            }    
+                                        } else {
+                                            $ennemiVivant++;
+                                            switch($tableauCreature[$cible]['localisation']){
+                                                case 1:
+                                                    for($i = 0; $i < count($tableauMonstre1); $i++){
+                                                        if($tableauCreature[$cible]['id'] == $tableauMonstre1[$i]){
+                                                            array_splice($tableauMonstre1, $i, 1);
+                                                        }
+                                                    }
+                                                break;
+                                                case 2:
+                                                    for($i = 0; $i < count($tableauMonstre2); $i++){
+                                                        if($tableauCreature[$cible]['id'] == $tableauMonstre2[$i]){
+                                                            array_splice($tableauMonstre2, $i, 1);
+                                                        }
+                                                    }
+                                                break;
+                                                case 3:
+                                                    for($i = 0; $i < count($tableauMonstre3); $i++){
+                                                        if($tableauCreature[$cible]['id'] == $tableauMonstre3[$i]){
+                                                            array_splice($tableauMonstre3, $i, 1);
+                                                        }
+                                                    }
+                                                break;
+                                            }
+                                            for($i = 0; $i < count($tableauMonstre); $i++){
+                                                if($tableauCreature[$cible]['id'] == $tableauMonstre[$i]){
+                                                    array_splice($tableauMonstre, $i, 1);
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        $fsObject->appendToFile($new_file_path, "" . $tableauCreature[$cible]['nom'] . " survit avec " . $tableauCreature[$cible]['pvActuel'] . " pv" . "\n");
+                                        $fsObject->appendToFile($new_file_path, "\n");
+                                    }
                                 }
                             }
+                            $fsObject->appendToFile($new_file_path, "#######################\n\n");
+                            $nbCible = $nbCible-1;
                         }
-                        $fsObject->appendToFile($new_file_path, "#######################\n\n");
-                        $nbCible = $nbCible-1;
                     }while($nbCible>0);
                     $fsObject->appendToFile($new_file_path, "######################################################\n\n");
                 }
