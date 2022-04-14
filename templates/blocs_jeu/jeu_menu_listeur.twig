@@ -1,25 +1,25 @@
 
 <div class="liste">
-{% if form is defined and form.vars.id != 'chevalement' %}
-<div class="contenu_liste">
-
-		{{ form(form) }}
-
-</div>
-{% endif %}
+	{% if form is defined and form.vars.id != 'chevalement' %}
+		<div class="contenu_liste">
+			{{ form(form) }}
+		</div>
+	{% endif %}
 
 
 	<!-- Pour la page de l'entrepot -->
 	<div class="liste">
 		{% if tabcreatures is defined %}
+		<div class="contenu_liste">
+			<h2>Vos hôtes :</h2>
 			<ul>
-				<div class="contenu_liste">
-					{% for creature in tabcreatures  %}
-						<li>
-							<a href="{{ path('app_entrepot', {'idcreature' : creature.id}) }}"> {{ creature.nom }}</a>
-						</li>
-					{% endfor %}
-				</div>
+				{% for creature in tabcreatures  %}
+					<li>
+						<a href="{{ path('app_entrepot', {'idcreature' : creature.id}) }}"> {{ creature.nom }}</a>
+					</li>
+				{% endfor %}
 			</ul>
+		</div>
 		{% endif %}
+	</div>
 </div>

@@ -299,7 +299,7 @@ form[name=registration_form] {
             @include flexRow
         }
 
-        .hote {
+        .whiteBorder {
             margin: 0.5rem;
             border-color: white;
             border-style: solid;
@@ -314,6 +314,19 @@ form[name=registration_form] {
             }
         }
 
+        .hotesStats {
+            display: flex;
+            flex-direction: column;
+            min-width: 18rem;
+
+            p {
+                margin-bottom: 0.1rem;
+            }
+        }
+
+        .strategies {
+            display: flex;
+        }
     }
 
     .contenu_liste {
