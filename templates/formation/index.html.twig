@@ -13,12 +13,27 @@
     {% for formation in tabformations %}
         <div class="formation">
         <h2>Formation : {{ formation.nom }}</h2>
+                {% if formation.composition|length <5 %}
+            <p>Il manque à cette formation {{ 5 - formation.composition|length }} hôte(s) !</p>
+        {% endif %}
+
         <div class="hotes">
         {% for varcreature in formation.composition %}
+
+
+            
             <div class="hote whiteBorder">
                 <h3>{{ varcreature.nom }}</h3>
-                <p>Location : {{ varcreature.position }}</p>
-                <p>Stratégie : {{ varcreature.strategie }}</p>
+                <p>Location : 
+                {% if varcreature.position is empty %}
+                    <span class="manque_val">à préciser !</span>
+                {% endif %}
+                {{ varcreature.position }}</p>
+                <p>Stratégie : 
+                {% if varcreature.strategie is empty %}
+                    <span class="manque_val">à préciser !</span>
+                {% endif %}
+                {{ varcreature.strategie }}</p>
                 <a href="{{ path('app_formation_delete', {'formation': formation.id , 'creature' : varcreature.id}) }}">Enlever de la formation</a>
             </div>
         {% endfor %}
