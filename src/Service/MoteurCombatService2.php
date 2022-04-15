@@ -189,6 +189,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
             foreach ($localisationsCrea as $localisationCrea) {
                 if($localisationCrea->getLienCreature()->getId() == $hote){
                     $Creature2['localisation'] = $localisationCrea->getLocalisation();
+                    $Creature2['strategie'] = $localisationCrea->getStrategie();
                 }
             }
             array_push($tableauCreature, $Creature2);
@@ -216,6 +217,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
             foreach ($localisationsCrea as $localisationCrea) {
                 if($localisationCrea->getLienCreature()->getId() == $monstre){
                     $Creature2['localisation'] = $localisationCrea->getLocalisation();
+                    $Creature2['strategie'] = $localisationCrea->getStrategie();
                 }
             }
             array_push($tableauCreature, $Creature2);
@@ -224,7 +226,11 @@ class MoteurCombatService2 extends ServiceEntityRepository
         $tableauAction = array();
         foreach ($tableauCreature as $creature) {
             $strategie = $this->doctrine->getRepository(StrategieModele::class)->findBy(['lienModele' => $creature['idModele']]);
-            $idStrategie = $strategie[0]->getlienStrategie()->getId();
+            foreach($strategie as $str){
+                if($str->getLienStrategie()->getId() == $creature['strategie']){
+                    $idStrategie = $str->getlienStrategie()->getId();
+                }
+            }
             $actions = $this->doctrine->getRepository(ActionStrategie::class)->findBy(['lienStrategie' => $idStrategie]);
             foreach ($actions as $action) {
                 $Action2['idCreature'] = $creature['id'];
@@ -325,7 +331,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
             for($z=0;$z < count($tableauCreature); $z++ ){
           /*  foreach ($tableauCreature as $creature) {*/
                 if ($tableauCreature[$z]['pvActuel'] > 0 && $tableauHote && $tableauMonstre ) {
-                    var_dump($tableauCreature);
+                    //var_dump($tableauCreature);
                     if ($tourAction == 6) {
                         $tourAction = 1;
                     }
@@ -687,7 +693,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                     $fsObject->appendToFile($new_file_path, "\n");
                                     $tableauCreature[$cible]['pvActuel'] = $tableauCreature[$cible]['pvActuel'] - $degatSubit;
                                     if ($tableauCreature[$cible]['pvActuel'] <= 0) {
-                                        var_dump($tableauCreature[$cible]);
+                                       // var_dump($tableauCreature[$cible]);
                                         $fsObject->appendToFile($new_file_path, "" . $tableauCreature[$cible]['nom'] . " est mort au combat" . "\n");
                                         $fsObject->appendToFile($new_file_path, "\n");
                                         if ($tableauCreature[$cible]['cote'] == 0) {

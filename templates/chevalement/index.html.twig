@@ -3,7 +3,12 @@
 {% block title %}Chevalement - Spéléonautes{% endblock %}
 
 {% block body %}
-
+{# read and display just one flash message type #}
+{% for message in app.flashes('notice') %}
+    <div class="flash-notice">
+        {{ message }}
+    </div>
+{% endfor %}
 
 <div class = "wrapper">
 	<h1>Combat</h1>
