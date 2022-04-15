@@ -314,6 +314,42 @@ form[name=registration_form] {
             }
         }
 
+        .classement {
+            p {
+                margin-bottom: 0;
+                width: 14rem;
+            }
+
+            .titre {
+                @include flexRow;
+                border-radius: 1.1rem;
+                background-color: #a6a6a696;
+                width: fit-content;
+                padding: 0.5rem;
+                margin-bottom: 0.2rem;
+            }
+
+            .joueurs {
+                @include flexColumn;
+                border-radius: 0.3rem;
+                background-color: #a6a6a696;
+                width: fit-content;
+
+            }
+
+            .joueur {
+                @include flexRow;
+                width: fit-content;
+                padding: 0.5rem;
+                border-bottom: 1px solid whitesmoke;
+
+                &:last-child {
+                    border: none;
+                }
+
+            }
+        }
+
         .hotesStats {
             display: flex;
             flex-direction: column;
@@ -353,6 +389,8 @@ form[name=registration_form] {
             }
         }
 
+
+
         .jeu_form {
             margin: 2rem 0;
         }
@@ -371,7 +409,7 @@ form[name=registration_form] {
     }
 
     .contenu_jeu {
-        background-color: #000000db;
+        background-color: rgba(40, 40, 40, 0.86);
         border-radius: 0.9rem;
         padding: 1rem;
 
