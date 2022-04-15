@@ -76,12 +76,24 @@ class RegistrationController extends AbstractController
             $var_formation2->setLienUser($user);            
             $entityManager->persist($var_formation2);
 */
-
+            $z = 0;
             // J'affecte les personnages de l'utilisateur à la formation
             foreach ($tab_creature as $var_creature){
+                $z++;
                 $var_creatureformation = new CreatureFormation;
                 $var_creatureformation->setLienCreature($var_creature);
                 $var_creatureformation->setLienFormation($var_formation);
+                $var_creatureformation->setStrategie(1);
+                if($z<4){
+                    $var_creatureformation->setLocalisation(1);
+                }
+                if($z==4){
+                    $var_creatureformation->setLocalisation(2);
+                }
+                if($z==5){
+                    $var_creatureformation->setLocalisation(3);
+                }
+                
                 $entityManager->persist($var_creatureformation);
             }
 
