@@ -64,7 +64,9 @@ class ActionFixtures extends Fixture implements OrderedFixtureInterface
             $$name->setNom($action["nom"])
                 ->setTier($action["tier"])
                 ->setToucher($action["toucher"])
-                ->setDegat($action["degat"]);
+                ->setDegat($action["degat"])
+                ->setNombreCible($action["nombreCible"])
+                ->setLocalisation($action["localisation"]);
             $manager->persist($$name);
             $this->addReference($name, $$name);
             //dump($name);
