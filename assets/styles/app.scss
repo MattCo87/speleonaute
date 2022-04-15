@@ -345,6 +345,12 @@ form[name=registration_form] {
 
         li {
             margin-left: 2rem;
+            list-style: none;
+            margin: 0.2rem;
+
+            a {
+                text-decoration: none;
+            }
         }
 
         .jeu_form {
