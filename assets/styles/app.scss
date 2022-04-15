@@ -296,7 +296,11 @@ form[name=registration_form] {
         }
 
         .hotes {
-            @include flexRow
+            @include flexRow;
+
+            .manque_val {
+                color: #ff9f9f;
+            }
         }
 
         .whiteBorder {
