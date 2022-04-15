@@ -45,6 +45,16 @@ class Action
      */
     private $actionStrategies;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $localisation;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nombreCible;
+
     public function __construct()
     {
         $this->actionStrategies = new ArrayCollection();
@@ -137,6 +147,30 @@ class Action
                 $actionStrategy->setLienAction(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLocalisation(): ?int
+    {
+        return $this->localisation;
+    }
+
+    public function setLocalisation(?int $localisation): self
+    {
+        $this->localisation = $localisation;
+
+        return $this;
+    }
+
+    public function getNombreCible(): ?int
+    {
+        return $this->nombreCible;
+    }
+
+    public function setNombreCible(?int $nombreCible): self
+    {
+        $this->nombreCible = $nombreCible;
 
         return $this;
     }

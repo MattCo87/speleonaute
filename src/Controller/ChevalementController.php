@@ -3,11 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Combat;
+use App\Entity\CreatureFormation;
 use App\Entity\Formation;
 use App\Form\ChevalementType;
 use App\Entity\Scenario;
 use App\Entity\User;
-use App\Service\MoteurCombatService;
+use App\Service\MoteurCombatService2;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +32,7 @@ class ChevalementController extends AbstractController
     /**
      * @Route("/chevalement", name="app_chevalement")
      */
-    public function index(Request $request, EntityManagerInterface $manager, MoteurCombatService $moteurCombatService): Response
+    public function index(Request $request, EntityManagerInterface $manager, MoteurCombatService2 $moteurCombatService): Response
     {
         // On crée un Combat
         $combat = new Combat();
@@ -49,10 +50,24 @@ class ChevalementController extends AbstractController
         $combat->setFichierLog('');
         // Action sur la validation du formulaire
         if ($form->isSubmitted() && $form->isValid()) {
+            $tiersCrea = $this->registry->getRepository(CreatureFormation::class)->findBy(['lienFormation' => $formation->getId()]);
+           // dd(count($tiersCrea));
+            if(count($tiersCrea) != 5){
+                
+                $this->addFlash(
+                    'notice',
+                    'formation pas parti'
+                );
+                return $this->redirectToRoute('app_chevalement');
+            }
             $manager->persist($combat);
             $manager->flush();
             $idCombat = $combat->getId();
             $moteurCombatService->combat($formation, $scenario,$idCombat);
+            $this->addFlash(
+                'notice',
+                'formation revenue!'
+            );
             return $this->redirectToRoute('app_chevalement');
         } 
         return $this->render('chevalement/index.html.twig', [

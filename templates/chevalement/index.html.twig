@@ -3,6 +3,12 @@
 {% block title %}Chevalement - Spéléonautes{% endblock %}
 
 {% block body %}
+{# read and display just one flash message type #}
+{% for message in app.flashes('notice') %}
+    <div class="flash-notice">
+        {{ message }}
+    </div>
+{% endfor %}
 
 <div class="contenu_jeu">
 	<h1>Envoyer une formation d'hôtes dans la Fosse</h1>
