@@ -46,8 +46,8 @@ class CreatureFormationFixtures extends Fixture implements OrderedFixtureInterfa
             $$name = new CreatureFormation();
             $$name->setLienFormation($this->getReference($formationCreature["lienFormation"]))
                 ->setLienCreature($this->getReference($formationCreature["lienCreature"]))
-                //->setLocalisation($formationCreature["localisation"])
-                //->setStrategie($formationCreature["strategie"])
+                ->setLocalisation($formationCreature["localisation"])
+                ->setStrategie($formationCreature["strategie"])
             ;
             $manager->persist($$name);
             $this->addReference($name, $$name);
