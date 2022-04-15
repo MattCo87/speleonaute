@@ -246,8 +246,8 @@ class MoteurCombatService2 extends ServiceEntityRepository
         $tableauAction = array();
         foreach ($tableauCreature as $creature) {
             $strategie = $this->doctrine->getRepository(StrategieModele::class)->findBy(['lienModele' => $creature['idModele']]);
-            foreach($strategie as $str){
-                if($str->getLienStrategie()->getId() == $creature['strategie']){
+            foreach($strategie as $str){           
+                if($str->getPositionStrategie() == $creature['strategie']){
                     $idStrategie = $str->getlienStrategie()->getId();
                 }
             }
