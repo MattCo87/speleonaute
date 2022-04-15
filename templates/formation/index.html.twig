@@ -34,7 +34,7 @@
                 </p>
                 <p>Stratégie : 
                 {% if varcreature.strategie is empty %}
-                    <span class="manque_val">à préciser !</span>
+                    <span class="manque_val">Par défaut</span>
                 {% endif %}
                 {{ varcreature.strategie }}</p>
                 <a href="{{ path('app_formation_delete', {'formation': formation.id , 'creature' : varcreature.id}) }}">Enlever de la formation</a>
