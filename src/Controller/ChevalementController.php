@@ -38,7 +38,7 @@ class ChevalementController extends AbstractController
         $combat = new Combat();
         $formation = new Formation();
         $scenario = new Scenario();
-        $tab =array();
+        $tab = array();
         $user = $this->security->getUser();
         $form = $this->createForm(ChevalementType::class, $tab);
         $form->handleRequest($request);
@@ -51,28 +51,28 @@ class ChevalementController extends AbstractController
         // Action sur la validation du formulaire
         if ($form->isSubmitted() && $form->isValid()) {
             $tiersCrea = $this->registry->getRepository(CreatureFormation::class)->findBy(['lienFormation' => $formation->getId()]);
-           // dd(count($tiersCrea));
-            if(count($tiersCrea) != 5){
-                
+            // dd(count($tiersCrea));
+            if (count($tiersCrea) != 5) {
+
                 $this->addFlash(
                     'notice',
-                    'formation pas parti'
+                    "Hobb a refusé d'envoyer votre formation ! Est-elle bien complète, avec ses stratégies et positionnements définies ?"
                 );
                 return $this->redirectToRoute('app_chevalement');
             }
             $manager->persist($combat);
             $manager->flush();
             $idCombat = $combat->getId();
-            $moteurCombatService->combat($formation, $scenario,$idCombat);
+            $moteurCombatService->combat($formation, $scenario, $idCombat);
             $this->addFlash(
                 'notice',
-                'formation revenue!'
+                "Votre formation est revenue ! Vous pouvez aller voir le log du combat dans le bureau."
             );
             return $this->redirectToRoute('app_chevalement');
-        } 
+        }
         return $this->render('chevalement/index.html.twig', [
             'form' => $form->createView(),
-            'controller_name' => 'ChevalementController',           
+            'controller_name' => 'ChevalementController',
         ]);
     }
 }

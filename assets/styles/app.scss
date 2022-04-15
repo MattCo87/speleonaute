@@ -421,6 +421,10 @@ form[name=registration_form] {
             font-size: 1.3rem;
         }
 
+        .flash-notice {
+            max-width: 22rem;
+        }
+
         p,
         li {
             margin-bottom: 1rem;
@@ -444,6 +448,8 @@ form[name=registration_form] {
                 flex-direction: row;
                 margin-bottom: 1rem;
             }
+
+
         }
     }
 }
