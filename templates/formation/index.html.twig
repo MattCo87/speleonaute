@@ -15,10 +15,10 @@
         <h2>Formation : {{ formation.nom }}</h2>
         <div class="hotes">
         {% for varcreature in formation.composition %}
-            <div class="hote">
+            <div class="hote whiteBorder">
                 <h3>{{ varcreature.nom }}</h3>
-                <p>Location :{{ varcreature.position }}</p>
-                <p>Stratégie :{{ varcreature.strategie }}</p>
+                <p>Location : {{ varcreature.position }}</p>
+                <p>Stratégie : {{ varcreature.strategie }}</p>
                 <a href="{{ path('app_formation_delete', {'formation': formation.id , 'creature' : varcreature.id}) }}">Enlever de la formation</a>
             </div>
         {% endfor %}
