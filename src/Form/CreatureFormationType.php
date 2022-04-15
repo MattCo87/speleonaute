@@ -42,7 +42,7 @@ class CreatureFormationType extends AbstractType
                 'choice_label' => 'nom',
             ))
 
-/*
+            /*
             // On affiche la liste des Créatures
             ->add('lienCreature', EntityType::class, array(
                 'class' => Creature::class,
@@ -80,9 +80,9 @@ class CreatureFormationType extends AbstractType
             // On choisit sa localisation
             ->add('localisation', ChoiceType::class, array(
                 'choices'  => [
-                    'Devant' => 0,
-                    'Milieu' => 1,
-                    'Derrière' => 2,
+                    'Devant' => 1,
+                    'Milieu' => 2,
+                    'Derrière' => 3,
                 ],
             ))
 
@@ -90,14 +90,14 @@ class CreatureFormationType extends AbstractType
             ->add('strategie', ChoiceType::class, [
                 'choices'  => [
                     '1' => 1,
-                    '2' => 2,
-                    '3' => 3,
-                    '4' => 4,
                 ],
             ])
 
             // Bouton pour valider la création de la CreationFormation
-            ->add('submit', SubmitType::class, [
+            ->add(
+                'submit',
+                SubmitType::class,
+                [
                     'label' => 'OK',
                 ],
             );
