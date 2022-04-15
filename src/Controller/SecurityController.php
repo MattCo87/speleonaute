@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\PageVisiteurRepository;
 use PharIo\Manifest\Email;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,22 +14,20 @@ class SecurityController extends AbstractController
     /**
      * @Route("/", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, PageVisiteurRepository $pageVisiteurRepository): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('app_hub');
         }
+
+        $pageContent = $pageVisiteurRepository->findOneBy(['titre' => 'Accueil']);;
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-
-
-
-
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error, 'contenu_page' => $pageContent]);
     }
 
     /**

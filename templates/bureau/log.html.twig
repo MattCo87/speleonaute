@@ -1,8 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'hub.twig' %}
 
 {% block title %}
+Bureau - Spéléonautes
 {% endblock %}
 
+{#
 {% block stylesheets %}
 <style>
 pre{
@@ -78,9 +80,6 @@ grid-row-gap: 0px;
         background-color:pink;
 }
 
-
-
-
 .dropbtn {
   background-color: #04AA6D;
   color: white;
@@ -133,15 +132,6 @@ grid-row-gap: 0px;
   color:red;
 }
 
-
-
-
-
-
-
-
-
-
 ::after,
 ::before {
   margin: 0;
@@ -153,8 +143,6 @@ grid-row-gap: 0px;
   --menubox-height: 68vh;
   --list-heigth: 50px;
 }
-
-
 
 a {
   font-family: fantasy;
@@ -213,11 +201,12 @@ a {
   font-size: 1.3rem;
 }
 
-
-
-
 </style>
+
 {% endblock %}
+#}
+
+{#}
 {% block javascripts %}
             <script>
 
@@ -271,11 +260,14 @@ window.addEventListener('wheel', activeMenu);
             </script>
 
         {% endblock %}
+#}
 
 
 
 
 {% block body %}
+<div class="contenu_jeu">
+
 {#<div class="total">#}
 <div class="profil"></div>
         <div class="contenue1">
@@ -310,4 +302,5 @@ window.addEventListener('wheel', activeMenu);
         </div>
 </div>     
 {#</div>#}
+</div>
 {% endblock %}

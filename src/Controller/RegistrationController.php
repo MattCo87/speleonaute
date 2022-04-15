@@ -68,6 +68,14 @@ class RegistrationController extends AbstractController
             $var_formation->setNom($var_formation_name);
             $var_formation->setLienUser($user);            
             $entityManager->persist($var_formation);
+/*
+            // Puis une deuxième pour l'exemple
+            $var_formation2 = new Formation;
+            $var_formation2_name = ucfirst(str_replace(' ', '', $user->getPseudo())). "Boyz";
+            $var_formation2->setNom($var_formation2_name);
+            $var_formation2->setLienUser($user);            
+            $entityManager->persist($var_formation2);
+*/
 
             // J'affecte les personnages de l'utilisateur à la formation
             foreach ($tab_creature as $var_creature){

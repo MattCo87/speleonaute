@@ -14,7 +14,7 @@ class PageVisiteurCrudController extends AbstractCrudController
         return PageVisiteur::class;
     }
 
-    
+
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -22,5 +22,4 @@ class PageVisiteurCrudController extends AbstractCrudController
             TextEditorField::new('contenu'),
         ];
     }
-    
 }

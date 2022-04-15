@@ -46,7 +46,7 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
                 "pseudo" => "Lord Aixois", "mail" => "87000@gmail.com", "role" => "ROLE_USER", "xp" => 1
             ),
             "USER_Joel" => array(
-                "pseudo" => "silentfabrik", "mail" => "joel@gmail.com", "role" => "ROLE_USER", "xp" => 1
+                "pseudo" => "silentfabrik", "mail" => "joel.obrecht@gmail.com", "role" => "ROLE_ADMIN", "xp" => 1
             ),
             "USER_Yanis" => array(
                 "pseudo" => "callipo", "mail" => "callipo@gmail.com", "role" => "ROLE_USER", "xp" => 1
