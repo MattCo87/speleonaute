@@ -230,6 +230,7 @@ form[name=registration_form] {
     .liste {
         grid-area: liste;
         padding: 0.5rem 2%;
+        margin-right: 7%;
     }
 
     .menu_plus {
@@ -370,7 +371,7 @@ form[name=registration_form] {
     }
 
     .contenu_liste {
-        background-color: #000000db;
+        background-color: $contenu-bg;
         border-radius: 0.9rem;
         padding: 1rem;
 
@@ -413,7 +414,7 @@ form[name=registration_form] {
     }
 
     .contenu_jeu {
-        background-color: rgba(40, 40, 40, 0.86);
+        background-color: $contenu-bg;
         border-radius: 0.9rem;
         padding: 1rem;
 
