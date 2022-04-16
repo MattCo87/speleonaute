@@ -6,8 +6,13 @@
 <div class="contenu_jeu">
 <h1>Hôtel des ventes</h1>
 <h2>Vous pouvez ici acquérir de nouveaux hôtes</h2>
-<p>Vous n'avez pas assez de réputation pour accéder à la fonction achat.</p>
+
 </div>
+
+
+
+                {% if joueur.reputation > 100 %}
+
 <section class="jeu_form">
 		{{ form(HVform) }}
 		
@@ -18,4 +23,10 @@
 		    </div>
 		{% endfor %}
 	</section>
+{% else %}
+<p>Vous n'avez pas assez de réputation pour accéder à la fonction achat.</p>
+                {% endif %}
+
+
+
 {% endblock %}
