@@ -908,6 +908,8 @@ class MoteurCombatService2 extends ServiceEntityRepository
             }
             $reputation = $formation->getLienUser()->getReputation() + $recompense;
             $formation->getLienUser()->setReputation($reputation);
+            $monnaie = $formation->getLienUser()->getMonnaie() + ($recompense*10);
+            $formation->getLienUser()->setMonnaie($monnaie);
             $random = rand(0,100);
             if($random>95){
                 $this->Creationhote($formation->getLienUser());
