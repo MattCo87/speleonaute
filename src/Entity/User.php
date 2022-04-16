@@ -66,6 +66,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $formations;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $monnaie;
+
     public function __construct()
     {
         $this->roles = [self::ROLE_USER];
@@ -273,6 +278,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $formation->setLienUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMonnaie(): ?int
+    {
+        return $this->monnaie;
+    }
+
+    public function setMonnaie(?int $monnaie): self
+    {
+        $this->monnaie = $monnaie;
 
         return $this;
     }

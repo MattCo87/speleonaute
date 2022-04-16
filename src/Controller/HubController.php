@@ -11,15 +11,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Symfony\Component\Security\Core\Security;
+
 class HubController extends AbstractController
 {
-
+    private $security;
     private $emm;
     private $emc;
     private $emsc;
 
-    function __construct(CreatureRepository $emc, ModeleRepository $emm, StatistiqueCreatureRepository $emsc)
+    function __construct(Security $security, CreatureRepository $emc, ModeleRepository $emm, StatistiqueCreatureRepository $emsc)
     {
+        $this->security = $security;
         $this->emm = $emm;
         $this->emc = $emc;
         $this->emsc = $emsc;
@@ -30,7 +33,12 @@ class HubController extends AbstractController
      */
     public function index(): Response
     {
+        $temp_user = $this->security->getUser();
+        $var_user = $temp_user->getId();
+        //dd($temp_user);
+
         return $this->render('hub/hub_accueil.html.twig', [
+            'profil'    => $temp_user,
             'controller_name' => 'HubController',
         ]);
     }
