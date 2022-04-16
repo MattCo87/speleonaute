@@ -8,5 +8,14 @@
 <h2>Vous pouvez ici acquérir de nouveaux hôtes</h2>
 <p>Vous n'avez pas assez de réputation pour accéder à la fonction achat.</p>
 </div>
-
+<section class="jeu_form">
+		{{ form(HVform) }}
+		
+		{# read and display just one flash message type #}
+		{% for message in app.flashes('notice') %}
+		    <div class="whiteBorder flash-notice">
+		        {{ message }}
+		    </div>
+		{% endfor %}
+	</section>
 {% endblock %}

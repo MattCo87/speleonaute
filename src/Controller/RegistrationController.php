@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Entity\Formation;
 use App\Entity\CreatureFormation;
 use App\Form\RegistrationFormType;
+use App\Service\MoteurCombatService2;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +32,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, MoteurCombatService2 $moteurCombatService): Response
     {
 
         $user = new User();
@@ -46,7 +47,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
+            /*
             // J'affecte 5 nouveaux personnages à l'utilisateur 
             $modele = $this->emm->findBy(['ouvrable' => 1]);
 
@@ -61,6 +62,13 @@ class RegistrationController extends AbstractController
                 $tab_creature[] = $creature;
                 $entityManager->persist($creature);
             }
+            */
+            for ($i = 0; $i < 5; $i++) {
+                $moteurCombatService->Creationhote($user);
+            }
+            $tab_creature = $this->emc->findBy(['lienUser' => $user->getId()]);
+
+            //dd($tab_creature);
 
             // Je crée une formation
             $var_formation = new Formation;

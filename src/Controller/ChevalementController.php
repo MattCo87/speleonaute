@@ -70,6 +70,7 @@ class ChevalementController extends AbstractController
             );
             return $this->redirectToRoute('app_chevalement');
         }
+        //dd($form);
         return $this->render('chevalement/index.html.twig', [
             'form' => $form->createView(),
             'controller_name' => 'ChevalementController',
