@@ -23,7 +23,8 @@ class BureauController extends AbstractController
         $combats = $doctrine->getRepository(Combat::class)->findAll();
         foreach ($combats as $combat) {
             $logTemp = $combat->getFichierLog();
-            $buffer = [];
+            //$buffer = [];
+            $buffer[] = '';
             if (false !== $handle = @fopen($logTemp, 'r')) {
                 while (($word = fgets($handle)) !== false) {
                     $buffer[] = $word;
@@ -33,13 +34,28 @@ class BureauController extends AbstractController
                 $buffer[] = "Pas de listes";
             }
             array_push($tableauLog, $buffer);
-            array_push($idLog, $i);
+            //array_push($idLog, $i);
+            $idLog[$i][0] = $i;
+            $idLog[$i][1] = $buffer;
             $i++;
         }
+        //dd($idLog);
+        /*************************************************************************************** */
+        if (isset($_GET['idlog'])) {
+            foreach ($idLog as $var_log) {
+                if ($var_log[0] == $_GET['idlog']) {
+                    $infolog = $var_log;
+                }
+            }
+        } else {
+            $infolog = 'Pas de combat';
+        }
+        /************************************************************************************************ */
+        //dd($infolog[1]);
         return $this->render('bureau/log.html.twig', [
             'idLogs' => $idLog,
             'logs' => $tableauLog,
-            'controller_name' => 'BureauController',
+            'infolog' => $infolog[1],
         ]);
     }
 

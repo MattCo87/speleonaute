@@ -1,7 +1,7 @@
 {% extends 'hub.twig' %}
 
 {% block title %}
-Bureau - Spéléonautes
+	Bureau - Spéléonautes
 {% endblock %}
 
 {#
@@ -263,44 +263,29 @@ window.addEventListener('wheel', activeMenu);
 #}
 
 
-
-
 {% block body %}
-<div class="contenu_jeu">
+	<div class="contenu_jeu">
+		<div class="profil"></div>
+		<div class="contenue1">
+			<div class="contenue2">
+        {% if infolog is defined %}
+				{% set i = 0 %}
+				{% for log in infolog %}
+					<pre>{{ log }}</pre>
+					{% set i = i + 1 %}
+				{% endfor %}
+        {% endif %}
 
-{#<div class="total">#}
-<div class="profil"></div>
-        <div class="contenue1">
-        <div class="contenue2">
-                {% for log in logs %}
-                        {% for logu in log %}
-                        <pre>{{ logu }}</pre>
-                        {#<div class="pre">{{ logu }}</div>#}
-                        {% endfor %}
-                {% endfor %}
-        </div>        
-        </div>   
-<div class="menu"><a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a></div>
-<div class="sous_menu">Coucou</div>
-<div class="liste">
-        <div class="dropdown">
-                <button class="dropbtn">Dropdown</button>
-                {#<div class="caché">
-                        <div class="dropdown-content">
-                                {% for idLog in idLogs %}
-                                <a href="#">Link {{ idLog }}</a>
-                                {% endfor %}
-                        </div>      
-                </div>#}
-                <div class="menu-box">
-  <div class="menu-list">
-                                {% for idLog in idLogs %}
-                                <a class="list" href="#">Link {{ idLog }}</a>
-                                {% endfor %}
-                        </div>
-                        </div>
-        </div>
-</div>     
-{#</div>#}
-</div>
+			</div>
+		</div>
+		<div class="menu"></div>
+
+		<div class="liste">
+			<div class="dropdown">
+				<div class="menu-box">
+					<div class="menu-list"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
