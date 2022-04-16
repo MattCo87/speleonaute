@@ -53,6 +53,7 @@ class EntrepotController extends AbstractController
         // On récupére la liste des créatures appartenant à l'utilisateur courant
         $temp_user = $this->security->getUser();
         $var_user = $temp_user->getId();
+        //dd($temp_user);
 
         // On récupére toutes les formations de l'utilisateur courant
         $tab_creature = $this->emc->findByUser($var_user);
