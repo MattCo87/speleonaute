@@ -22,4 +22,20 @@
 		</div>
 		{% endif %}
 	</div>
+
+		<!-- Pour la page des bureau/log -->
+	<div class="liste">
+		{% if idLogs is defined %}
+		<div class="contenu_liste">
+			<h2>Vos combats:</h2>
+			<ul>
+				{% for idLog in idLogs  %}
+					<li>
+						<a href="{{ path('app_bureau', {'idlog' : idLog[0] }) }}">#{{ idLog[0] }}</a>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+		{% endif %}
+	</div>
 </div>
