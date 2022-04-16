@@ -28,9 +28,9 @@
                 {% if varcreature.position is empty %}
                     <span class="manque_val">à préciser, par défaut : </span>
                 {% endif %}
-                {% if varcreature.position == 0 %} Devant {% endif %}
-                {% if varcreature.position == 1 %} Milieu {% endif %}
-                {% if varcreature.position == 2 %} Derrière {% endif %}
+                {% if varcreature.position == 1 %} Devant {% endif %}
+                {% if varcreature.position == 2 %} Milieu {% endif %}
+                {% if varcreature.position == 3 %} Derrière {% endif %}
                 </p>
                 <p>Stratégie : 
                 {% if varcreature.strategie is empty %}

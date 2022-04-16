@@ -59,7 +59,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
 
     public function CreationMonstre( User $user){
 
-        $modele = $this->emm->findBy(['ouvrable' => 1]);
+        $modele = $this->emm->find();
 
         $taille = count($modele)-1;
         $a = rand(0, $taille);
@@ -908,6 +908,11 @@ class MoteurCombatService2 extends ServiceEntityRepository
             }
             $reputation = $formation->getLienUser()->getReputation() + $recompense;
             $formation->getLienUser()->setReputation($reputation);
+            $random = rand(0,100);
+            if($random>95){
+                $this->Creationhote($formation->getLienUser());
+                $fsObject->appendToFile($new_file_path, "Vous avez gagné un nouvelle hote\n");
+            }
             $this->manager->persist($formation->getLienUser());
             $this->manager->persist($tableauHotePex[0]);
             $this->manager->persist($tableauHotePex[1]);
