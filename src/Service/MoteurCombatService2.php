@@ -10,6 +10,8 @@ use App\Entity\Formation;
 use App\Entity\Scenario;
 use App\Entity\StatistiqueCreature;
 use App\Entity\StrategieModele;
+use App\Entity\User;
+use App\Repository\CreatureRepository;
 use App\Repository\ModeleRepository;
 use App\Repository\StatistiqueModeleRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -24,13 +26,56 @@ class MoteurCombatService2 extends ServiceEntityRepository
 {
     private $doctrine;
 
-    function __construct(ManagerRegistry $doctrine, EntityManagerInterface $manager, ModeleRepository $emm, StatistiqueModeleRepository $emsm)
+    function __construct(CreatureRepository $emc, ManagerRegistry $doctrine, EntityManagerInterface $manager, ModeleRepository $emm, StatistiqueModeleRepository $emsm)
     {
         $this->doctrine = $doctrine;
         $this->manager = $manager;
         $this->emm = $emm;
         $this->emsm = $emsm;
+        $this->emc = $emc;
     }
+
+
+
+
+    public function Creationhote( User $user){
+
+        $modele = $this->emm->findBy(['ouvrable' => 1]);
+
+        $taille = count($modele)-1;
+        $a = rand(0, $taille);
+
+        // Je crée une nouvelle créature
+        $creature = $this->emc->makeCreature($modele[$a]);
+        $creature->setLienUser($user);
+        $tab_creature[] = $creature;
+        $this->manager->persist($creature);
+        $this->manager->flush();
+        
+
+
+    }
+
+
+    public function CreationMonstre( User $user){
+
+        $modele = $this->emm->findBy(['ouvrable' => 1]);
+
+        $taille = count($modele)-1;
+        $a = rand(0, $taille);
+
+        // Je crée une nouvelle créature
+        $creature = $this->emc->makeMonstre($modele[$a]);
+        $creature->setLienUser($user);
+        $tab_creature[] = $creature;
+        $this->manager->persist($creature);
+        $this->manager->flush();
+        
+
+
+    }
+
+
 
 
     public function NiveauPlus( Creature $creature)
