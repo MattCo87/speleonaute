@@ -66,7 +66,7 @@ class ChevalementController extends AbstractController
                 return $this->redirectToRoute('app_chevalement');
             }
             //reputation stop
-            if ($temp_user->getReputation() < $scenario->getId()*1000) {
+            if ($temp_user->getReputation() < $scenario->getId()*1000-1000) {
 
                 $this->addFlash(
                     'notice',
