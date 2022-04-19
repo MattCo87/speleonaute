@@ -9,16 +9,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Core\Security;
 /**
  * @IsGranted("ROLE_USER")
  */
 class BureauController extends AbstractController
 {
+    private $security;
+
+    function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     /**
      * @Route("/bureau", name="app_bureau")
      */
     public function indexLog(ManagerRegistry $doctrine): Response
     {
+        $temp_user = $this->security->getUser();
 
         $tableauLog = array();
         $idLog = array();
@@ -56,6 +65,7 @@ class BureauController extends AbstractController
         /************************************************************************************************ */
         //dd($infolog[1]);
         return $this->render('bureau/log.html.twig', [
+            'profil'    => $temp_user,
             'idLogs' => $idLog,
             'logs' => $tableauLog,
             'infolog' => $infolog[1],
@@ -67,6 +77,7 @@ class BureauController extends AbstractController
      */
     public function indexClassement(ManagerRegistry $doctrine): Response
     {
+        $temp_user = $this->security->getUser();
         $tableauJoueur = array();
         $joueurs = $doctrine->getRepository(User::class)->findAll();
         foreach ($joueurs as $joueur) {
@@ -82,6 +93,7 @@ class BureauController extends AbstractController
         array_multisort($reputation, SORT_DESC, $tableauJoueur);
 
         return $this->render('bureau/classement.html.twig', [
+            'profil'    => $temp_user,
             'Joueurs' => $tableauJoueur,
         ]);
     }

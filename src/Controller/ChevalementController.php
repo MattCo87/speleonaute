@@ -37,6 +37,7 @@ class ChevalementController extends AbstractController
      */
     public function index(Request $request, EntityManagerInterface $manager, MoteurCombatService2 $moteurCombatService): Response
     {
+        $temp_user = $this->security->getUser();
         // On crée un Combat
         $combat = new Combat();
         $formation = new Formation();
@@ -75,6 +76,7 @@ class ChevalementController extends AbstractController
         }
         //dd($form);
         return $this->render('chevalement/index.html.twig', [
+            'profil'    => $temp_user,
             'form' => $form->createView(),
             'controller_name' => 'ChevalementController',
         ]);

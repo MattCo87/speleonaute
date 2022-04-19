@@ -32,17 +32,17 @@ class HotelVentesController extends AbstractController
      */
     public function index(Request $request, MoteurCombatService2 $moteurCombatService): Response
     {
-
+        $temp_user = $this->security->getUser();
         $user = $this->security->getUser();
         $tab = array();
         $form = $this->createForm(HotelVentesType::class,$tab);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && $user->getMonnaie()>=1000) {
             $moteurCombatService->Creationhote($user);
                 $this->addFlash(
                     'notice',
-                    "hote bien créer"
+                    "hote bien créé"
                 );
                 $monnaie = $user->getMonnaie() -1000;
                 $user->setMonnaie($monnaie);
@@ -54,6 +54,7 @@ class HotelVentesController extends AbstractController
 //        dd($form);
 
         return $this->render('hotel_ventes/index.html.twig', [
+            'profil' => $temp_user,
             'joueur' => $user,
             'HVform' => $form->createView(),
             'controller_name' => 'HotelVentesController',

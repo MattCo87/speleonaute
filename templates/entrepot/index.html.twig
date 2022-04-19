@@ -36,6 +36,10 @@
 					<p>Toucher : {{ action.toucher }}</p>
 					<p>Tier : {{ action.tier }}</p>
 					<p>Dégâts : {{ action.degat }}</p>
+					<p>nombre de cible : {{ action.nombreCible }}</p>
+					{% if action.localisation == 1 %}localisation : Devant {% endif %}
+                {% if action.localisation == 2 %}localisation : Milieu {% endif %}
+                {% if action.localisation == 3 %}localisation : Derrière {% endif %}
 				</div>
 			{% endfor %}
 			</div>
