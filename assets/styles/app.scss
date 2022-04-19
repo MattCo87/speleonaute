@@ -239,6 +239,10 @@ form[name=registration_form] {
         grid-area: liste;
         padding: 0.5rem 2%;
         margin-right: 7%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        scrollbar-width: none;
+        margin-bottom: 1.5rem;
     }
 
     .menu_plus {
