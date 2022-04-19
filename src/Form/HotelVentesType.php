@@ -40,11 +40,11 @@ class HotelVentesType extends AbstractType
                 'submit',
                 SubmitType::class,
                 [
-                    'label' => 'Pull un hote',
+                    'label' => 'Acheter un hôte pour 1000 po',
                 ]
             );
     }
-/*
+    /*
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
