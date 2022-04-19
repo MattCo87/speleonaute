@@ -38,11 +38,12 @@ class MoteurCombatService2 extends ServiceEntityRepository
 
 
 
-    public function Creationhote( User $user){
+    public function Creationhote(User $user)
+    {
 
         $modele = $this->emm->findBy(['ouvrable' => 1]);
 
-        $taille = count($modele)-1;
+        $taille = count($modele) - 1;
         $a = rand(0, $taille);
 
         // Je crée une nouvelle créature
@@ -51,17 +52,15 @@ class MoteurCombatService2 extends ServiceEntityRepository
         $tab_creature[] = $creature;
         $this->manager->persist($creature);
         $this->manager->flush();
-        
-
-
     }
 
 
-    public function CreationMonstre( User $user){
+    public function CreationMonstre(User $user)
+    {
 
         $modele = $this->emm->find();
 
-        $taille = count($modele)-1;
+        $taille = count($modele) - 1;
         $a = rand(0, $taille);
 
         // Je crée une nouvelle créature
@@ -70,15 +69,12 @@ class MoteurCombatService2 extends ServiceEntityRepository
         $tab_creature[] = $creature;
         $this->manager->persist($creature);
         $this->manager->flush();
-        
-
-
     }
 
 
 
 
-    public function NiveauPlus( Creature $creature)
+    public function NiveauPlus(Creature $creature)
     {
         $idModele = $creature->getLienModele();
         $pointNiv = $creature->getLienModele()->getPointNiv();
@@ -108,41 +104,41 @@ class MoteurCombatService2 extends ServiceEntityRepository
         shuffle($tab_tas);
         // On choisit la stat et on ajoute 1 point
         for ($z = 0; $z < $pointNiv; $z++) {
-            $alea = rand(0, $total_points-1);
+            $alea = rand(0, $total_points - 1);
             $tab_final[] = $tab_tas[$alea];
         }
         $stat = $this->doctrine->getRepository(StatistiqueCreature::class)->findBy(['lienCreature' => $creature->getId()]);
-        for( $z = 0; $z < count($tab_final); $z++){
-            switch ($tab_final[$z]->getId()){
+        for ($z = 0; $z < count($tab_final); $z++) {
+            switch ($tab_final[$z]->getId()) {
                 case $stat[0]->getLienStatistique()->getId():
-                    $statFinal = $stat[0]->getValeur()+1;
+                    $statFinal = $stat[0]->getValeur() + 1;
                     $stat[0]->setValeur($statFinal);
                     $this->manager->persist($stat[0]);
-                break;
+                    break;
 
                 case $stat[1]->getLienStatistique()->getId():
-                    $statFinal = $stat[1]->getValeur()+1;
+                    $statFinal = $stat[1]->getValeur() + 1;
                     $stat[1]->setValeur($statFinal);
                     $this->manager->persist($stat[1]);
-                break;
+                    break;
 
                 case $stat[2]->getLienStatistique()->getId():
-                    $statFinal = $stat[2]->getValeur()+1;
+                    $statFinal = $stat[2]->getValeur() + 1;
                     $stat[2]->setValeur($statFinal);
                     $this->manager->persist($stat[2]);
-                break;
+                    break;
 
                 case $stat[3]->getLienStatistique()->getId():
-                    $statFinal = $stat[3]->getValeur()+1;
+                    $statFinal = $stat[3]->getValeur() + 1;
                     $stat[3]->setValeur($statFinal);
                     $this->manager->persist($stat[3]);
-                break;
+                    break;
 
                 case $stat[4]->getLienStatistique()->getId():
-                    $statFinal = $stat[4]->getValeur()+1;
+                    $statFinal = $stat[4]->getValeur() + 1;
                     $stat[4]->setValeur($statFinal);
                     $this->manager->persist($stat[4]);
-                break;
+                    break;
             }
         }
     }
@@ -155,7 +151,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
 
     public function combat(Formation $formation, Scenario $scenario, int $idCombat)
     {
-        
+
         /*
         Pour commencer on créer les tableau neccessaire au focntionnement du combat grace au données renseigner en entrée
         */
@@ -174,25 +170,25 @@ class MoteurCombatService2 extends ServiceEntityRepository
         $tiersCrea = $this->doctrine->getRepository(CreatureFormation::class)->findBy(['lienFormation' => $id]);
         //on creer les tableau de localisation ainsi que celui qui regroupe toute les hote en vie
         foreach ($tiersCrea as $crea) {
-            switch($crea->getLocalisation()){
+            switch ($crea->getLocalisation()) {
                 case 1:
                     $idCrea = $crea->getLienCreature();
                     array_push($tableauHotePex, $idCrea);
                     array_push($tableauHote1, $idCrea->getId());
                     array_push($tableauHote, $idCrea->getId());
-                break;
+                    break;
                 case 2:
                     $idCrea = $crea->getLienCreature();
                     array_push($tableauHotePex, $idCrea);
                     array_push($tableauHote2, $idCrea->getId());
                     array_push($tableauHote, $idCrea->getId());
-                break;
+                    break;
                 case 3:
                     $idCrea = $crea->getLienCreature();
                     array_push($tableauHotePex, $idCrea);
                     array_push($tableauHote3, $idCrea->getId());
                     array_push($tableauHote, $idCrea->getId());
-                break;
+                    break;
             }
         }
         /*
@@ -207,22 +203,22 @@ class MoteurCombatService2 extends ServiceEntityRepository
         $tiersCrea2 = $this->doctrine->getRepository(CreatureFormation::class)->findBy(['lienFormation' => $idScenario]);
         //on creer les tableau de localisation ainsi que celui qui regroupe toute les monstre en vie
         foreach ($tiersCrea2 as $crea) {
-            switch($crea->getLocalisation()){
+            switch ($crea->getLocalisation()) {
                 case 1:
                     $idCrea2 = $crea->getLienCreature();
                     array_push($tableauMonstre1, $idCrea2->getId());
                     array_push($tableauMonstre, $idCrea2->getId());
-                break;
+                    break;
                 case 2:
                     $idCrea2 = $crea->getLienCreature();
                     array_push($tableauMonstre2, $idCrea2->getId());
                     array_push($tableauMonstre, $idCrea2->getId());
-                break;
+                    break;
                 case 3:
                     $idCrea2 = $crea->getLienCreature();
                     array_push($tableauMonstre3, $idCrea2->getId());
                     array_push($tableauMonstre, $idCrea2->getId());
-                break;
+                    break;
             }
         }
         /* 
@@ -250,7 +246,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
             $Creature2['initiative'] = 0;
             $localisationsCrea = $this->doctrine->getRepository(CreatureFormation::class)->findBy(['lienFormation' => $id]);
             foreach ($localisationsCrea as $localisationCrea) {
-                if($localisationCrea->getLienCreature()->getId() == $hote){
+                if ($localisationCrea->getLienCreature()->getId() == $hote) {
                     $Creature2['localisation'] = $localisationCrea->getLocalisation();
                     $Creature2['strategie'] = $localisationCrea->getStrategie();
                 }
@@ -278,7 +274,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
             $Creature2['initiative'] = 0;
             $localisationsCrea = $this->doctrine->getRepository(CreatureFormation::class)->findBy(['lienFormation' => $idScenario]);
             foreach ($localisationsCrea as $localisationCrea) {
-                if($localisationCrea->getLienCreature()->getId() == $monstre){
+                if ($localisationCrea->getLienCreature()->getId() == $monstre) {
                     $Creature2['localisation'] = $localisationCrea->getLocalisation();
                     $Creature2['strategie'] = $localisationCrea->getStrategie();
                 }
@@ -291,8 +287,8 @@ class MoteurCombatService2 extends ServiceEntityRepository
         $tableauAction = array();
         foreach ($tableauCreature as $creature) {
             $strategie = $this->doctrine->getRepository(StrategieModele::class)->findBy(['lienModele' => $creature['idModele']]);
-            foreach($strategie as $str){           
-                if($str->getPositionStrategie() == $creature['strategie']){
+            foreach ($strategie as $str) {
+                if ($str->getPositionStrategie() == $creature['strategie']) {
                     $idStrategie = $str->getlienStrategie()->getId();
                 }
             }
@@ -309,7 +305,6 @@ class MoteurCombatService2 extends ServiceEntityRepository
                 $Action2['nombreCible'] = $action->getLienAction()->getNombreCible();
                 array_push($tableauAction, $Action2);
             }
-            
         }
         /* 
         On creer un fichier log pour le combat qu'on enrichira au fur et a mesure de celui ci et on renseignera la route du log 
@@ -365,35 +360,45 @@ class MoteurCombatService2 extends ServiceEntityRepository
         */
         $tour = 0;
         $tourAction = 0;
+        $localisation = [1 => "Devant", 2 => "Milieu", 3 => "Derrière",];
         //le combat continue tant qu'on a pas depasser la limite de tour ou qu'une des deux equipe n'est pas entierement morte
-        while ( $tour < 50 && ($tableauHote && $tableauMonstre) ){
+        while ($tour < 50 && ($tableauHote && $tableauMonstre)) {
             $tour++;
             $tourAction++;
-            $fsObject->appendToFile($new_file_path, "\n\n\n");
+            $fsObject->appendToFile($new_file_path, " \n\n\n");
+            $fsObject->appendToFile($new_file_path, " \n\n\n");
+            $fsObject->appendToFile($new_file_path, " \n\n\n");
             $fsObject->appendToFile($new_file_path, "###################################################\n");
-            $fsObject->appendToFile($new_file_path, "############           Tour " . $tour . "           ############\n");
+            $fsObject->appendToFile($new_file_path, "############           Tour " . $tour . "           ###########\n");
             $fsObject->appendToFile($new_file_path, "###################################################\n\n\n\n\n\n");
-            $fsObject->appendToFile($new_file_path, "Phase d'initiative" . "\n\n");
+            $fsObject->appendToFile($new_file_path, " \n\n");
             /* 
             on definie l'initiative de chaque creature en faisant d'abort celle des hote puis celle des monstre pour pouvoir afficher les deux equipe l'une a la suite de l'autre dans le log
             */
+            $fsObject->appendToFile($new_file_path, "Phase d'initiative de vos hôtes : \n");
+
             for ($i = 0; ($i < count($tableauCreature)); $i++) {
                 if ($tableauCreature[$i]['cote'] == 0 && $tableauCreature[$i]['pvActuel'] > 0) {
                     $random = rand(1, 20);
                     $tableauCreature[$i]['initiative'] = $tableauCreature[$i]['vitesse'] + $random;
-                    $fsObject->appendToFile($new_file_path, "initiative de " . $tableauCreature[$i]['nom'] . " est egale à sa vitesse " . $tableauCreature[$i]['vitesse'] . " + un jet d'initiative (" . $random . ") =" . $tableauCreature[$i]['initiative'] . "\n");
+                    $fsObject->appendToFile($new_file_path, $tableauCreature[$i]['nom'] . " vitesse " . $tableauCreature[$i]['vitesse'] . " + un jet d20 (" . $random . ") = " . $tableauCreature[$i]['initiative'] . "\n");
                 }
             }
-            $fsObject->appendToFile($new_file_path, "\n");
+            $fsObject->appendToFile($new_file_path, " \n");
+            $fsObject->appendToFile($new_file_path, "Phase d'initiative des monstres :\n");
             for ($i = 0; ($i < count($tableauCreature)); $i++) {
                 if ($tableauCreature[$i]['cote'] == 1 && $tableauCreature[$i]['pvActuel'] > 0) {
                     $random = rand(1, 20);
                     $tableauCreature[$i]['initiative'] = $tableauCreature[$i]['vitesse'] + $random;
-                    $fsObject->appendToFile($new_file_path, "initiative de " . $tableauCreature[$i]['nom'] . " est egale à sa vitesse " . $tableauCreature[$i]['vitesse'] . " + un jet d'initiative (" . $random . ") =" . $tableauCreature[$i]['initiative'] . "\n");
+                    $fsObject->appendToFile($new_file_path, $tableauCreature[$i]['nom'] . " vitesse " . $tableauCreature[$i]['vitesse'] . " + un jet d20 (" . $random . ") = " . $tableauCreature[$i]['initiative'] . "\n");
                 }
             }
             $fsObject->appendToFile($new_file_path, "\n");
+            $fsObject->appendToFile($new_file_path, " \n");
             $fsObject->appendToFile($new_file_path, "###################################################\n\n");
+            $fsObject->appendToFile($new_file_path, " \n");
+            $fsObject->appendToFile($new_file_path, "Phase d'actions \n");
+            $fsObject->appendToFile($new_file_path, " \n");
             /* 
             On tri le tablaeu de toutes les creatures par ordre decroissant d'initiative pour ensuite effectuer les actions dans le bonne ordre en deroulant le tableau
             */
@@ -405,9 +410,9 @@ class MoteurCombatService2 extends ServiceEntityRepository
             /* 
             On va donc passer sur chaque creature du tableau pour la faire agir
             */
-            for($z=0;$z < count($tableauCreature); $z++ ){
+            for ($z = 0; $z < count($tableauCreature); $z++) {
                 //mais elle n'agira que si elle est en vie et si aucune des deux team n'est entierement eliminé
-                if ($tableauCreature[$z]['pvActuel'] > 0 && $tableauHote && $tableauMonstre ) {
+                if ($tableauCreature[$z]['pvActuel'] > 0 && $tableauHote && $tableauMonstre) {
                     //on increment la variable qui permet de savoir qu'elle action de la strategie doit etre utilisé
                     if ($tourAction == 6) {
                         $tourAction = 1;
@@ -421,11 +426,23 @@ class MoteurCombatService2 extends ServiceEntityRepository
                             $indexAction++;
                         }
                     }
+                    if ($tableauCreature[$z]['cote'] == 0) {
+                        $fsObject->appendToFile($new_file_path, "Allié : \n");
+                    }
+
+                    if ($tableauCreature[$z]['cote'] == 1) {
+                        $fsObject->appendToFile($new_file_path, "Ennemi : \n");
+                    }
+
                     /* 
                     On s'apprete a trouver la ou les cible de l'action. Pour cela il nous faut creer des copie des tableau de localisation car une meme action ne peut cibler quelqu'un qu'une seule fois et donc on va vider les tableau petit a petit.
                     Mais on doit recuperer les tableau plein pour l'action suivante donc on creer des copie avant de derouler une action
                     */
-                    $fsObject->appendToFile($new_file_path, "Action " . $tableauAction[$indexAction]['nom'] . "(Tier " . $tableauAction[$indexAction]['tier'] . ") - localisation ".$tableauAction[$indexAction]['localisation']." ciblera ".$tableauAction[$indexAction]['nombreCible']." creature\n");
+                    $fsObject->appendToFile($new_file_path, $tableauCreature[$z]['nom'] . " \n");
+                    $fsObject->appendToFile($new_file_path, "Action " . $tableauAction[$indexAction]['nom'] . "(Tier " . $tableauAction[$indexAction]['tier'] . ")\n");
+                    $fsObject->appendToFile($new_file_path, "Localisation : " . $localisation[$tableauAction[$indexAction]['localisation']] . " -> cible " . $tableauAction[$indexAction]['nombreCible'] . " creature(s)\n");
+                    $fsObject->appendToFile($new_file_path, " \n");
+                    $fsObject->appendToFile($new_file_path, "---------------------------------------------------\n");
                     $tableauMonstre1Copie = $tableauMonstre1;
                     $tableauMonstre2Copie = $tableauMonstre2;
                     $tableauMonstre3Copie = $tableauMonstre3;
@@ -436,7 +453,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
                     /* 
                     Une action ce repetera autant de fois qu'elle a de potentiel cible, limité par le nombre de coup q'elle a le droit de mettre et le nombre de personne pouvant etre taper
                     */
-                    do{
+                    do {
                         /* 
                         On va regarder la localisation de l'action puis commencer par chercher une cible a cet endroit la. On prendra une cible aleatoire a la bonne localisation. Si il n'y a personne, alors nous passerons a la localisation suivante et ainsi de suite. Si personne n'est disponible on met fin a l'action.
                         Devant>millieu>derriere>devant
@@ -445,7 +462,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
                         //on verifie si c'est un hote et si oui on visera des monstre
                         if ($tableauCreature[$z]['cote'] == 0) {
                             //target devant
-                            if($tableauAction[$indexAction]['localisation'] == 1 && $tableauMonstre1Copie){
+                            if ($tableauAction[$indexAction]['localisation'] == 1 && $tableauMonstre1Copie) {
                                 $taille = count($tableauMonstre1Copie) - 1;
                                 $a = rand(0, $taille);
                                 $idCible = $tableauMonstre1Copie[$a];
@@ -459,8 +476,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                         $cible++;
                                     }
                                 }
-                            }
-                            else if($tableauAction[$indexAction]['localisation'] == 1 && empty($tableauMonstre1Copie) && $tableauMonstre2Copie){
+                            } else if ($tableauAction[$indexAction]['localisation'] == 1 && empty($tableauMonstre1Copie) && $tableauMonstre2Copie) {
                                 $taille = count($tableauMonstre2Copie) - 1;
                                 $a = rand(0, $taille);
                                 $idCible = $tableauMonstre2Copie[$a];
@@ -474,8 +490,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                         $cible++;
                                     }
                                 }
-                            }
-                            else if($tableauAction[$indexAction]['localisation'] == 1 && empty($tableauMonstre1Copie) && empty($tableauMonstre2Copie) && $tableauMonstre3Copie){
+                            } else if ($tableauAction[$indexAction]['localisation'] == 1 && empty($tableauMonstre1Copie) && empty($tableauMonstre2Copie) && $tableauMonstre3Copie) {
                                 $taille = count($tableauMonstre3Copie) - 1;
                                 $a = rand(0, $taille);
                                 $idCible = $tableauMonstre3Copie[$a];
@@ -491,13 +506,12 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                         $cible++;
                                     }
                                 }
-                            }
-                            else if($tableauAction[$indexAction]['localisation'] == 1 && empty($tableauMonstre1Copie) && empty($tableauMonstre2Copie) && empty($tableauMonstre3Copie)){
+                            } else if ($tableauAction[$indexAction]['localisation'] == 1 && empty($tableauMonstre1Copie) && empty($tableauMonstre2Copie) && empty($tableauMonstre3Copie)) {
                                 $nbCible = 0;
                             }
 
                             //target millieu
-                            else if($tableauAction[$indexAction]['localisation'] == 2 && $tableauMonstre2Copie){
+                            else if ($tableauAction[$indexAction]['localisation'] == 2 && $tableauMonstre2Copie) {
                                 $taille = count($tableauMonstre2Copie) - 1;
                                 $a = rand(0, $taille);
                                 $idCible = $tableauMonstre2Copie[$a];
@@ -511,8 +525,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                         $cible++;
                                     }
                                 }
-                            }
-                            else if($tableauAction[$indexAction]['localisation'] == 2 && empty($tableauMonstre2Copie) && $tableauMonstre3Copie){
+                            } else if ($tableauAction[$indexAction]['localisation'] == 2 && empty($tableauMonstre2Copie) && $tableauMonstre3Copie) {
                                 $taille = count($tableauMonstre3Copie) - 1;
                                 $a = rand(0, $taille);
                                 $idCible = $tableauMonstre3Copie[$a];
@@ -526,8 +539,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                         $cible++;
                                     }
                                 }
-                            }
-                            else if($tableauAction[$indexAction]['localisation'] == 2 && empty($tableauMonstre2Copie) && empty($tableauMonstre3Copie) && $tableauMonstre1Copie){
+                            } else if ($tableauAction[$indexAction]['localisation'] == 2 && empty($tableauMonstre2Copie) && empty($tableauMonstre3Copie) && $tableauMonstre1Copie) {
                                 $taille = count($tableauMonstre1Copie) - 1;
                                 $a = rand(0, $taille);
                                 $idCible = $tableauMonstre1Copie[$a];
@@ -541,13 +553,12 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                         $cible++;
                                     }
                                 }
-                            }
-                            else if($tableauAction[$indexAction]['localisation'] == 2 && empty($tableauMonstre2Copie) && empty($tableauMonstre3Copie) && empty($tableauMonstre1Copie)){
+                            } else if ($tableauAction[$indexAction]['localisation'] == 2 && empty($tableauMonstre2Copie) && empty($tableauMonstre3Copie) && empty($tableauMonstre1Copie)) {
                                 $nbCible = 0;
                             }
 
                             //target derriere
-                            else if($tableauAction[$indexAction]['localisation'] == 3 && $tableauMonstre3Copie){
+                            else if ($tableauAction[$indexAction]['localisation'] == 3 && $tableauMonstre3Copie) {
                                 $taille = count($tableauMonstre3Copie) - 1;
                                 $a = rand(0, $taille);
                                 $idCible = $tableauMonstre3Copie[$a];
@@ -561,8 +572,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                         $cible++;
                                     }
                                 }
-                            }
-                            else if($tableauAction[$indexAction]['localisation'] == 3 && empty($tableauMonstre3Copie) && $tableauMonstre1Copie){
+                            } else if ($tableauAction[$indexAction]['localisation'] == 3 && empty($tableauMonstre3Copie) && $tableauMonstre1Copie) {
                                 $taille = count($tableauMonstre1Copie) - 1;
                                 $a = rand(0, $taille);
                                 $idCible = $tableauMonstre1Copie[$a];
@@ -576,8 +586,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                         $cible++;
                                     }
                                 }
-                            }
-                            else if($tableauAction[$indexAction]['localisation'] == 3 && empty($tableauMonstre3Copie) && empty($tableauMonstre1Copie) && $tableauMonstre2Copie){
+                            } else if ($tableauAction[$indexAction]['localisation'] == 3 && empty($tableauMonstre3Copie) && empty($tableauMonstre1Copie) && $tableauMonstre2Copie) {
                                 $taille = count($tableauMonstre2Copie) - 1;
                                 $a = rand(0, $taille);
                                 $idCible = $tableauMonstre2Copie[$a];
@@ -591,15 +600,14 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                         $cible++;
                                     }
                                 }
-                            }
-                            else if($tableauAction[$indexAction]['localisation'] == 3 && empty($tableauMonstre3Copie) && empty($tableauMonstre1Copie) && empty($tableauMonstre2Copie)){
+                            } else if ($tableauAction[$indexAction]['localisation'] == 3 && empty($tableauMonstre3Copie) && empty($tableauMonstre1Copie) && empty($tableauMonstre2Copie)) {
                                 $nbCible = 0;
                             }
                         }
                         //on verifie si c'est un monstre et si oui on visera des hotes
-                        if ($tableauCreature[$z]['cote'] == 1){
+                        if ($tableauCreature[$z]['cote'] == 1) {
                             //target devant
-                            if($tableauAction[$indexAction]['localisation'] == 1 && $tableauHote1Copie){
+                            if ($tableauAction[$indexAction]['localisation'] == 1 && $tableauHote1Copie) {
                                 $taille = count($tableauHote1Copie) - 1;
                                 $a = rand(0, $taille);
                                 $idCible = $tableauHote1Copie[$a];
@@ -613,8 +621,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                         $cible++;
                                     }
                                 }
-                            }
-                            else if($tableauAction[$indexAction]['localisation'] == 1 && empty($tableauHote1Copie) && $tableauHote2Copie){
+                            } else if ($tableauAction[$indexAction]['localisation'] == 1 && empty($tableauHote1Copie) && $tableauHote2Copie) {
                                 $taille = count($tableauHote2Copie) - 1;
                                 $a = rand(0, $taille);
                                 $idCible = $tableauHote2Copie[$a];
@@ -628,8 +635,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                         $cible++;
                                     }
                                 }
-                            }
-                            else if($tableauAction[$indexAction]['localisation'] == 1 && empty($tableauHote1Copie) && empty($tableauHote2Copie) && $tableauHote3Copie){
+                            } else if ($tableauAction[$indexAction]['localisation'] == 1 && empty($tableauHote1Copie) && empty($tableauHote2Copie) && $tableauHote3Copie) {
                                 $taille = count($tableauHote3Copie) - 1;
                                 $a = rand(0, $taille);
                                 $idCible = $tableauHote3Copie[$a];
@@ -643,13 +649,12 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                         $cible++;
                                     }
                                 }
-                            }
-                            else if($tableauAction[$indexAction]['localisation'] == 1 && empty($tableauHote1Copie) && empty($tableauHote2Copie) && empty($tableauHote3Copie)){
+                            } else if ($tableauAction[$indexAction]['localisation'] == 1 && empty($tableauHote1Copie) && empty($tableauHote2Copie) && empty($tableauHote3Copie)) {
                                 $nbCible = 0;
                             }
 
                             //target millieu
-                            else if($tableauAction[$indexAction]['localisation'] == 2 && $tableauHote2Copie){
+                            else if ($tableauAction[$indexAction]['localisation'] == 2 && $tableauHote2Copie) {
                                 $taille = count($tableauHote2Copie) - 1;
                                 $a = rand(0, $taille);
                                 $idCible = $tableauHote2Copie[$a];
@@ -663,8 +668,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                         $cible++;
                                     }
                                 }
-                            }
-                            else if($tableauAction[$indexAction]['localisation'] == 2 && empty($tableauHote2Copie) && $tableauHote3Copie){
+                            } else if ($tableauAction[$indexAction]['localisation'] == 2 && empty($tableauHote2Copie) && $tableauHote3Copie) {
                                 $taille = count($tableauHote3Copie) - 1;
                                 $a = rand(0, $taille);
                                 $idCible = $tableauHote3Copie[$a];
@@ -678,8 +682,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                         $cible++;
                                     }
                                 }
-                            }
-                            else if($tableauAction[$indexAction]['localisation'] == 2 && empty($tableauHote2Copie) && empty($tableauHote3Copie) && $tableauHote1Copie){
+                            } else if ($tableauAction[$indexAction]['localisation'] == 2 && empty($tableauHote2Copie) && empty($tableauHote3Copie) && $tableauHote1Copie) {
                                 $taille = count($tableauHote1Copie) - 1;
                                 $a = rand(0, $taille);
                                 $idCible = $tableauHote1Copie[$a];
@@ -693,13 +696,12 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                         $cible++;
                                     }
                                 }
-                            }
-                            else if($tableauAction[$indexAction]['localisation'] == 2 && empty($tableauHote2Copie) && empty($tableauHote3Copie) && empty($tableauHote1Copie)){
+                            } else if ($tableauAction[$indexAction]['localisation'] == 2 && empty($tableauHote2Copie) && empty($tableauHote3Copie) && empty($tableauHote1Copie)) {
                                 $nbCible = 0;
                             }
 
                             //target derriere
-                            else if($tableauAction[$indexAction]['localisation'] == 3 && $tableauHote3Copie){
+                            else if ($tableauAction[$indexAction]['localisation'] == 3 && $tableauHote3Copie) {
                                 $taille = count($tableauHote3Copie) - 1;
                                 $a = rand(0, $taille);
                                 $idCible = $tableauHote3Copie[$a];
@@ -713,8 +715,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                         $cible++;
                                     }
                                 }
-                            }
-                            else if($tableauAction[$indexAction]['localisation'] == 3 && empty($tableauHote3Copie) && $tableauHote1Copie){
+                            } else if ($tableauAction[$indexAction]['localisation'] == 3 && empty($tableauHote3Copie) && $tableauHote1Copie) {
                                 $taille = count($tableauHote1Copie) - 1;
                                 $a = rand(0, $taille);
                                 $idCible = $tableauHote1Copie[$a];
@@ -728,8 +729,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                         $cible++;
                                     }
                                 }
-                            }
-                            else if($tableauAction[$indexAction]['localisation'] == 3 && empty($tableauHote3Copie) && empty($tableauHote1Copie) && $tableauHote2Copie){
+                            } else if ($tableauAction[$indexAction]['localisation'] == 3 && empty($tableauHote3Copie) && empty($tableauHote1Copie) && $tableauHote2Copie) {
                                 $taille = count($tableauHote2Copie) - 1;
                                 $a = rand(0, $taille);
                                 $idCible = $tableauHote2Copie[$a];
@@ -743,110 +743,113 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                         $cible++;
                                     }
                                 }
-                            }
-                            else if($tableauAction[$indexAction]['localisation'] == 3 && empty($tableauHote3Copie) && empty($tableauHote1Copie) && empty($tableauHote2Copie)){
+                            } else if ($tableauAction[$indexAction]['localisation'] == 3 && empty($tableauHote3Copie) && empty($tableauHote1Copie) && empty($tableauHote2Copie)) {
                                 $nbCible = 0;
                             }
                         }
                         /* 
                         si la cible a etait determiner et qu'il reste au moins un coup a mettre on realise l'action
                         */
-                        if($nbCible > 0){
+                        if ($nbCible > 0) {
                             //realise l'action
                             // on commence par effectuer le jet de toucher de la creature attaquante
                             $d20 = rand(1, 20);
                             $toucher = $tableauCreature[$z]['toucher'] + $tableauAction[$indexAction]['toucher'] + $d20;
-                            $fsObject->appendToFile($new_file_path, "####" . $tableauCreature[$z]['nom'] . " realise l'action " . $tableauAction[$indexAction]['nom'] . "(Tier " . $tableauAction[$indexAction]['tier'] . ") contre " . $tableauCreature[$cible]['nom'] . "\n");
-                            $fsObject->appendToFile($new_file_path, "attaque de " . $tableauCreature[$z]['nom'] . " est egale à son toucher " . $tableauCreature[$z]['toucher'] . " plus un jet de toucher (" . $d20 . ") auquel on ajoute aussi le bonus de toucher le l'action " . $tableauAction[$indexAction]['toucher'] . " = " . $toucher . "\n");
+                            $fsObject->appendToFile($new_file_path, " \n");
+                            $fsObject->appendToFile($new_file_path, "Contre " . $tableauCreature[$cible]['nom'] . " (" . $localisation[$tableauCreature[$cible]['localisation']] . ") \n");
+                            $fsObject->appendToFile($new_file_path, "Toucher : " . $tableauCreature[$z]['toucher'] . " plus un jet d20 : " . $d20 . " + bonus action " . $tableauAction[$indexAction]['toucher'] . " = " . $toucher . "\n");
                             $fsObject->appendToFile($new_file_path, "\n");
                             //le defenseur effectue une defense
                             $defense = $tableauCreature[$cible]['toucher'] + $d20;
-                            $fsObject->appendToFile($new_file_path, "defense de " . $tableauCreature[$cible]['nom'] . " est egale à son toucher " . $tableauCreature[$cible]['toucher'] . " plus un jet de toucher (" . $d20 . ") = " . $defense . "\n");
+                            $fsObject->appendToFile($new_file_path, "Défense : " . $tableauCreature[$cible]['toucher'] . " plus un jet d20 : " . $d20 . " = " . $defense . "\n");
                             //en cas de defense superieur ou egale au toucher l'action n'a pas etait efficace dans e cas contraire alors il faut poursuivre
                             if ($toucher < $defense) {
-                                $fsObject->appendToFile($new_file_path, "Defense reussite" . "\n");
+                                $fsObject->appendToFile($new_file_path, "! Attaque échouée !" . "\n");
                                 $fsObject->appendToFile($new_file_path, "\n");
                             } else {
-                                $fsObject->appendToFile($new_file_path, "Defense echoué" . "\n\n");
+                                $fsObject->appendToFile($new_file_path, "⚔ Attaque réussie ⚔" . "\n\n");
+                                $fsObject->appendToFile($new_file_path, " \n");
                                 //si l'attaque a reussie on regarde combien de degat a effectuer l'attaquant
                                 $degat = floor($tableauCreature[$z]['degat'] / 2) + $tableauAction[$indexAction]['degat'];
-                                $fsObject->appendToFile($new_file_path, "degat de " . $tableauCreature[$z]['nom'] . " est egale à son degat diviser par deux (arrondie a l'inferieur) (" . floor($tableauCreature[$z]['degat'] / 2) . ") plus le bonus de degat le l'action " . $tableauAction[$indexAction]['degat'] . " = " . $degat . "\n");
+                                $fsObject->appendToFile($new_file_path, "Dégâts : " . floor($tableauCreature[$z]['degat'] / 2) . " + bonus action " . $tableauAction[$indexAction]['degat'] . " = " . $degat . "\n");
                                 $fsObject->appendToFile($new_file_path, "\n");
                                 //on regarde de combien de degat le defenseur encaisse l'attaque
                                 $resistance = floor($tableauCreature[$cible]['resistance'] / 2);
-                                $fsObject->appendToFile($new_file_path, "resistance de " . $tableauCreature[$cible]['nom'] . " est egale à sa resistance diviser par deux (arrondie a l'inferieur) (" . floor($tableauCreature[$cible]['resistance'] / 2) . ") = " . $resistance . "\n");
+                                $fsObject->appendToFile($new_file_path, "Résistance : " . floor($tableauCreature[$cible]['resistance'] / 2) . "\n");
                                 //si le defenseur encaisse la totalité alors l'attaque n'a pas produit de perte de point de vie
                                 if ($degat <= $resistance) {
-                                    $fsObject->appendToFile($new_file_path, "" . $tableauCreature[$cible]['nom'] . " à resister a l'attaque" . "\n");
+                                    $fsObject->appendToFile($new_file_path, "" . $tableauCreature[$cible]['nom'] . " a résisté à l'attaque" . "\n");
                                     $fsObject->appendToFile($new_file_path, "\n\n");
                                 } else {
                                     // si les degat sont superieur a la resistance alors on calcule la difference et c'est le nombre de point de vie perdu par l'attaquant
                                     $degatSubit = $degat - $resistance;
-                                    $fsObject->appendToFile($new_file_path, "" . $tableauCreature[$cible]['nom'] . " à subit " . $degatSubit . " de degat" . "\n");
+                                    $fsObject->appendToFile($new_file_path, "" . $tableauCreature[$cible]['nom'] . " a subi " . $degatSubit . " de dégât" . "\n");
                                     $fsObject->appendToFile($new_file_path, "\n");
                                     // on calcule les point de vie actuel de la cible en lui soustrayant les point de degat subit
                                     $tableauCreature[$cible]['pvActuel'] = $tableauCreature[$cible]['pvActuel'] - $degatSubit;
                                     //si ses point de vie actuel tombe sous 0 alos il meurt et on le retire du tableau d'hote ou de monstre qui permette de verifier si une equipe est completement eliminé
                                     if ($tableauCreature[$cible]['pvActuel'] <= 0) {
-                                       // var_dump($tableauCreature[$cible]);
-                                        $fsObject->appendToFile($new_file_path, "" . $tableauCreature[$cible]['nom'] . " est mort au combat" . "\n");
-                                        $fsObject->appendToFile($new_file_path, "\n");
+                                        // var_dump($tableauCreature[$cible]);
+                                        $fsObject->appendToFile($new_file_path, " \n");
+                                        $fsObject->appendToFile($new_file_path, "☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠\n");
+                                        $fsObject->appendToFile($new_file_path, "☠☠☠    " . $tableauCreature[$cible]['nom'] . " est mort au combat " . "\n");
+                                        $fsObject->appendToFile($new_file_path, "☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠\n");
                                         if ($tableauCreature[$cible]['cote'] == 0) {
                                             //vide le tableauhote et tableaumonstre correspondant a la localisation pour pas cibler quelqu'un de mort
-                                            switch($tableauCreature[$cible]['localisation']){
+                                            switch ($tableauCreature[$cible]['localisation']) {
                                                 case 1:
-                                                    for($i = 0; $i < count($tableauHote1); $i++){
-                                                        if($tableauCreature[$cible]['id'] == $tableauHote1[$i]){
+                                                    for ($i = 0; $i < count($tableauHote1); $i++) {
+                                                        if ($tableauCreature[$cible]['id'] == $tableauHote1[$i]) {
                                                             array_splice($tableauHote1, $i, 1);
                                                         }
                                                     }
-                                                break;
+                                                    break;
                                                 case 2:
-                                                    for($i = 0; $i < count($tableauHote2); $i++){
-                                                        if($tableauCreature[$cible]['id'] == $tableauHote2[$i]){
+                                                    for ($i = 0; $i < count($tableauHote2); $i++) {
+                                                        if ($tableauCreature[$cible]['id'] == $tableauHote2[$i]) {
                                                             array_splice($tableauHote2, $i, 1);
                                                         }
                                                     }
-                                                break;
+                                                    break;
                                                 case 3:
-                                                    for($i = 0; $i < count($tableauHote3); $i++){
-                                                        if($tableauCreature[$cible]['id'] == $tableauHote3[$i]){
+                                                    for ($i = 0; $i < count($tableauHote3); $i++) {
+                                                        if ($tableauCreature[$cible]['id'] == $tableauHote3[$i]) {
                                                             array_splice($tableauHote3, $i, 1);
                                                         }
                                                     }
-                                                break;
+                                                    break;
                                             }
-                                            for($i = 0; $i < count($tableauHote); $i++){
-                                                if($tableauCreature[$cible]['id'] == $tableauHote[$i]){    
+                                            for ($i = 0; $i < count($tableauHote); $i++) {
+                                                if ($tableauCreature[$cible]['id'] == $tableauHote[$i]) {
                                                     array_splice($tableauHote, $i, 1);
                                                 }
-                                            }    
+                                            }
                                         } else {
-                                            switch($tableauCreature[$cible]['localisation']){
+                                            switch ($tableauCreature[$cible]['localisation']) {
                                                 case 1:
-                                                    for($i = 0; $i < count($tableauMonstre1); $i++){
-                                                        if($tableauCreature[$cible]['id'] == $tableauMonstre1[$i]){
+                                                    for ($i = 0; $i < count($tableauMonstre1); $i++) {
+                                                        if ($tableauCreature[$cible]['id'] == $tableauMonstre1[$i]) {
                                                             array_splice($tableauMonstre1, $i, 1);
                                                         }
                                                     }
-                                                break;
+                                                    break;
                                                 case 2:
-                                                    for($i = 0; $i < count($tableauMonstre2); $i++){
-                                                        if($tableauCreature[$cible]['id'] == $tableauMonstre2[$i]){
+                                                    for ($i = 0; $i < count($tableauMonstre2); $i++) {
+                                                        if ($tableauCreature[$cible]['id'] == $tableauMonstre2[$i]) {
                                                             array_splice($tableauMonstre2, $i, 1);
                                                         }
                                                     }
-                                                break;
+                                                    break;
                                                 case 3:
-                                                    for($i = 0; $i < count($tableauMonstre3); $i++){
-                                                        if($tableauCreature[$cible]['id'] == $tableauMonstre3[$i]){
+                                                    for ($i = 0; $i < count($tableauMonstre3); $i++) {
+                                                        if ($tableauCreature[$cible]['id'] == $tableauMonstre3[$i]) {
                                                             array_splice($tableauMonstre3, $i, 1);
                                                         }
                                                     }
-                                                break;
+                                                    break;
                                             }
-                                            for($i = 0; $i < count($tableauMonstre); $i++){
-                                                if($tableauCreature[$cible]['id'] == $tableauMonstre[$i]){
+                                            for ($i = 0; $i < count($tableauMonstre); $i++) {
+                                                if ($tableauCreature[$cible]['id'] == $tableauMonstre[$i]) {
                                                     array_splice($tableauMonstre, $i, 1);
                                                 }
                                             }
@@ -857,11 +860,14 @@ class MoteurCombatService2 extends ServiceEntityRepository
                                     }
                                 }
                             }
-                            $fsObject->appendToFile($new_file_path, "#######################\n\n");
-                            $nbCible = $nbCible-1;
+
+                            $nbCible = $nbCible - 1;
                         }
-                    }while($nbCible>0);
+                    } while ($nbCible > 0);
+
+                    $fsObject->appendToFile($new_file_path, " \n\n");
                     $fsObject->appendToFile($new_file_path, "######################################################\n\n");
+                    $fsObject->appendToFile($new_file_path, " \n\n");
                 }
             }
         }
@@ -869,25 +875,52 @@ class MoteurCombatService2 extends ServiceEntityRepository
         //si tout les hote sont mort defaite sinon victoire
         if (empty($tableauHote)) {
             $fsObject->appendToFile($new_file_path, "\n");
-            $fsObject->appendToFile($new_file_path, "\n");
-            $fsObject->appendToFile($new_file_path, "###################################################\n");
-            $fsObject->appendToFile($new_file_path, "############           Defaite           ############\n");
-            $fsObject->appendToFile($new_file_path, "###################################################\n\n\n\n\n\n");
+            $fsObject->appendToFile($new_file_path, " \n");
+            $fsObject->appendToFile($new_file_path, <<<TXT
+            _____              _           _            
+            |_   _|__  ___     | |__   ___ | |_ ___  ___ 
+              | |/ _ \/ __|    | '_ \ / _ \| __/ _ \/ __|
+              | |  __/\__ \    | | | | (_) | ||  __/\__ \
+              |_|\___||___/    |_| |_|\___/ \__\___||___/
+                                                         
+                             _                              _       
+             ___  ___  _ __ | |_       _ __ ___   ___  _ __| |_ ___ 
+            / __|/ _ \| '_ \| __|     | '_ ` _ \ / _ \| '__| __/ __|
+            \__ \ (_) | | | | |_      | | | | | | (_) | |  | |_\__ \
+            |___/\___/|_| |_|\__|     |_| |_| |_|\___/|_|   \__|___/
+            TXT);
+            $fsObject->appendToFile($new_file_path, " \n\n");
             $combat = $this->doctrine->getRepository(Combat::class)->findBy(['id' => $idCombat]);
             $combat[0]->setFichierLog($new_file_path);
             $this->manager->persist($combat[0]);
             $this->manager->flush();
+            $fsObject->appendToFile($new_file_path, " \n\n");
         } else {
-            $fsObject->appendToFile($new_file_path, "###################################################\n");
-            $fsObject->appendToFile($new_file_path, "############           Victoire           ############\n");
-            $fsObject->appendToFile($new_file_path, "###################################################\n\n\n\n\n\n");
+            $fsObject->appendToFile($new_file_path, " \n\n");
+            $fsObject->appendToFile($new_file_path, <<<TXT
+            _____              _           _            
+            |_   _|__  ___     | |__   ___ | |_ ___  ___ 
+              | |/ _ \/ __|    | '_ \ / _ \| __/ _ \/ __|
+              | |  __/\__ \    | | | | (_) | ||  __/\__ \
+              |_|\___||___/    |_| |_|\___/ \__\___||___/
+                                                         
+                         _                                    _ 
+              ___  _ __ | |_    __ _  __ _  __ _ _ __   ___  | |
+             / _ \| '_ \| __|  / _` |/ _` |/ _` | '_ \ / _ \ | |
+            | (_) | | | | |_  | (_| | (_| | (_| | | | |  __/ |_|
+             \___/|_| |_|\__|  \__, |\__,_|\__, |_| |_|\___| (_)
+                               |___/       |___/                
+            TXT);
+            $fsObject->appendToFile($new_file_path, " \n\n");
+            $fsObject->appendToFile($new_file_path, " \n\n");
+            $fsObject->appendToFile($new_file_path, " \n\n");
             //on recupere les recompense du scenario qu'on va donner en pex au hote et en reputation au joueur
             $recompense = $scenario->getRecompense();
             for ($i = 0; ($i < count($tableauCreature)); $i++) {
                 if ($tableauCreature[$i]['cote'] == 0) {
                     $tableauCreature[$i]['exp'] = $tableauCreature[$i]['exp'] + $recompense;
                     // modifier l'exp de l'hote en bdd
-                    $fsObject->appendToFile($new_file_path, "" . $tableauCreature[$i]['nom'] . " à gagné " . $recompense . " pex" . "\n");
+                    $fsObject->appendToFile($new_file_path, "" . $tableauCreature[$i]['nom'] . " a gagné " . $recompense . " points d'expérience" . "\n");
                 }
             }
             //on passe sur chaque hote pour modifier dans la base son nombre de pex et si il a passer un niveau alors on le change aussi et on soustrait le nombre de pex neccessaire au passage de niveau
@@ -896,28 +929,28 @@ class MoteurCombatService2 extends ServiceEntityRepository
                 $pex = $tableauHotePex[$i]->getExp() + $recompense;
                 $tableauHotePex[$i]->setExp($pex);
                 //On verifie si les hotes passe un niveau
-                if($tableauHotePex[$i]->getNiveau() < 10){
-                    if ($tableauHotePex[$i]->getExp() >= $tableauHotePex[$i]->getNiveau()*100 ){
-                        $tableauHotePex[$i]->setExp($tableauHotePex[$i]->getExp()-$tableauHotePex[$i]->getNiveau()*100);
-                        $tableauHotePex[$i]->setNiveau($tableauHotePex[$i]->getNiveau()+1);
+                if ($tableauHotePex[$i]->getNiveau() < 10) {
+                    if ($tableauHotePex[$i]->getExp() >= $tableauHotePex[$i]->getNiveau() * 100) {
+                        $tableauHotePex[$i]->setExp($tableauHotePex[$i]->getExp() - $tableauHotePex[$i]->getNiveau() * 100);
+                        $tableauHotePex[$i]->setNiveau($tableauHotePex[$i]->getNiveau() + 1);
                         $this->NiveauPlus($tableauHotePex[$i]);
                     }
-                }else{
-                    if ($tableauHotePex[$i]->getExp() >= $tableauHotePex[$i]->getNiveau()*1000 ){
-                        $tableauHotePex[$i]->setExp($tableauHotePex[$i]->getExp()-$tableauHotePex[$i]->getNiveau()*1000);
-                        $tableauHotePex[$i]->setNiveau($tableauHotePex[$i]->getNiveau()+1);
+                } else {
+                    if ($tableauHotePex[$i]->getExp() >= $tableauHotePex[$i]->getNiveau() * 1000) {
+                        $tableauHotePex[$i]->setExp($tableauHotePex[$i]->getExp() - $tableauHotePex[$i]->getNiveau() * 1000);
+                        $tableauHotePex[$i]->setNiveau($tableauHotePex[$i]->getNiveau() + 1);
                         $this->NiveauPlus($tableauHotePex[$i]);
                     }
                 }
             }
-            $reputation = $formation->getLienUser()->getReputation() + $recompense*10;
+            $reputation = $formation->getLienUser()->getReputation() + $recompense * 10;
             $formation->getLienUser()->setReputation($reputation);
-            $monnaie = $formation->getLienUser()->getMonnaie() + ($recompense*10);
+            $monnaie = $formation->getLienUser()->getMonnaie() + ($recompense * 10);
             $formation->getLienUser()->setMonnaie($monnaie);
-            $random = rand(0,100);
-            if($random>95){
+            $random = rand(0, 100);
+            if ($random > 95) {
                 $this->Creationhote($formation->getLienUser());
-                $fsObject->appendToFile($new_file_path, "Vous avez gagné un nouvelle hote\n");
+                $fsObject->appendToFile($new_file_path, "Vous avez gagné un nouvel hôte\n");
             }
             $this->manager->persist($formation->getLienUser());
             $this->manager->persist($tableauHotePex[0]);
@@ -929,7 +962,8 @@ class MoteurCombatService2 extends ServiceEntityRepository
             $combat[0]->setFichierLog($new_file_path);
             $this->manager->persist($combat[0]);
             $this->manager->flush();
-            $fsObject->appendToFile($new_file_path, "" . $formation->getLienUser()->getPseudo() . " vous avez gagné " . $recompense . " de reputation, ce qui vous fait un total de " . $formation->getLienUser()->getReputation() . " reputation\n");
+            $fsObject->appendToFile($new_file_path, "" . $formation->getLienUser()->getPseudo() . ", vous avez gagné " . $recompense . " points de reputation !\n");
+            $fsObject->appendToFile($new_file_path, "Ce qui vous fait un total de " . $formation->getLienUser()->getReputation() . " reputation\n");
         }
     }
 }
