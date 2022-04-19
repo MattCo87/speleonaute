@@ -220,7 +220,8 @@ form[name=registration_form] {
             display: flex;
         }
 
-        a {
+        a,
+        .stats_user {
             background: rgba(255, 255, 255, 0.73);
             color: black;
             text-decoration: none;
@@ -233,12 +234,21 @@ form[name=registration_form] {
                 cursor: pointer;
             }
         }
+
+        .stats_user:hover {
+            transform: none;
+            cursor: auto;
+        }
     }
 
     .liste {
         grid-area: liste;
         padding: 0.5rem 2%;
         margin-right: 7%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        scrollbar-width: none;
+        margin-bottom: 1.5rem;
     }
 
     .menu_plus {
