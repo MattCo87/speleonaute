@@ -220,7 +220,8 @@ form[name=registration_form] {
             display: flex;
         }
 
-        a {
+        a,
+        .stats_user {
             background: rgba(255, 255, 255, 0.73);
             color: black;
             text-decoration: none;
@@ -232,6 +233,11 @@ form[name=registration_form] {
                 transform: scale(1.1);
                 cursor: pointer;
             }
+        }
+
+        .stats_user:hover {
+            transform: none;
+            cursor: auto;
         }
     }
 
