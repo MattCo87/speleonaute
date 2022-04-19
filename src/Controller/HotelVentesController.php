@@ -38,11 +38,21 @@ class HotelVentesController extends AbstractController
         $form = $this->createForm(HotelVentesType::class,$tab);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid() && $user->getMonnaie()>=1000) {
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if($user->getMonnaie()<1000){
+                $this->addFlash(
+                    'notice',
+                    "Tu n'a pas assez d'argent"
+                );
+                return $this->redirectToRoute('app_hotel_ventes');
+            }
+
             $moteurCombatService->Creationhote($user);
                 $this->addFlash(
                     'notice',
-                    "hote bien créé"
+                    "Merci pour votre achat, un hote a etait envoyé à votre entrepot"
                 );
                 $monnaie = $user->getMonnaie() -1000;
                 $user->setMonnaie($monnaie);
