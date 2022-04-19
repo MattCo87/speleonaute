@@ -26,9 +26,9 @@
 		<div class="contenu_liste">
 			<h2>Vos combats:</h2>
 			<ul>
-				{% for idLog in idLogs  %}
+				{% for idLog in idLogs |reverse %}
 					<li>
-						<a href="{{ path('app_bureau', {'idlog' : idLog[0] }) }}">#{{ idLog[0] }}</a>
+						<a href="{{ path('app_bureau', {'idlog' : idLog[0] }) }}">#{{ idLog[0]+1 }}</a>
 					</li>
 				{% endfor %}
 			</ul>

@@ -270,7 +270,7 @@ window.addEventListener('wheel', activeMenu);
 			<div class="contenue2">
         {% if infolog | length > 4 %}
 				{% set i = 0 %}
-				{% for log in infolog %}
+				{% for log in infolog  %}
 					<pre>{{ log }}</pre>
 					{% set i = i + 1 %}
 				{% endfor %}

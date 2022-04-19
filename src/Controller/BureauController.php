@@ -64,6 +64,7 @@ class BureauController extends AbstractController
         }
         /************************************************************************************************ */
         //dd($infolog[1]);
+        //dd($idLog,$tableauLog,$infolog[1]);
         return $this->render('bureau/log.html.twig', [
             'profil'    => $temp_user,
             'idLogs' => $idLog,
