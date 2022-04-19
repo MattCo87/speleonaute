@@ -45,7 +45,9 @@ class RegistrationController extends AbstractController
                 $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
-                )
+                ),
+            $user->setMonnaie(0),
+            $user->setReputation(0)
             );
             /*
             // J'affecte 5 nouveaux personnages à l'utilisateur 
