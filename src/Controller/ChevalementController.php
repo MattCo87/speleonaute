@@ -46,6 +46,7 @@ class ChevalementController extends AbstractController
         $user = $this->security->getUser();
         $form = $this->createForm(ChevalementType::class, $tab);
         $form->handleRequest($request);
+        //dd($form['lienScenario']);
         $formation = $form['lienUser']->getData();
         $scenario = $form['lienScenario']->getData();
         $combat->setLienUser($user);
@@ -61,6 +62,15 @@ class ChevalementController extends AbstractController
                 $this->addFlash(
                     'notice',
                     "Hobb a refusé d'envoyer votre formation ! Est-elle bien complète, avec ses stratégies et positionnements définies ?"
+                );
+                return $this->redirectToRoute('app_chevalement');
+            }
+            //reputation stop
+            if ($temp_user->getReputation() < $scenario->getId()*1000) {
+
+                $this->addFlash(
+                    'notice',
+                    "Hobb a refusé d'envoyer votre formation ! tu n'est pas encore pret a allez à une telle profondeur"
                 );
                 return $this->redirectToRoute('app_chevalement');
             }
