@@ -16,8 +16,11 @@ use Symfony\Component\Security\Core\Security;
 use App\Repository\CreatureRepository;
 use App\Repository\FormationRepository;
 use App\Repository\CreatureFormationRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-
+/**
+ * @IsGranted("ROLE_USER")
+ */
 class FormationController extends AbstractController
 {
     private $security;

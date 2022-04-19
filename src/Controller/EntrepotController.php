@@ -10,9 +10,12 @@ use App\Repository\ModeleRepository;
 use App\Repository\StatistiqueCreatureRepository;
 use App\Repository\StrategieModeleRepository;
 use App\Repository\ActionStrategieRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 use Symfony\Component\Security\Core\Security;
-
+/**
+ * @IsGranted("ROLE_USER")
+ */
 class EntrepotController extends AbstractController
 {
     private $security;

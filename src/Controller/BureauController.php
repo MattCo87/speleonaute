@@ -8,7 +8,10 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+/**
+ * @IsGranted("ROLE_USER")
+ */
 class BureauController extends AbstractController
 {
     /**
@@ -23,8 +26,8 @@ class BureauController extends AbstractController
         $combats = $doctrine->getRepository(Combat::class)->findAll();
         foreach ($combats as $combat) {
             $logTemp = $combat->getFichierLog();
-            //$buffer = [];
-            $buffer[] = '';
+            $buffer = [];
+            //$buffer[] = '';
             if (false !== $handle = @fopen($logTemp, 'r')) {
                 while (($word = fgets($handle)) !== false) {
                     $buffer[] = $word;
