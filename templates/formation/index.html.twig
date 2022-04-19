@@ -4,12 +4,46 @@
 {% endblock %}
 
 {% block body %}
+<div class="contenu_jeu">
+    <h1>Vérifiez vos formations</h1>
+    <p>Dans le menu de droite vous pouvez ajouter des hôtes à votre formation et en préciser l'emplacement et la stratégie. À votre niveau actuel, celle-ci est la stratégie par défaut (1). Ci-dessous vous pouvez enlever des hôtes de vos formations. Pour ajouter un nouvel hôte ou le même hôte avec une nouvelle stratégie, veuillez en faire la sélection à gauche. Vous pouvez également choisir une position, c'est-à-dire la position de l'hôte dans la formation, devant ou derrière. Chaque créature de la fosse dirige ses attaques sur une position, alors choisissez-bien !</p>
+<p>Attention, pour avoir un maximum de chances de réussite au combat, il doit y avoir <em>au moins une et un maximum de trois créature(s) par position</em>.</p>
+	{% set i = 0 %}
+    <div class="formations">
+    {% for formation in tabformations %}
+        <div class="formation">
+        <h2>Formation : {{ formation.nom }}</h2>
+                {% if formation.composition|length <5 %}
+            <p>Il manque à cette formation {{ 5 - formation.composition|length }} hôte(s) !</p>
+        {% endif %}
 
-	<div>
-		<h1>FORMATION</h1>
+        <div class="hotes">
+        {% for varcreature in formation.composition %}
 
-		<section>
-			{{ form(form) }}
-			</section>
-		</div>
+
+            
+            <div class="hote whiteBorder">
+                <h3>{{ varcreature.nom }}</h3>
+                <p>Location : 
+                {% if varcreature.position is empty %}
+                    <span class="manque_val">à préciser, par défaut : </span>
+                {% endif %}
+                {% if varcreature.position == 1 %} Devant {% endif %}
+                {% if varcreature.position == 2 %} Milieu {% endif %}
+                {% if varcreature.position == 3 %} Derrière {% endif %}
+                </p>
+                <p>Stratégie : 
+                {% if varcreature.strategie is empty %}
+                    <span class="manque_val">Par défaut</span>
+                {% endif %}
+                {{ varcreature.strategie }}</p>
+                <a href="{{ path('app_formation_delete', {'formation': formation.id , 'creature' : varcreature.id}) }}">Enlever de la formation</a>
+            </div>
+        {% endfor %}
+        </div>
+        </div>
+        {% set i = i + 1 %}
+    {% endfor %}
+	</div>
+</div>
 	{% endblock %}

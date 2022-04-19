@@ -1,0 +1,14 @@
+
+<div class="zone_titre">
+<nav>
+    <a href="{{ path('app_hub') }}"> Hub </a>
+    <a href="{{ path('app_logout') }}"> Déconnexion </a>
+    <a href="{{ path('app_hub_regles') }}"> Règles </a>
+    <a href="{{ path('app_hub_glossaire') }}"> Glossaire </a>
+    <a href="{{ path('app_bureau_classement') }}"> Classement </a>
+    <div class="stats_user"> {{ profil.pseudo}} 
+        <span>Or : {{ profil.monnaie}}</span> 
+        <span>Reputation : {{ profil.reputation}}</span> 
+    </div>
+</nav>
+</div>

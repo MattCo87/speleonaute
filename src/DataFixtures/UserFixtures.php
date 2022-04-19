@@ -42,23 +42,23 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
 
 
         $users = array(
-            "USER_Matt" => array(
-                "pseudo" => "Lord Aixois", "mail" => "87000@gmail.com", "role" => "ROLE_USER", "xp" => 1
+            "USER_Admin" => array(
+                "pseudo" => "admin", "mail" => "admin@gmail.com", "role" => "ROLE_ADMIN", "xp" => 1, "monnaie" => 1
             ),
-            "USER_Joel" => array(
-                "pseudo" => "silentfabrik", "mail" => "joel@gmail.com", "role" => "ROLE_USER", "xp" => 1
+            "USER_Joueur" => array(
+                "pseudo" => "joueur", "mail" => "joueur@gmail.com", "role" => "ROLE_USER", "xp" => 0, "monnaie" => 1000
             ),
             "USER_Yanis" => array(
-                "pseudo" => "callipo", "mail" => "callipo@gmail.com", "role" => "ROLE_USER", "xp" => 1
+                "pseudo" => "callipo", "mail" => "callipo@gmail.com", "role" => "ROLE_USER", "xp" => 1, "monnaie" => 1
             ),
             "USER_Pierrette" => array(
-                "pseudo" => "piepie", "mail" => "piepie@gmail.com", "role" => "ROLE_USER", "xp" => 1
+                "pseudo" => "piepie", "mail" => "piepie@gmail.com", "role" => "ROLE_USER", "xp" => 1, "monnaie" => 1
             ),
             "USER_Paulette" => array(
-                "pseudo" => "paully", "mail" => "paully@gmail.com", "role" => "ROLE_USER", "xp" => 1
+                "pseudo" => "paully", "mail" => "paully@gmail.com", "role" => "ROLE_USER", "xp" => 1, "monnaie" => 1
             ),
             "USER_Jacqueline" => array(
-                "pseudo" => "jaki", "mail" => "jaki@gmail.com", "role" => "ROLE_USER", "xp" => 1
+                "pseudo" => "jaki", "mail" => "jaki@gmail.com", "role" => "ROLE_USER", "xp" => 1, "monnaie" => 1
             ),
         );
 
@@ -69,7 +69,8 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
             $$name->setPseudo($user['pseudo'])
                 ->setEmail($user['mail'])
                 ->setRoles([$user['role']])
-                ->setReputation($user['xp']);
+                ->setReputation($user['xp'])
+                ->setMonnaie($user['monnaie']);
             $password = $this->hasher->hashPassword($$name, 'pass_1234');
             $$name->setPassword($password);
             $manager->persist($$name);

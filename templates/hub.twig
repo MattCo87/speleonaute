@@ -2,12 +2,18 @@
 
 {% block appWrapperdiv %}
   <main id="hub_wrapper">
-  {% include 'base/menuHub.twig' %}
+  <div class="game_width">
+  {% include "blocs_jeu/jeu_titre.twig" %}
+  <div class="zone_jeu">
 {% endblock %}
 
 {% block body %}{% endblock %}
 
 {% block appWrapperclose %}
-  {% include 'base/menuHub.twig' %}
+  </div>
+  {% include "blocs_jeu/jeu_menu_hub.twig" %}
+  {% include "blocs_jeu/jeu_menu_listeur.twig" %}
+  {% include "blocs_jeu/jeu_menu_plus.twig" %}
+  </div>
   </main>
 {% endblock %}

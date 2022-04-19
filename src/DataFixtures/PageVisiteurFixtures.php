@@ -63,12 +63,40 @@ class PageVisiteurFixtures extends Fixture implements OrderedFixtureInterface
         $pages["PG_team"] = [
             "titre" => "Team", "contenu" =>
             <<<HTML
-        <p><strong>Yanis</strong> : l'idée originale vient d'un jeu auquel il a beaucoup joué, aujourd'hui disparu ! Le moteur de combat, c'est lui.</p>
-        <p><strong>Matthieu</strong> : Notre référent technique en Symfony, toujours prêt pour un petit <code>php bin/console</code> !</p>
-        <p><strong>Joël</strong> : Sa passion pour <em>Made in Abyss</em> lui a donné envie de créer un univers parallèle avec une Fosse et des monstres ;)</p>
+            <h1>La Team</h1>
+            <h2>Les créateurs</h2>
+            <p><strong>Yanis</strong> : l'idée originale vient d'un jeu auquel il a beaucoup joué, aujourd'hui disparu ! Le moteur de combat, c'est lui.</p>
+            <p><strong>Matthieu</strong> : Notre référent technique en Symfony, toujours prêt pour un petit <code>php bin/console</code> !</p>
+            <p><strong>Joël</strong> : Sa passion pour <em>Made in Abyss</em> lui a donné envie de créer un univers parallèle avec une Fosse et des monstres ;)</p>
+            <h2>Remerciements</h2>
+            <p><strong>Baptiste</strong> : C'est lui qui nous a rassemblés dans cette aventure et convaincus de travailler avec sqlite.</p>
+            <p><strong>Nicolas</strong> : Nous a remis sur les rails quand on partait par tous les chemins.</p>
+            <p><strong>Adeline</strong> : A été d'une aide patiente et précieuse.</p>
+            <p><strong>Maxime</strong> : Sans lui on ne serait pas autant à l'aise avec Symfony aujourd'hui.</p>
+            HTML
+        ];
+        $pages["PG_Accueil"] = [
+            "titre" => "Accueil", "contenu" =>
+            <<<HTML
+                <div class="histoire">
+                        
+                <h1>L'histoire de la Fosse</h1>
+                <p>L'effondrement a eu lieu il y a plus de mille ans. La Fosse a tout pris, la mine, les villages autour, les hommes et femmes qui y travaillaient. Mais les profondeurs de celle-ci ont révélé une richesse fabuleuse, une richesse que seuls les plus téméraires ont su s'approprier.</p>
+                <p>Le gouffre, dont la fin n'a jamais pu être mesurée, se trouve au milieu d'une plaine désertée du grand continent Kyanos. Une population de téméraires aventuriers, les Spéléonautes, réside sur son pourtour depuis de nombreuses générations, après la catastrophe qui a causé son apparition et les découvertes extraordinaires qui s'ensuivirent. </p>
+                <p>Les Spéléonautes sont prêts à tout pour affronter la Fosse et en remonter des artefacts puissants, issus des civilisations du passé. Les Lanternes Blanches, les plus connus d'entre eux, sont devenus des légendes vivantes, les premiers à avoir découvert la Géode (ou grande salle) de la Verna, et a en être revenus vivants. </p>
+                <p>Tout au fond du gouffre se trouvent les artefacts les plus rares, qui ont une valeur inestimable. Mais aussi, la Fosse est peuplée d'une flore et d'une faune propre à chaque Géode, extraordinaire et variée, dont certains spécimens sont extrêmement dangereux. On les appelle les Hôtes de la Fosse.</p>
+                <p>Les hôtes de la fosse ont des caractéristiques passionnantes, principalement dues au Courant. </p>
+                <p>Descendre est facile, remonter est extrêmement ardu. Car la Grande Fosse est habitée d'une force unique, le Courant, qui se déplace continuellement vers le fond, d'une Géode à l'autre. Si suivre le Courant pour descendre toujours plus profond est facile, remonter le Courant vers la surface cause aux organismes vivants d'importants effets secondaires : nausées, brûlures, hallucinations, folie, mutations.</p>
+                <p>Seule la Lanterne, un artefact manufacturé spécialement pour les Spéléonautes, est capable de repousser le Courant pour en mitiger les effets. </p>
+                <p class="centered">☆  ☆  ☆</p>
+                <p><em>Durant l'ère légendaire des Lanternes Blanches, tout se faisait à la main par les Spéléonautes qui risquaient leur vie pour remonter les précieux artefacts. </em></p>
+                <p>L'ère contemporaine est celle du Chevalement, caractérisée par un treuil immense qui a été construit pour envoyer en profondeur de nombreuses équipes d'Hôtes préprogrammés pour explorer et remonter reliques du passé et autres trésors. La plus grande invention de l'ère du Chevalement est la Manufacture. Celle-ci permet de créer de nouveaux artefacts en combinant des reliques et d'autres ressources, les articles les plus connus étant les Lanternes, qui permettent de remonter le Courant et les greffons, qui permettent d'apprivoiser et de programmer les Hôtes.</p>
+                <p>Spelaïon est une ville fondée tout autour de la Grande Fosse, constituée de plusieurs quartiers comme le quartier de la Manufacture, le quartier marchand, le quartier Nord, et le quartier des orphelins. La principale activité des habitants contemporains de Spelaïon est d'envoyer des Hôtes explorer les différents niveaux de la Fosse, pour en remonter les trésors, mais aussi de tenter d'agrandir son équipe en capturant les hôtes sauvages habitant dans la Fosse.</p>
+                <p>Hugo et Anna sont deux orphelins inséparables dont les parents ont depuis longtemps disparu, ils ont été élevés dans le même orphelinat. Après avoir reçu une lanterne bleue afin d'explorer le premier niveau de la Fosse, ils ont enfin atteint l'âge d'obtenir leurs premiers hôtes.</p>
+                        
+                </div>
         HTML
         ];
-
         foreach ($pages as $name => $page) {
             // Populate the objects
             $$name = new PageVisiteur();

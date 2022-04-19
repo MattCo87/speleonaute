@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Entity\Formation;
 use App\Entity\CreatureFormation;
 use App\Form\RegistrationFormType;
+use App\Service\MoteurCombatService2;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +32,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, MoteurCombatService2 $moteurCombatService): Response
     {
 
         $user = new User();
@@ -44,9 +45,11 @@ class RegistrationController extends AbstractController
                 $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
-                )
+                ),
+            $user->setMonnaie(0),
+            $user->setReputation(0)
             );
-
+            /*
             // J'affecte 5 nouveaux personnages à l'utilisateur 
             $modele = $this->emm->findBy(['ouvrable' => 1]);
 
@@ -61,6 +64,13 @@ class RegistrationController extends AbstractController
                 $tab_creature[] = $creature;
                 $entityManager->persist($creature);
             }
+            */
+            for ($i = 0; $i < 5; $i++) {
+                $moteurCombatService->Creationhote($user);
+            }
+            $tab_creature = $this->emc->findBy(['lienUser' => $user->getId()]);
+
+            //dd($tab_creature);
 
             // Je crée une formation
             $var_formation = new Formation;
@@ -68,12 +78,32 @@ class RegistrationController extends AbstractController
             $var_formation->setNom($var_formation_name);
             $var_formation->setLienUser($user);            
             $entityManager->persist($var_formation);
-
+/*
+            // Puis une deuxième pour l'exemple
+            $var_formation2 = new Formation;
+            $var_formation2_name = ucfirst(str_replace(' ', '', $user->getPseudo())). "Boyz";
+            $var_formation2->setNom($var_formation2_name);
+            $var_formation2->setLienUser($user);            
+            $entityManager->persist($var_formation2);
+*/
+            $z = 0;
             // J'affecte les personnages de l'utilisateur à la formation
             foreach ($tab_creature as $var_creature){
+                $z++;
                 $var_creatureformation = new CreatureFormation;
                 $var_creatureformation->setLienCreature($var_creature);
                 $var_creatureformation->setLienFormation($var_formation);
+                $var_creatureformation->setStrategie(1);
+                if($z<4){
+                    $var_creatureformation->setLocalisation(1);
+                }
+                if($z==4){
+                    $var_creatureformation->setLocalisation(2);
+                }
+                if($z==5){
+                    $var_creatureformation->setLocalisation(3);
+                }
+                
                 $entityManager->persist($var_creatureformation);
             }
 

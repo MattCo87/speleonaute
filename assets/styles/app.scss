@@ -2,50 +2,522 @@
     font-family: 'Space Mono', monospace;
     font-family: 'Work Sans', sans-serif;
 */
-@use "./vars.scss";
-@use "./mixins.scss";
 @use './reset.scss';
+
+@import "./vars.scss";
+@import "./mixins.scss";
+
+html {
+    font-size: 18px;
+}
 
 body {
     margin: 0;
     padding: 0;
+    line-height: 1.2rem;
+}
 
-    #accueil_wrapper {
+
+
+#accueil_wrapper {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(30, 32, 32);
+    color: white;
+    background-image: url("../images/BGAccueil.png");
+    min-height: 100vh;
+    background-size: cover;
+    background-repeat: repeat-x;
+    background-position-y: top;
+    font-family: 'Work Sans', sans-serif;
+
+    .accueil_text_wrapper {
+        display: flex;
+        flex-direction: column;
+        max-width: 1000px;
+
+        form div {
+            margin-bottom: 1rem;
+
+            input {
+                margin-left: 2rem;
+            }
+        }
+    }
+
+    .title {
+        font-size: 4rem;
+    }
+
+    blockquote {
+        padding: 4rem 2rem 6rem 2rem;
+        color: rgb(129, 128, 128);
+        font-family: 'Grape Nuts', cursive;
+        font-size: 1.8rem;
+        line-height: 1.8rem;
+    }
+
+    .log-in {
         display: grid;
-        background-color: rgb(30, 32, 32);
-        color: white;
-        background-image: url("../img/BGAccueil.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 100%;
+        grid-template-areas: "mail mi si"
+            "pw pwi si";
+        max-width: 800px;
+        @include marginAuto;
+    }
+
+    label[for=inputEmail],
+    #inputEmail,
+    label[for=inputPassword],
+    #inputPassword {
+        margin: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        font-size: 1.4rem;
+    }
+
+    #inputEmail,
+    #inputPassword {
+        max-width: 18rem;
+    }
+
+    label[for=inputEmail] {
+        grid-area: mail;
+    }
+
+    #inputEmail {
+        grid-area: mi;
+    }
+
+    label[for=inputPassword] {
+        grid-area: pw;
+    }
+
+    #inputPassword {
+        grid-area: pwi;
+    }
+
+    .btn-lg {
+        grid-area: si;
+        margin: 0.5rem 2rem;
+        width: 8rem;
+        height: 8rem;
+        border-width: thick;
+        border-image-source: url(../images/border-image_fer-forge.svg);
+        background-image: url(../images/BGBoutonAccueil.png);
+        border-image-slice: 82%;
+        border-image-outset: 0.5rem;
+        border-image-width: 12rem;
+        border-image-repeat: round;
+        font-size: 1.2rem;
+        background-color: white;
+        cursor: pointer;
+        background-position: 275px 300px;
+        transition: 10s;
+    }
+
+    .btn-lg:hover {
+        background-color: rgb(29, 29, 29);
+        color: rgb(248, 248, 248);
+        transition: 1s;
+        background-position: 275px 2200px;
+        transition: 10s;
+    }
+
+    .register {
+        max-width: 800px;
+        @include marginAuto;
+        font-size: 2rem;
+        padding: 2rem;
+    }
+
+    header,
+    footer,
+    main {
+        padding: 1.5rem;
+
+        a {
+            text-decoration: none;
+            padding-right: 2rem;
+            font-size: 1.2rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            padding: 3rem 0;
+            @include marginAuto;
+        }
+
+    }
+
+    footer {
+        display: flex;
+        justify-content: center;
+
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+    }
+
+}
+
+form[name=registration_form] {
+
+    display: flex;
+    flex-direction: column;
+
+    div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 1rem;
+    }
+
+    label,
+    button,
+    input[type=text],
+    input[type=password] {
+        min-width: 18rem;
+        font-size: 1.2rem;
+        padding: 0.5rem;
+    }
+
+    input[type=checkbox] {
+        width: 2rem;
+    }
+}
+
+#hub_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(30, 32, 32);
+    color: white;
+    background-image: url("../images/BGHUBSpeleo.png");
+    min-height: 100vh;
+    background-origin: content-box;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Work Sans', sans-serif;
+
+    .game_width {
         height: 100vh;
         width: 100vw;
-        font-family: 'Work Sans', sans-serif;
+        display: grid;
+        grid-template-columns: 5fr 1fr;
+        grid-template-rows: 1fr 10fr 1fr;
+        grid-template-areas: 'zone_titre menu_plus''zone_jeu liste''menuHub liste';
     }
 
-    #hub_wrapper {
-        background-color: rgb(30, 32, 32);
-        color: white;
-        background-image: url("../img/BGHUBSpeleo.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 100%;
-        height: 100vh;
-        width: 100vw;
-        font-family: 'Work Sans', sans-serif;
+    .zone_titre {
+        grid-area: zone_titre;
+        padding: 0.5rem 2%;
+
+        nav {
+            display: flex;
+        }
+
+        a,
+        .stats_user {
+            background: rgba(255, 255, 255, 0.73);
+            color: black;
+            text-decoration: none;
+            padding: 0.5rem;
+            margin: 0.5em;
+            border-radius: 0.5rem;
+
+            &:hover {
+                transform: scale(1.1);
+                cursor: pointer;
+            }
+        }
+
+        .stats_user:hover {
+            transform: none;
+            cursor: auto;
+        }
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-family: 'Space Mono', monospace;
+    .liste {
+        grid-area: liste;
+        padding: 0.5rem 2%;
+        margin-right: 7%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        scrollbar-width: none;
+        margin-bottom: 1.5rem;
     }
 
+    .menu_plus {
+        grid-area: menu_plus;
+        padding: 0.5rem 2%;
+    }
 
-    a {
-        color: white;
+    .menuHub {
+        display: flex;
+        grid-area: menuHub;
+        padding: 0.5rem 2%;
+
+        a {
+            display: flex;
+            align-items: center;
+            max-width: 4rem;
+            max-height: 4rem;
+            background: rgba(255, 255, 255, 0.73);
+            padding: 0.5rem;
+            margin: 1rem;
+            border-radius: 0.5rem;
+            border-width: thick;
+            border-image-source: url(../images/border-image_fer-forge.svg);
+            border-image-slice: 82%;
+            border-image-outset: 0.5rem;
+            border-image-width: 12rem;
+            border-image-repeat: round;
+            overflow: hidden;
+
+            &:hover,
+            &:focus {
+                transform: scale(1.1);
+            }
+
+            img {
+                @include imgAdapt;
+            }
+        }
+    }
+
+    .zone_jeu {
+        grid-area: zone_jeu;
+        padding: 0.5rem 2%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        scrollbar-width: none;
+
+        select,
+        button {
+            font-size: 1rem;
+            padding: 0.2rem;
+            background-color: transparent;
+            color: white;
+            border-radius: 0.4rem;
+            border-color: rgba(255, 255, 255, 0.363);
+        }
+
+        select {
+            margin-left: 2rem;
+        }
+
+        .formations {
+            @include flexColumn;
+        }
+
+        .hotes {
+            @include flexRow;
+
+            .manque_val {
+                color: #ff9f9f;
+            }
+        }
+
+        .whiteBorder {
+            margin: 0.5rem;
+            border-color: white;
+            border-style: solid;
+            display: block;
+            border-width: 0.01rem;
+            border-radius: 1rem;
+            padding: 0.6rem;
+            max-width: 14rem;
+
+            p {
+                margin-bottom: 0.2rem;
+            }
+        }
+
+        .classement {
+            p {
+                margin-bottom: 0;
+                width: 14rem;
+            }
+
+            .titre {
+                @include flexRow;
+                border-radius: 1.1rem;
+                background-color: #a6a6a696;
+                width: fit-content;
+                padding: 0.5rem;
+                margin-bottom: 0.2rem;
+            }
+
+            .joueurs {
+                @include flexColumn;
+                border-radius: 0.3rem;
+                background-color: #a6a6a696;
+                width: fit-content;
+
+            }
+
+            .joueur {
+                @include flexRow;
+                width: fit-content;
+                padding: 0.5rem;
+                border-bottom: 1px solid whitesmoke;
+
+                &:last-child {
+                    border: none;
+                }
+
+            }
+        }
+
+        .hotesStats {
+            display: flex;
+            flex-direction: column;
+            min-width: 18rem;
+
+            p {
+                margin-bottom: 0.1rem;
+            }
+        }
+
+        .strategies {
+            display: flex;
+        }
+    }
+
+    .contenu_liste {
+        background-color: $contenu-bg;
+        border-radius: 0.9rem;
+        padding: 1rem;
+
+        h1 {
+            font-size: 1rem;
+        }
+
+        p,
+        li {
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-left: 2rem;
+            list-style: none;
+            margin: 0.2rem;
+
+            a {
+                text-decoration: none;
+            }
+        }
+
+
+
+        .jeu_form {
+            margin: 2rem 0;
+        }
+
+        #chevalement {
+            display: flex;
+            flex-direction: column;
+        }
+
+        div {
+            display: flex;
+            align-items: baseline;
+            flex-direction: column;
+            margin-bottom: 1rem;
+        }
+    }
+
+    .contenu_jeu {
+        background-color: $contenu-bg;
+        border-radius: 0.9rem;
+        padding: 1rem;
+
+        h1 {
+            font-size: 1.3rem;
+        }
+
+        .flash-notice {
+            max-width: 22rem;
+        }
+
+        p,
+        li {
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-left: 2rem;
+        }
+
+        .jeu_form {
+            margin: 2rem 0;
+        }
+
+        #chevalement {
+            display: flex;
+            flex-direction: column;
+
+            div {
+                display: flex;
+                align-items: baseline;
+                flex-direction: row;
+                margin-bottom: 1rem;
+            }
+
+
+        }
+    }
+}
+
+
+
+p {
+    margin-bottom: 2rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 1.2rem;
+}
+
+a {
+    color: white;
+}
+
+
+
+
+.separateur {
+    margin-top: 6rem;
+}
+
+.histoire {
+    p {
+        margin-top: 2rem;
+        font-family: serif;
+        font-style: italic;
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+        letter-spacing: 0.02rem;
+    }
+
+    .centered {
+        @include marginAuto;
+        margin-top: 6rem;
+        margin-bottom: 6rem;
+        width: fit-content;
     }
 }

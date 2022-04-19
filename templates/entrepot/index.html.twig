@@ -1,20 +1,59 @@
 {% extends 'hub.twig' %}
 
-{% block title %}Hello EntrepotController!{% endblock %}
+{% block title %}Entrepôt - Spéléonautes{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="contenu_jeu">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/app/src/Controller/EntrepotController.php'|file_link(0) }}">src/Controller/EntrepotController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/app/templates/entrepot/index.html.twig'|file_link(0) }}">templates/entrepot/index.html.twig</a></code></li>
-    </ul>
-</div>
+<!-- Si il y'a eu un clic sur un personnage -->
+{% if idcreature is defined and infocreature != '' %}
+     	<h2>
+		{{ infocreature.nom }}
+		</h2>
+	<!-- On affiche son identité -->
+	<div class="hotes">
+		<div class="hotesStats">
+			<h3>Statistiques :</h2>
+			<p>Niveau : {{ infocreature.niveau }}</p>
+			<p>Experience : {{ infocreature.exp }}</p>
+			<p>Rareté : {{ infocreature.rarete }}</p>
+		<!-- On affiche ses statistiques -->
+			<p>Toucher : {{ infocreature.toucher }}</p>
+			<p>Dégâts : {{ infocreature.degat }}</p>
+			<p>Résistance : {{ infocreature.resistance }}</p>
+			<p>Vitesse : {{ infocreature.vitesse }}</p>
+			<p>Endurance : {{ infocreature.endurance }}</p>
+		</div>
+		<!-- On affiche les stratégies -->
+		<div class="statégie">
+			<h3>Stratégie : {{ infocreature.strategie1 }}</h3>
+			<!-- Et pour chaque stratégie on affiche les actions qui la compose -->
+			<div class="strategies">
+			{% for action in infocreature.Actionstrategie1 %}
+				<div class="whiteBorder">
+					<p>{{ action.nom }}</p>
+					<p>Toucher : {{ action.toucher }}</p>
+					<p>Tier : {{ action.tier }}</p>
+					<p>Dégâts : {{ action.degat }}</p>
+					<p>nombre de cible : {{ action.nombreCible }}</p>
+					{% if action.localisation == 1 %}localisation : Devant {% endif %}
+                {% if action.localisation == 2 %}localisation : Milieu {% endif %}
+                {% if action.localisation == 3 %}localisation : Derrière {% endif %}
+				</div>
+			{% endfor %}
+			</div>
+		</div>
+	</div>
+          				{% else %}
+                  <!-- Si pas de créature en vue, on affiche la page de garde -->
+			<div class="hotes">
+				<h1>Votre entrepôt</h1>
+			</div>
+			<div class="hotes">
+				<h2>
+					Choisissez une créature  pour afficher ses informations
+					<h2></div>
+{% endif %}
+	</div>
 {% endblock %}

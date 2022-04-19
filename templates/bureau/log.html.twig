@@ -1,8 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'hub.twig' %}
 
 {% block title %}
+	Bureau - Spéléonautes
 {% endblock %}
 
+{#
 {% block stylesheets %}
 <style>
 pre{
@@ -78,9 +80,6 @@ grid-row-gap: 0px;
         background-color:pink;
 }
 
-
-
-
 .dropbtn {
   background-color: #04AA6D;
   color: white;
@@ -133,15 +132,6 @@ grid-row-gap: 0px;
   color:red;
 }
 
-
-
-
-
-
-
-
-
-
 ::after,
 ::before {
   margin: 0;
@@ -153,8 +143,6 @@ grid-row-gap: 0px;
   --menubox-height: 68vh;
   --list-heigth: 50px;
 }
-
-
 
 a {
   font-family: fantasy;
@@ -213,11 +201,12 @@ a {
   font-size: 1.3rem;
 }
 
-
-
-
 </style>
+
 {% endblock %}
+#}
+
+{#}
 {% block javascripts %}
             <script>
 
@@ -271,43 +260,36 @@ window.addEventListener('wheel', activeMenu);
             </script>
 
         {% endblock %}
-
-
+#}
 
 
 {% block body %}
-{#<div class="total">#}
-<div class="profil"></div>
-        <div class="contenue1">
-        <div class="contenue2">
-                {% for log in logs %}
-                        {% for logu in log %}
-                        <pre>{{ logu }}</pre>
-                        {#<div class="pre">{{ logu }}</div>#}
-                        {% endfor %}
-                {% endfor %}
-        </div>        
-        </div>   
-<div class="menu"><a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a></div>
-<div class="sous_menu">Coucou</div>
-<div class="liste">
-        <div class="dropdown">
-                <button class="dropbtn">Dropdown</button>
-                {#<div class="caché">
-                        <div class="dropdown-content">
-                                {% for idLog in idLogs %}
-                                <a href="#">Link {{ idLog }}</a>
-                                {% endfor %}
-                        </div>      
-                </div>#}
-                <div class="menu-box">
-  <div class="menu-list">
-                                {% for idLog in idLogs %}
-                                <a class="list" href="#">Link {{ idLog }}</a>
-                                {% endfor %}
-                        </div>
-                        </div>
-        </div>
-</div>     
-{#</div>#}
+	<div class="contenu_jeu">
+		<div class="profil"></div>
+		<div class="contenue1">
+			<div class="contenue2">
+        {% if infolog | length > 4 %}
+				{% set i = 0 %}
+				{% for log in infolog %}
+					<pre>{{ log }}</pre>
+					{% set i = i + 1 %}
+				{% endfor %}
+        {% else %}
+          <h1>Veuillez sélectionner un log de combat à droite</h1>
+          <p>Le bureau sert à naviguer dans les logs de combat qui sont disponibles au retour de votre équipe du chevalement. Ils sont classés par ordre décroissant, les logs les plus récents s'affichant en haut.</p>
+        {% endif %}
+        
+
+			</div>
+		</div>
+		<div class="menu"></div>
+
+		<div class="liste">
+			<div class="dropdown">
+				<div class="menu-box">
+					<div class="menu-list"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

@@ -14,13 +14,12 @@ class PageVisiteurCrudController extends AbstractCrudController
         return PageVisiteur::class;
     }
 
-    
+
     public function configureFields(string $pageName): iterable
     {
         return [
             TextField::new('titre'),
-            TextEditorField::new('contenue'),
+            TextEditorField::new('contenu'),
         ];
     }
-    
 }

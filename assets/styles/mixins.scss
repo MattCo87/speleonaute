@@ -13,6 +13,17 @@
 
 /* Generic mixins */
 
+@mixin flexColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin flexRow {
+    display: flex;
+    align-items: baseline;
+    flex-direction: row;
+}
+
 @mixin flexCenter {
     display: flex;
     justify-content: center;
