@@ -48,11 +48,11 @@ class StatistiqueModeleFixture extends Fixture implements OrderedFixtureInterfac
         $statistiquesModele["STATMOD_5371"] = ["lienModele" => "MODEL_Basilicgea", "lienStatistique" => "STAT_resis", "valeurMin" => 7, "valeurMax" => 10, "valeurNiv" => 7];
         $statistiquesModele["STATMOD_5461"] = ["lienModele" => "MODEL_Basilicgea", "lienStatistique" => "STAT_vites", "valeurMin" => 6, "valeurMax" => 11, "valeurNiv" => 3];
         $statistiquesModele["STATMOD_5525"] = ["lienModele" => "MODEL_Basilicgea", "lienStatistique" => "STAT_endur", "valeurMin" => 25, "valeurMax" => 30, "valeurNiv" => 8];
-        $statistiquesModele["STATMOD_6146"] = ["lienModele" => "MODEL_Basilicgea", "lienStatistique" => "STAT_touch", "valeurMin" => 4, "valeurMax" => 6, "valeurNiv" => 8];
-        $statistiquesModele["STATMOD_6235"] = ["lienModele" => "MODEL_Basilicgea", "lienStatistique" => "STAT_degat", "valeurMin" => 3, "valeurMax" => 5, "valeurNiv" => 7];
-        $statistiquesModele["STATMOD_6334"] = ["lienModele" => "MODEL_Basilicgea", "lienStatistique" => "STAT_resis", "valeurMin" => 3, "valeurMax" => 4, "valeurNiv" => 5];
-        $statistiquesModele["STATMOD_6481"] = ["lienModele" => "MODEL_Basilicgea", "lienStatistique" => "STAT_vites", "valeurMin" => 8, "valeurMax" => 10, "valeurNiv" => 6];
-        $statistiquesModele["STATMOD_6513"] = ["lienModele" => "MODEL_Basilicgea", "lienStatistique" => "STAT_endur", "valeurMin" => 13, "valeurMax" => 18, "valeurNiv" => 5];
+        $statistiquesModele["STATMOD_6146"] = ["lienModele" => "MODEL_Ratsanguin", "lienStatistique" => "STAT_touch", "valeurMin" => 4, "valeurMax" => 6, "valeurNiv" => 8];
+        $statistiquesModele["STATMOD_6235"] = ["lienModele" => "MODEL_Ratsanguin", "lienStatistique" => "STAT_degat", "valeurMin" => 3, "valeurMax" => 5, "valeurNiv" => 7];
+        $statistiquesModele["STATMOD_6334"] = ["lienModele" => "MODEL_Ratsanguin", "lienStatistique" => "STAT_resis", "valeurMin" => 3, "valeurMax" => 4, "valeurNiv" => 5];
+        $statistiquesModele["STATMOD_6481"] = ["lienModele" => "MODEL_Ratsanguin", "lienStatistique" => "STAT_vites", "valeurMin" => 8, "valeurMax" => 10, "valeurNiv" => 6];
+        $statistiquesModele["STATMOD_6513"] = ["lienModele" => "MODEL_Ratsanguin", "lienStatistique" => "STAT_endur", "valeurMin" => 13, "valeurMax" => 18, "valeurNiv" => 5];
         $statistiquesModele["STATMOD_7147"] = ["lienModele" => "MODEL_Vertoxique", "lienStatistique" => "STAT_touch", "valeurMin" => 4, "valeurMax" => 7, "valeurNiv" => 9];
         $statistiquesModele["STATMOD_7256"] = ["lienModele" => "MODEL_Vertoxique", "lienStatistique" => "STAT_degat", "valeurMin" => 5, "valeurMax" => 6, "valeurNiv" => 8];
         $statistiquesModele["STATMOD_7336"] = ["lienModele" => "MODEL_Vertoxique", "lienStatistique" => "STAT_resis", "valeurMin" => 3, "valeurMax" => 6, "valeurNiv" => 6];

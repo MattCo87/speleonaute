@@ -176,6 +176,7 @@ class FormationController extends AbstractController
         /*********************                   ************************************************************************ */
 
         return $this->render('formation/index.html.twig', [
+            'profil'    => $temp_user,
             'form' => $form->createView(),
             'tabformations' => $tab_formation,
         ]);

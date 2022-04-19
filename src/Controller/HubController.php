@@ -37,8 +37,6 @@ class HubController extends AbstractController
     public function index(): Response
     {
         $temp_user = $this->security->getUser();
-        $var_user = $temp_user->getId();
-        //dd($temp_user);
 
         return $this->render('hub/hub_accueil.html.twig', [
             'profil'    => $temp_user,
@@ -51,10 +49,12 @@ class HubController extends AbstractController
      */
     public function reglesHub(ManagerRegistry $doctrine): Response
     {
+        $temp_user = $this->security->getUser();
         $page = [];
         $page = $doctrine->getRepository(PageVisiteur::class)->findOneBy(['titre' => 'Règles']);
         //dd($page);
         return $this->render('hub/regles_hub.html.twig', [
+            'profil'    => $temp_user,
             'regles' => $page,
             'controller_name' => 'HubController',
         ]);
@@ -65,10 +65,12 @@ class HubController extends AbstractController
      */
     public function glossaireHub(ManagerRegistry $doctrine): Response
     {
+        $temp_user = $this->security->getUser();
         $page = [];
         $page = $doctrine->getRepository(PageVisiteur::class)->findOneBy(['titre' => 'Glossaire']);
         //dd($page);
         return $this->render('hub/glossaire_hub.html.twig', [
+            'profil'    => $temp_user,
             'glossaire' => $page,
             'controller_name' => 'HubController',
         ]);

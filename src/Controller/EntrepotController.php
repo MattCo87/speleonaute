@@ -42,6 +42,7 @@ class EntrepotController extends AbstractController
      */
     public function index(): Response
     {
+
         // On teste si une créature a déjà été choisie
         if (!(isset($_GET['idcreature']))) {
             $idcreature = 'Choisissez une créature à droite pour afficher ses informations';
@@ -94,6 +95,8 @@ class EntrepotController extends AbstractController
                     $tab_var_actions[$z]['toucher'] = $action->getLienAction()->getToucher();
                     $tab_var_actions[$z]['tier'] = $action->getLienAction()->getTier();
                     $tab_var_actions[$z]['degat'] = $action->getLienAction()->getDegat();
+                    $tab_var_actions[$z]['nombreCible'] = $action->getLienAction()->getNombreCible();
+                    $tab_var_actions[$z]['localisation'] = $action->getLienAction()->getLocalisation();
 
                     // On ajoute ce tableau au tableau de la créature
                     $tab_creature[$i]['Actionstrategie' . $j][] = $tab_var_actions[$z];
@@ -115,6 +118,7 @@ class EntrepotController extends AbstractController
         }
         //dd($infocreature);
         return $this->render('entrepot/index.html.twig', [
+            'profil'    => $temp_user,
             'tabcreatures' => $tab_creature,
             'idcreature' => $idcreature,
             'infocreature' => $infocreature,
