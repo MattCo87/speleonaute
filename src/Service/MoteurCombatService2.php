@@ -873,6 +873,10 @@ class MoteurCombatService2 extends ServiceEntityRepository
             $fsObject->appendToFile($new_file_path, "###################################################\n");
             $fsObject->appendToFile($new_file_path, "############           Defaite           ############\n");
             $fsObject->appendToFile($new_file_path, "###################################################\n\n\n\n\n\n");
+            $combat = $this->doctrine->getRepository(Combat::class)->findBy(['id' => $idCombat]);
+            $combat[0]->setFichierLog($new_file_path);
+            $this->manager->persist($combat[0]);
+            $this->manager->flush();
         } else {
             $fsObject->appendToFile($new_file_path, "###################################################\n");
             $fsObject->appendToFile($new_file_path, "############           Victoire           ############\n");
@@ -906,7 +910,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
                     }
                 }
             }
-            $reputation = $formation->getLienUser()->getReputation() + $recompense;
+            $reputation = $formation->getLienUser()->getReputation() + $recompense*10;
             $formation->getLienUser()->setReputation($reputation);
             $monnaie = $formation->getLienUser()->getMonnaie() + ($recompense*10);
             $formation->getLienUser()->setMonnaie($monnaie);
