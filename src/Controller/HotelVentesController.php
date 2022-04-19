@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 /**
  * @IsGranted("ROLE_USER")
  */
@@ -35,33 +36,33 @@ class HotelVentesController extends AbstractController
         $temp_user = $this->security->getUser();
         $user = $this->security->getUser();
         $tab = array();
-        $form = $this->createForm(HotelVentesType::class,$tab);
+        $form = $this->createForm(HotelVentesType::class, $tab);
         $form->handleRequest($request);
 
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if($user->getMonnaie()<1000){
+            if ($user->getMonnaie() < 1000) {
                 $this->addFlash(
                     'notice',
-                    "Tu n'a pas assez d'argent"
+                    "Vous n'avez pas assez d'argent"
                 );
                 return $this->redirectToRoute('app_hotel_ventes');
             }
 
             $moteurCombatService->Creationhote($user);
-                $this->addFlash(
-                    'notice',
-                    "Merci pour votre achat, un hote a etait envoyé à votre entrepot"
-                );
-                $monnaie = $user->getMonnaie() -1000;
-                $user->setMonnaie($monnaie);
-                $this->manager->persist($user);
-                $this->manager->flush();
+            $this->addFlash(
+                'notice',
+                "Merci pour votre achat, un hôte a été envoyé à votre entrepôt !"
+            );
+            $monnaie = $user->getMonnaie() - 1000;
+            $user->setMonnaie($monnaie);
+            $this->manager->persist($user);
+            $this->manager->flush();
 
-                return $this->redirectToRoute('app_hotel_ventes');
+            return $this->redirectToRoute('app_hotel_ventes');
         }
-//        dd($form);
+        //        dd($form);
 
         return $this->render('hotel_ventes/index.html.twig', [
             'profil' => $temp_user,
