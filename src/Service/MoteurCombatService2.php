@@ -111,7 +111,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
             $alea = rand(0, $total_points-1);
             $tab_final[] = $tab_tas[$alea];
         }
-        $stat = $this->doctrine->getRepository(StatistiqueCreature::class)->findBy(['lienCreature' => $idModele->getId()]);
+        $stat = $this->doctrine->getRepository(StatistiqueCreature::class)->findBy(['lienCreature' => $creature->getId()]);
         for( $z = 0; $z < count($tab_final); $z++){
             switch ($tab_final[$z]->getId()){
                 case $stat[0]->getLienStatistique()->getId():
