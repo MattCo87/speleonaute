@@ -910,7 +910,7 @@ class MoteurCombatService2 extends ServiceEntityRepository
                     }
                 }
             }
-            $reputation = $formation->getLienUser()->getReputation() + $recompense;
+            $reputation = $formation->getLienUser()->getReputation() + $recompense*10;
             $formation->getLienUser()->setReputation($reputation);
             $monnaie = $formation->getLienUser()->getMonnaie() + ($recompense*10);
             $formation->getLienUser()->setMonnaie($monnaie);
