@@ -8,8 +8,10 @@ Lien vers notre [image docker](https://hub.docker.com/repository/docker/joelobre
 
 ## Commandes pour l'installation
 
-- `docker container run -d --name speleoalpha -p "1270:80" -v C:cheminversdossier/SpeleoAlpha:/app joelobrecht/speleoalpha`
-- Version Windows sans volume `docker container run -d --name speleoalpha -p "1270:80" joelobrecht/speleoalpha`
+`docker container run -d --name speleoalpha -p "1270:80" -v chemin_vers_dossier:/app joelobrecht/speleoalpha`
+
+Version sans volume `docker container run -d --name speleoalpha -p "1270:80" joelobrecht/speleoalpha`
+
 - `docker start speleoalpha`
 - `docker exec -it speleoalpha bash`
 - `cd app`
